@@ -4,16 +4,22 @@
       <div class="nav d-flex">
         <v-toolbar-title>LMS</v-toolbar-title>
         <v-spacer></v-spacer>
-        <p class="mx-2 my-2 link">Home</p>
+        <p class="mx-2 my-2 link" @click="goHome()">Home</p>
         <p class="mx-2 my-2 link">Features</p>
         <v-btn
           depressed
           color="#484848"
           class="white--text mx-2 text-capitalize"
+          to="/daftar"
         >
           Daftar
         </v-btn>
-        <v-btn depressed outlined class="#484848--text text-capitalize">
+        <v-btn
+          depressed
+          outlined
+          class="#484848--text text-capitalize"
+          to="/masuk"
+        >
           Masuk
         </v-btn>
       </div>
@@ -263,6 +269,9 @@ export default {
   methods: {
     showAnswer(id) {
       this.selectIndex = id;
+    },
+    goHome() {
+      this.$router.push("/");
     },
   },
   setup() {},
