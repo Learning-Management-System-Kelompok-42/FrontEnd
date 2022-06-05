@@ -1,5 +1,5 @@
 <template>
-<<<<<<< HEAD
+
   <v-app>
     <v-app-bar app color="primary" dark>
       <div class="d-flex align-center">
@@ -37,15 +37,14 @@
     <v-main>
       <SideBar />
     </v-main>
-=======
+
   <v-app id="app">
     <router-view></router-view>
->>>>>>> rizki
   </v-app>
 </template>
 
 <script>
-<<<<<<< HEAD
+
 import SideBar from "./components/SideBar";
 
 export default {
@@ -54,22 +53,18 @@ export default {
   components: {
     SideBar,
   },
-=======
-export default {
-  name: "App",
-  components: {},
->>>>>>> rizki
+
 
   data: () => ({
     //
   }),
 };
 </script>
-<<<<<<< HEAD
-=======
+
+
 <style>
 #app {
   font-family: "Inter";
 }
 </style>
->>>>>>> rizki
+

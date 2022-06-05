@@ -1,17 +1,12 @@
-<<<<<<< HEAD
-import Vue from 'vue';
-import Vuetify from 'vuetify/lib/framework';
-=======
 import Vue from "vue";
 import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
->>>>>>> rizki
+
 
 Vue.use(Vuetify);
 
 export default new Vuetify({
-<<<<<<< HEAD
-=======
+
   theme: {
     dark: false,
     themes: {
@@ -35,5 +30,5 @@ export default new Vuetify({
       },
     },
   },
->>>>>>> rizki
+
 });
