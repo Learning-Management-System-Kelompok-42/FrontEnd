@@ -63,7 +63,12 @@
         <v-row>
           <v-col cols="3" v-for="(course, index) in listCourse" :key="index">
             <v-card hover>
-              <v-img class="ms-4" :src="course.img" width="50" height="50">
+              <v-img
+                class="ms-4 imgcard"
+                :src="course.img"
+                width="50"
+                height="50"
+              >
               </v-img>
               <v-card-title>{{ course.title }}</v-card-title>
               <v-card-subtitle>{{ course.description }}</v-card-subtitle>
@@ -100,30 +105,21 @@
         <h1 class="text-capitalize text-center mb-5">
           pertanyaan yang sering ditanyakan
         </h1>
-        <v-card
-          flat
-          class="mt-5"
-          v-for="(question, index) in listQuestion"
-          :key="index"
-        >
-          <v-btn
-            depressed
-            large
-            class="text-lowercase"
-            block
-            @click="showAnswer(index)"
+
+        <v-expansion-panels multiple hover>
+          <v-expansion-panel
+            v-for="(question, index) in listQuestion"
+            :key="index"
+            class="my-1 rounded-lg"
           >
-            {{ question.question }}
-            <v-spacer></v-spacer>
-            <v-icon v-if="selectIndex === index"> mdi-chevron-up </v-icon>
-            <v-icon v-else> mdi-chevron-down </v-icon>
-          </v-btn>
-          <v-card-text v-show="selectIndex === index" color="grey">
-            <span>
+            <v-expansion-panel-header class="font-weight-bold">
+              {{ question.question }}
+            </v-expansion-panel-header>
+            <v-expansion-panel-content color="#EEEEEE" class="caption">
               {{ question.desc }}
-            </span>
-          </v-card-text>
-        </v-card>
+            </v-expansion-panel-content>
+          </v-expansion-panel>
+        </v-expansion-panels>
       </div>
       <div class="joinNow mt-6 pt-6 text-center">
         <v-card class="pa-6" flat color="#ECECFB">
@@ -137,38 +133,50 @@
           </v-btn>
         </v-card>
       </div>
-      <v-footer class="mt-6">
-        <div class="footer d-flex mt-6">
-          <div class="logo">
-            <v-img
-              src="http://placehold.jp/20x20.png"
-              width="40"
-              height="30"
-            ></v-img>
-            <p class="caption">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
-              tempore!
-            </p>
-          </div>
-          <v-spacer></v-spacer>
-          <div class="socmed mx-6 px-2">
-            <h5>Media Social</h5>
-            <p class="caption mb-0">Facebook</p>
-            <p class="caption mb-0">Twitter</p>
-            <p class="caption mb-0">Telegram</p>
-          </div>
-          <div class="help mx-6 px-3">
-            <h5>Bantuan</h5>
-            <p class="caption mb-0">Facebook</p>
-            <p class="caption mb-0">Facebook</p>
-            <p class="caption mb-0">Facebook</p>
-          </div>
-          <div class="develop mx-6 px-3">
-            <h5>Pengembang</h5>
-            <p class="caption mb-0">Facebook</p>
-            <p class="caption mb-0">Facebook</p>
-          </div>
-        </div>
+      <v-footer class="mt-6" color="white">
+        <v-row>
+          <v-col cols="4">
+            <div class="logo">
+              <v-img
+                src="http://placehold.jp/20x20.png"
+                width="40"
+                height="30"
+                class="mb-3"
+              >
+              </v-img>
+              <p class="caption">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
+                tempore!
+              </p>
+            </div>
+          </v-col>
+          <v-col cols="2">
+            <div class="divider"></div>
+          </v-col>
+          <v-col cols="2">
+            <div class="socmed">
+              <h5 class="mb-3">Media Social</h5>
+              <p class="caption mb-0">Facebook</p>
+              <p class="caption mb-0">Instagram</p>
+              <p class="caption mb-0">Telegram</p>
+            </div>
+          </v-col>
+          <v-col cols="2">
+            <div class="help">
+              <h5 class="mb-3">Bantuan</h5>
+              <p class="caption mb-0">FAQ</p>
+              <p class="caption mb-0">Email Support</p>
+              <p class="caption mb-0">Term Of Service</p>
+            </div>
+          </v-col>
+          <v-col cols="2">
+            <div class="develop">
+              <h5 class="mb-3">Pengembang</h5>
+              <p class="caption mb-0">Developer</p>
+              <p class="caption mb-0">Kirim Masukan</p>
+            </div>
+          </v-col>
+        </v-row>
       </v-footer>
     </v-container>
   </div>
@@ -278,11 +286,20 @@ export default {
 };
 </script>
 <style>
+.imgcard {
+  padding-top: 20px !important;
+}
 .link,
-.detailAsk {
+.detailAsk,
+.socmed > p,
+.develop > p,
+.help > p {
   cursor: pointer;
 }
-.link:hover {
+.link:hover,
+.socmed > p:hover,
+.develop > p:hover,
+.help > p:hover {
   color: rgb(136, 132, 132);
 }
 </style>

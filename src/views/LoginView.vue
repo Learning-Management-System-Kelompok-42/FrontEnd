@@ -8,20 +8,34 @@
           <p>
             Lengkapi form dibawah ini dengan menggunakan data Anda yang valid
           </p>
-          <v-text-field label="Email Perusahaan" outlined dense></v-text-field>
-          <v-text-field label="Kata Sandi" outlined dense append-icon="mdi-eye">
+          <v-text-field
+            label="Email Perusahaan"
+            :rules="emailValidation"
+            outlined
+            dense
+          ></v-text-field>
+          <v-text-field
+            label="Kata Sandi"
+            outlined
+            dense
+            :append-icon="password ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="password = !password"
+            :type="password ? 'text' : 'password'"
+          >
           </v-text-field>
           <span class="d-flex">
-            <v-checkbox class="my-0 mx-0"> </v-checkbox>
-            <p class="mt-1">Ingat Saya</p>
+            <v-checkbox class="my-0 mx-0" label="Ingat Saya"> </v-checkbox>
           </span>
-          <v-btn
-            class="text-capitalize white--text mt-2"
-            color="#484848"
-            depressed
-          >
-            Masuk
-          </v-btn>
+          <div class="d-flex">
+            <v-spacer></v-spacer>
+            <v-btn
+              class="text-capitalize white--text mt-2"
+              color="#484848"
+              depressed
+            >
+              Masuk
+            </v-btn>
+          </div>
         </v-container>
       </v-col>
       <v-col cols="5">
@@ -34,10 +48,27 @@
     </v-row>
   </div>
 </template>
+<script>
+export default {
+  setup() {},
+  data() {
+    return {
+      password: false,
+      emailValidation: [
+        (email) => !!email || "Masukkan email anda",
+        (email) =>
+          /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+            email
+          ) || "Pastikan E-mail Anda Benar",
+      ],
+    };
+  },
+};
+</script>
 <style>
 .contain {
-  margin-top: 50px;
-  width: 400px;
+  margin-top: 50px !important;
+  width: 400px !important;
 }
 .body {
   margin: 0;
