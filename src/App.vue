@@ -1,7 +1,6 @@
 <template>
   <v-app id="app">
-    <router-view/>
-
+    <router-view></router-view>
   </v-app>
 </template>
 
@@ -12,9 +11,13 @@ export default {
   components: {
     
   },
-
   data: () => ({
     //
   }),
 };
 </script>
+<style>
+#app {
+  font-family: "Inter";
+}
+</style>
