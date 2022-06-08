@@ -3,8 +3,8 @@ import VueRouter from "vue-router";
 import LandingView from "../views/LandingView.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
-import EmployeeView from "../views/EmployeeView.vue"
-import DashboardView from "../views/DashBoard.vue"
+import EmployeeView from "../views/EmployeeView.vue";
+import DashboardView from "../views/DashBoard.vue";
 
 Vue.use(VueRouter);
 
@@ -24,6 +24,7 @@ const routes = [
     name: "masuk",
     component: LoginView,
   },
+  {
     path: "/employee",
     name: "employee",
     component: EmployeeView,
