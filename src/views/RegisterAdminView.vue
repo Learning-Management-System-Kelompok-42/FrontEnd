@@ -3,58 +3,72 @@
     <v-row>
       <v-col cols="7">
         <v-container class="cont">
-          <h4 class="my-3">LMS</h4>
-          <h1>Daftarkan Perusahaanmu</h1>
-          <p class="caption">
-            Lengkapi form dibawah ini dengan menggunakan data Anda yang valid
-          </p>
+          <v-btn
+            dense
+            plain
+            outlined
+            class="text-capitalize"
+            color="#484848"
+            @click="
+              () => {
+                this.$router.go(-1);
+              }
+            "
+          >
+            <v-icon>mdi-chevron-left</v-icon>
+            Kembali
+          </v-btn>
+          <div class="my-6">
+            <h1>Informasi Perusahaan</h1>
+            <p class="caption">
+              Lengkapi form dibawah ini dengan data perusahaan anda
+            </p>
+          </div>
           <v-text-field
-            label="Nama Lengkap"
+            label="Nama Perusahaan"
             :rules="nameValidation"
             outlined
             dense
           ></v-text-field>
           <v-text-field
-            label="Nomor Handphone"
-            :rules="nameValidation"
-            outlined
-            dense
-            type="number"
-          ></v-text-field>
-          <v-text-field
-            label="Alamat Lengkap"
+            label="Alamat Perusahaan"
             :rules="nameValidation"
             outlined
             dense
           ></v-text-field>
           <v-text-field
-            label="Email Perusahaan"
+            label="Bidang Perusahaan"
+            :rules="nameValidation"
+            outlined
+            dense
+          ></v-text-field>
+          <v-text-field
+            label="Website Perusahaan"
             :rules="emailValidation"
             outlined
             dense
           ></v-text-field>
-          <v-text-field
-            label="Kata Sandi"
-            outlined
-            dense
-            v-model="dataPassword"
-            :rules="passwordValidation"
-            :append-icon="password ? 'mdi-eye' : 'mdi-eye-off'"
-            @click:append="password = !password"
-            :type="password ? 'text' : 'password'"
-          >
-          </v-text-field>
-          <v-text-field
-            label="Konfirmasi Kata Sandi"
-            outlined
-            dense
-            v-model="dataConfirmPassword"
-            :rules="confirmPasswordValidation"
-            :append-icon="passwordConfirm ? 'mdi-eye' : 'mdi-eye-off'"
-            @click:append="passwordConfirm = !passwordConfirm"
-            :type="passwordConfirm ? 'text' : 'password'"
-          >
-          </v-text-field>
+          <v-toolbar flat outlined dense rounded>
+            <v-btn
+              small
+              color="#484848"
+              class="text-capitalize white--text"
+              depressed
+              @click="onButtonClick"
+            >
+              Upload File
+            </v-btn>
+            <input
+              type="file"
+              class="d-none"
+              accept="image/*"
+              ref="uploader"
+              @change="onFileChanged"
+            />
+            <p class="pt-3 ps-4">{{ buttonText }}</p>
+          </v-toolbar>
+          <!-- <v-file-input outlined dense></v-file-input> -->
+
           <v-checkbox
             class="my-0 mx-0"
             label="Saya setuju dengan syarat dan ketentuan yang berlaku"
@@ -68,8 +82,7 @@
               color="#484848"
               depressed
             >
-              Selanjutnya
-              <v-icon class="ms-3">mdi-chevron-right</v-icon>
+              Daftar sekarang
             </v-btn>
           </div>
         </v-container>
@@ -89,6 +102,8 @@ export default {
   setup() {},
   data() {
     return {
+      selectedFile: null,
+      defaultText: "",
       dataPassword: "",
       dataConfirmPassword: "",
       password: false,
@@ -117,6 +132,21 @@ export default {
           ) || "Pastikan E-mail Anda Benar",
       ],
     };
+  },
+  computed: {
+    buttonText() {
+      return this.selectedFile ? this.selectedFile.name : this.defaultText;
+    },
+  },
+  methods: {
+    onButtonClick() {
+      window.addEventListener("focus", () => {});
+      this.$refs.uploader.click();
+    },
+    onFileChanged(e) {
+      console.log(e.target.files[0]);
+      this.selectedFile = e.target.files[0];
+    },
   },
 };
 </script>
