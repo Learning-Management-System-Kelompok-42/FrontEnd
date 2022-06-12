@@ -4,9 +4,9 @@
     <sideBar/>
     <v-main class="ma-5">
       <h3><b>Spesializations</b></h3> 
-      <v-btn depressed color="">
+      <v-btn depressed color="" >
       <span>Tambah Spesialization</span>
-          <v-icon right ></v-icon>
+      <router-link :to="specialization/add" style="text-decoration:none; color: black"> </router-link>
       
     </v-btn>
       <p>Lihat daftar spesialization role yang di perusahaanmu
