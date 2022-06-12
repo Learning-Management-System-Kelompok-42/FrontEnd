@@ -3,51 +3,48 @@
   <v-layout>
     <sideBar/>
     <v-main class="ma-5">
-      <h3><b>Spesializations</b></h3> 
-      <v-btn depressed color="">
-      <span>Tambah Spesialization</span>
-          <v-icon right ></v-icon>
+    <v-btn depressed
+        class="ma-2"
+        color=""
+        dark
+      >
+        <v-icon
+          dark
+          left
+        >
+          mdi-arrow-left
+        </v-icon>Back
+      </v-btn>
+      <h3><b>Tambah Spesialization</b></h3> 
       
-    </v-btn>
       <p>Lihat daftar spesialization role yang di perusahaanmu
       </p>
-          <v-data-table
-            :headers="headers"
-            :items="specialization"
-            class="elevation-1"
-            app
-          >
-            <template v-slot:[`item.status`]='{item}'> 
-              <v-chip small>{{item.status}}</v-chip>
-            </template>
-
-            <template v-slot:[`item.action`]='{item}'> 
-              <v-btn class="text-capitalize" small @click="showDetail(item)">{{item.action}}</v-btn>
-            </template>
-          </v-data-table>
-
-          <v-dialog v-model="dialogDetail">
-            <v-card>
-              <v-container>
-                <v-row>
-                  <v-col cols= '4'>
-                    Nama
-                  </v-col>
-                  <v-col cols= '8'>
-                    : {{detailItem.name}}
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col cols= '4'>
-                    Description
-                  </v-col>
-                  <v-col cols= '8'>
-                    : {{detailItem.description}}
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card>
-          </v-dialog>  
+      <template>
+        <v-col
+          
+        >
+          <v-text-field
+            label="Nama Specialization"
+            outlined
+          ></v-text-field>
+        </v-col>
+         <v-col >
+        <v-textarea
+          solo
+          name="input-7-4"
+          label="Solo textarea"
+        ></v-textarea>
+      </v-col>
+      <v-btn depressed
+        class="ma-2"
+        color=""
+        dark
+        right
+      >
+        Save
+      </v-btn>
+</template>
+            
     </v-main>
   </v-layout>
 </v-app>
