@@ -6,8 +6,6 @@
       <h3><b>Spesializations</b></h3> 
       <v-btn depressed color="" >
       <span>Tambah Spesialization</span>
-      <router-link :to="specialization/add" style="text-decoration:none; color: black"> </router-link>
-      
     </v-btn>
       <p>Lihat daftar spesialization role yang di perusahaanmu
       </p>
