@@ -3,10 +3,12 @@
   <v-layout>
     <sideBar/>
     <v-main class="ma-5">
-      <h3><b>Spesializations</b></h3> 
+      <h3><b>Spesializations</b></h3>
+      <router-link :to="'specialization/add'" style="text-decoration:none; color: black"> 
       <v-btn depressed color="" >
       <span>Tambah Spesialization</span>
-    </v-btn>
+      </v-btn>
+      </router-link>
       <p>Lihat daftar spesialization role yang di perusahaanmu
       </p>
           <v-data-table

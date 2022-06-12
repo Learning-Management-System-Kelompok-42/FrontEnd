@@ -20,14 +20,15 @@ const routes = [
     component: EmployeeView,
   },
   {
+    
     path: "/",
-    name: "specialization",
-    component: SpecializationView.vue,
-    children: [
+    name: "specializationview",
+    component : SpecializationView,
+    children:  [
       {
-        path: "/add",
-        name: "specializationadd",
-        component: SpecializationAdd,
+        path : "add",
+        name : "specializationadd",
+        component : SpecializationAdd,
       }
     ]
   },

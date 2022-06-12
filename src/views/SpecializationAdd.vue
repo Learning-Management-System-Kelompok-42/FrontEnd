@@ -3,6 +3,7 @@
   <v-layout>
     <sideBar/>
     <v-main class="ma-5">
+    <router-link :to="'specialization/'" style="text-decoration:none; color: black">
     <v-btn depressed
         class="ma-2"
         color=""
@@ -15,14 +16,14 @@
           mdi-arrow-left
         </v-icon>Back
       </v-btn>
+      </router-link>
       <h3><b>Tambah Spesialization</b></h3> 
       
       <p>Lihat daftar spesialization role yang di perusahaanmu
       </p>
       <template>
-        <v-col
-          
-        >
+      
+        <v-col>
           <v-text-field
             label="Nama Specialization"
             outlined
@@ -35,6 +36,7 @@
           label="Solo textarea"
         ></v-textarea>
       </v-col>
+      
       <v-btn depressed
         class="ma-2"
         color=""
