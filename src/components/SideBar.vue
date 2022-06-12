@@ -26,13 +26,15 @@
           :key="item.title"
           link
         >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
+         <router-link :to="'/'+ item.value" style="text-decoration:none; color: black">
+         <v-row>
+            <v-list-item-icon>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content></v-row>
+         </router-link>
         </v-list-item>
       </v-list>
 
@@ -53,12 +55,12 @@ export default {
   data () {
       return {
         items: [
-          { title: 'Dashboard', icon: 'mdi-view-dashboard' },
-          { title: 'Specializations', icon: 'mdi-account-box' },
-          { title: 'Courses', icon: 'mdi-table-account' },
-          { title: 'Employees', icon: 'mdi-account-supervisor-outline' },
-          { title: 'Course Request', icon: 'mdi-chart-box-plus-outline' },
-          { title: 'Settings', icon: 'mdi-cog-outline' },
+          { title: 'Dashboard', icon: 'mdi-view-dashboard', value:'dashboard' },
+          { title: 'Specializations', icon: 'mdi-account-box', value:'specialization' },
+          { title: 'Courses', icon: 'mdi-table-account', value:'course' },
+          { title: 'Employees', icon: 'mdi-account-supervisor-outline', value:'employee' },
+          { title: 'Course Request', icon: 'mdi-chart-box-plus-outline', value:'request'},
+          { title: 'Settings', icon: 'mdi-cog-outline', value:'setting'},
         ],
       }
     },
