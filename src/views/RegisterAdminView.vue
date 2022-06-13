@@ -18,69 +18,75 @@
             <v-icon>mdi-chevron-left</v-icon>
             Kembali
           </v-btn>
-          <div class="my-6">
-            <h1>Informasi Perusahaan</h1>
-            <p class="caption">
-              Lengkapi form dibawah ini dengan data perusahaan anda
-            </p>
-          </div>
-          <v-text-field
-            label="Nama Perusahaan"
-            :rules="nameValidation"
-            outlined
-            dense
-          ></v-text-field>
-          <v-text-field
-            label="Alamat Perusahaan"
-            :rules="nameValidation"
-            outlined
-            dense
-          ></v-text-field>
-          <v-text-field
-            label="Bidang Perusahaan"
-            :rules="nameValidation"
-            outlined
-            dense
-          ></v-text-field>
-          <v-text-field
-            label="Website Perusahaan"
-            :rules="emailValidation"
-            outlined
-            dense
-          ></v-text-field>
-          <v-toolbar flat outlined dense rounded>
-            <v-btn
-              small
-              color="#484848"
-              class="text-capitalize white--text"
-              depressed
-              @click="onButtonClick"
+          <h1>Informasi Penanggung Jawab</h1>
+          <p class="caption">
+            Lengkapi form dibawah ini dengan data penanggung jawab perusahaan
+          </p>
+          <v-form ref="form" v-model="valid">
+            <v-text-field
+              label="Nama Lengkap"
+              :rules="nameValidation"
+              outlined
+              dense
+            ></v-text-field>
+            <v-text-field
+              label="Nomor Handphone"
+              :rules="nameValidation"
+              outlined
+              dense
+              type="number"
+            ></v-text-field>
+            <v-text-field
+              label="Alamat Lengkap"
+              :rules="nameValidation"
+              outlined
+              dense
+            ></v-text-field>
+            <v-text-field
+              label="Email Perusahaan"
+              :rules="emailValidation"
+              outlined
+              dense
+            ></v-text-field>
+            <v-text-field
+              label="Kata Sandi"
+              outlined
+              dense
+              v-model="dataPassword"
+              :rules="passwordValidation"
+              :append-icon="password ? 'mdi-eye' : 'mdi-eye-off'"
+              @click:append="password = !password"
+              :type="password ? 'text' : 'password'"
             >
-              Upload File
-            </v-btn>
-            <input
-              type="file"
-              class="d-none"
-              accept="image/*"
-              ref="uploader"
-              @change="onFileChanged"
-            />
-            <p class="pt-3 ps-4">{{ buttonText }}</p>
-          </v-toolbar>
-          <!-- <v-file-input outlined dense></v-file-input> -->
+            </v-text-field>
+            <v-text-field
+              label="Konfirmasi Kata Sandi"
+              outlined
+              dense
+              v-model="dataConfirmPassword"
+              :rules="confirmPasswordValidation"
+              :append-icon="passwordConfirm ? 'mdi-eye' : 'mdi-eye-off'"
+              @click:append="passwordConfirm = !passwordConfirm"
+              :type="passwordConfirm ? 'text' : 'password'"
+            >
+            </v-text-field>
+            <v-checkbox
+              v-model="checkbox"
+              class="my-0 mx-0"
+              :rules="[(v) => !!v || 'Anda harus menyetujui untuk melanjutkan']"
+              label="Saya setuju dengan syarat dan ketentuan yang berlaku"
+            >
+            </v-checkbox>
+          </v-form>
 
-          <v-checkbox
-            class="my-0 mx-0"
-            label="Saya setuju dengan syarat dan ketentuan yang berlaku"
-          >
-          </v-checkbox>
           <div class="btnDiv d-flex">
             <v-spacer></v-spacer>
             <v-btn
-              to="/admin"
+              :disabled="!valid"
               class="text-capitalize white--text mt-5"
               color="#484848"
               depressed
+              @click="validate"
             >
               Daftar sekarang
             </v-btn>
@@ -100,10 +106,15 @@
 <script>
 export default {
   setup() {},
+  methods: {
+    validate() {
+      this.$refs.form.validate();
+    },
+  },
   data() {
     return {
-      selectedFile: null,
-      defaultText: "",
+      checkbox: false,
+      valid: true,
       dataPassword: "",
       dataConfirmPassword: "",
       password: false,
@@ -132,21 +143,6 @@ export default {
           ) || "Pastikan E-mail Anda Benar",
       ],
     };
-  },
-  computed: {
-    buttonText() {
-      return this.selectedFile ? this.selectedFile.name : this.defaultText;
-    },
-  },
-  methods: {
-    onButtonClick() {
-      window.addEventListener("focus", () => {});
-      this.$refs.uploader.click();
-    },
-    onFileChanged(e) {
-      console.log(e.target.files[0]);
-      this.selectedFile = e.target.files[0];
-    },
   },
 };
 </script>

@@ -1,302 +1,167 @@
 <template>
-  <div>
-    <v-container>
-      <div class="nav d-flex">
-        <v-toolbar-title>LMS</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <p class="mx-2 my-2 link" @click="goHome()">Home</p>
-        <p class="mx-2 my-2 link">Features</p>
-        <v-btn
-          depressed
-          color="#484848"
-          class="white--text mx-2 text-capitalize"
-          to="/daftar"
-        >
-          Daftar
-        </v-btn>
-        <v-btn
-          depressed
-          outlined
-          class="#484848--text text-capitalize"
-          to="/masuk"
-        >
-          Masuk
-        </v-btn>
-      </div>
-      <div class="hero">
-        <v-row class="mt-6">
-          <v-col class="mt-6">
-            <div class="textLeft mt-6">
-              <h1 class="text-capitalize">
-                tingkatkan kemampuan para pekerjamu
-              </h1>
-              <p class="mt-6">
-                Bantu mereka untuk berkembang dengan memberikan tempat belajar
-                yang sesuai dengan bidang mereka
-              </p>
-              <v-btn depressed color="#484848" class="white--text mt-6">
-                <span class="text-capitalize"> Daftarkan Perusahaan </span>
-              </v-btn>
+  <div class="body">
+    <v-row>
+      <v-col cols="7">
+        <v-container class="cont">
+          <h4 class="my-3">LMS</h4>
+          <div class="my-6">
+            <h1>Informasi Perusahaan</h1>
+            <p class="caption">
+              Lengkapi form dibawah ini dengan data perusahaan anda
+            </p>
+          </div>
+          <v-form v-model="valid" ref="form">
+            <div class="form">
+              <v-text-field
+                label="Nama Perusahaan"
+                :rules="nameValidation"
+                outlined
+                v-model="name_company"
+                dense
+              ></v-text-field>
+              <v-text-field
+                label="Alamat Perusahaan"
+                :rules="nameValidation"
+                v-model="address_company"
+                outlined
+                dense
+              ></v-text-field>
+              <v-text-field
+                label="Bidang Perusahaan"
+                v-model="sector"
+                :rules="nameValidation"
+                outlined
+                dense
+              ></v-text-field>
+              <v-text-field
+                label="Website Perusahaan"
+                outlined
+                v-model="website"
+                dense
+              ></v-text-field>
+              <v-toolbar class="inputPicture" flat outlined dense rounded>
+                <v-btn
+                  small
+                  color="#484848"
+                  class="text-capitalize white--text"
+                  depressed
+                  @click="onButtonClick"
+                >
+                  Upload File
+                </v-btn>
+                <input
+                  type="file"
+                  class="d-none"
+                  accept="image/*"
+                  ref="uploader"
+                  @change="onFileChanged"
+                />
+                <p class="pt-3 ps-4">{{ buttonText }}</p>
+              </v-toolbar>
             </div>
-          </v-col>
-          <v-col>
-            <div class="imageRight">
-              <v-img src="http://placehold.jp/50x50.png"></v-img>
-            </div>
-          </v-col>
-        </v-row>
-      </div>
-      <div class="companyCourse py-6 my-6">
-        <p class="caption font-weight-bold my-0 py-0 primary--text">
-          Kenapa Harus LMS
-        </p>
-        <v-row>
-          <v-col cols="7">
-            <h1 class="text-capitalize">
-              kelola e-learning perusahaan dengan mudah
-            </h1>
-          </v-col>
-          <v-col cols="5"></v-col>
-        </v-row>
-      </div>
-      <div class="companyCourseList mb-6">
-        <v-row>
-          <v-col cols="3" v-for="(course, index) in listCourse" :key="index">
-            <v-card hover>
-              <v-img
-                class="ms-4 imgcard"
-                :src="course.img"
-                width="50"
-                height="50"
-              >
-              </v-img>
-              <v-card-title>{{ course.title }}</v-card-title>
-              <v-card-subtitle>{{ course.description }}</v-card-subtitle>
-            </v-card>
-          </v-col>
-        </v-row>
-      </div>
-      <div class="partner my-6 pt-6">
-        <p class="caption text-capitalize my-0 py-0">bagian dari kami</p>
-        <v-row>
-          <v-col cols="7">
-            <h1 class="text-capitalize">perusahaan yang percaya dengan kami</h1>
-          </v-col>
-          <v-col cols="5"></v-col>
-        </v-row>
-        <div class="listPartner">
-          <v-row>
-            <v-col
-              cols="2"
-              v-for="(partner, index) in listPartner"
-              :key="index"
+          </v-form>
+          <div class="btnDiv d-flex">
+            <v-spacer></v-spacer>
+            <v-btn
+              to="/daftar/admin"
+              :disabled="!valid"
+              class="text-capitalize white--text mt-5"
+              color="#484848"
+              depressed
+              @click="validate"
             >
-              <v-img :src="partner.img" width="120" height="50"></v-img>
-            </v-col>
-          </v-row>
-        </div>
-      </div>
-      <div class="frequentlyAsk mt-6 mb-6">
-        <p
-          class="caption bold grey--text text-center text-capitalize mt-6 mb-0 pt-6"
-        >
-          kamu kebingungan?
-        </p>
-        <h1 class="text-capitalize text-center mb-5">
-          pertanyaan yang sering ditanyakan
-        </h1>
-
-        <v-expansion-panels multiple hover>
-          <v-expansion-panel
-            v-for="(question, index) in listQuestion"
-            :key="index"
-            class="my-1 rounded-lg"
-          >
-            <v-expansion-panel-header class="font-weight-bold">
-              {{ question.question }}
-            </v-expansion-panel-header>
-            <v-expansion-panel-content color="#EEEEEE" class="caption">
-              {{ question.desc }}
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-        </v-expansion-panels>
-      </div>
-      <div class="joinNow mt-6 pt-6 text-center">
-        <v-card class="pa-6" flat color="#ECECFB">
-          <h1 class="text-capitalize">tunggu apalagi? mulai gabung sekarang</h1>
-          <p class="text-caption py-6">
-            Bantu pekerejamu untuk berkembang dengan memberikan tempat belajar
-            yang sesuai dengan bidang mereka
-          </p>
-          <v-btn depressed class="text-capitalize" color="primary">
-            gabung disini
-          </v-btn>
-        </v-card>
-      </div>
-      <v-footer class="mt-6" color="white">
-        <v-row>
-          <v-col cols="4">
-            <div class="logo">
-              <v-img
-                src="http://placehold.jp/20x20.png"
-                width="40"
-                height="30"
-                class="mb-3"
-              >
-              </v-img>
-              <p class="caption">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
-                tempore!
-              </p>
-            </div>
-          </v-col>
-          <v-col cols="2">
-            <div class="divider"></div>
-          </v-col>
-          <v-col cols="2">
-            <div class="socmed">
-              <h5 class="mb-3">Media Social</h5>
-              <p class="caption mb-0">Facebook</p>
-              <p class="caption mb-0">Instagram</p>
-              <p class="caption mb-0">Telegram</p>
-            </div>
-          </v-col>
-          <v-col cols="2">
-            <div class="help">
-              <h5 class="mb-3">Bantuan</h5>
-              <p class="caption mb-0">FAQ</p>
-              <p class="caption mb-0">Email Support</p>
-              <p class="caption mb-0">Term Of Service</p>
-            </div>
-          </v-col>
-          <v-col cols="2">
-            <div class="develop">
-              <h5 class="mb-3">Pengembang</h5>
-              <p class="caption mb-0">Developer</p>
-              <p class="caption mb-0">Kirim Masukan</p>
-            </div>
-          </v-col>
-        </v-row>
-      </v-footer>
-    </v-container>
+              Selanjutnya
+              <v-icon class="ms-3">mdi-chevron-right</v-icon>
+            </v-btn>
+          </div>
+        </v-container>
+      </v-col>
+      <v-col cols="5">
+        <v-img
+          class="imgfull"
+          src="http://placehold.jp/1280x2850.png"
+          max-height="720"
+        ></v-img>
+      </v-col>
+    </v-row>
   </div>
 </template>
 <script>
+import { mapFields } from "vuex-map-fields";
 export default {
+  setup() {
+    // const selectedFile = "";
+    // return selectedFile;
+  },
   data() {
     return {
-      show: true,
-      selectIndex: null,
-      showText: false,
-      listCourse: [
-        {
-          img: "http://placehold.jp/20x20.png",
-          title: "Title Card 0",
-          description:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sedullam, molestiae non quae cumque beatae.",
-        },
-        {
-          img: "http://placehold.jp/20x20.png",
-          title: "Title Card 1",
-          description:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sedullam, molestiae non quae cumque beatae.",
-        },
-        {
-          img: "http://placehold.jp/20x20.png",
-          title: "Title Card 2",
-          description:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sedullam, molestiae non quae cumque beatae.",
-        },
-        {
-          img: "http://placehold.jp/20x20.png",
-          title: "Title Card 3",
-          description:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sedullam, molestiae non quae cumque beatae.",
-        },
+      checkbox: false,
+      valid: true,
+      selectedFile: null,
+      dataPassword: "",
+      dataConfirmPassword: "",
+      password: false,
+      passwordConfirm: false,
+      nameValidation: [(name) => !!name || "Silahkan Masukkan Nama Anda"],
+      passwordValidation: [
+        (password) => !!password || "Silahkan masukkan password anda",
+        (password) =>
+          /(?=.*\d)(?=.*[a-z]).{8,}/.test(password) ||
+          "Password minimal 8 karakter dan Memiliki nomor",
       ],
-      listPartner: [
-        {
-          img: "http://placehold.jp/20x20.png",
-        },
-        {
-          img: "http://placehold.jp/20x20.png",
-        },
-        {
-          img: "http://placehold.jp/20x20.png",
-        },
-        {
-          img: "http://placehold.jp/20x20.png",
-        },
-        {
-          img: "http://placehold.jp/20x20.png",
-        },
-        {
-          img: "http://placehold.jp/20x20.png",
-        },
+      confirmPasswordValidation: [
+        (cpassword) => !!cpassword || "Konfirmasi password anda",
+        (cpassword) =>
+          /(?=.*\d)(?=.*[a-z]).{8,}/.test(cpassword) ||
+          "Password minimal 8 karakter",
+        (cpassword) =>
+          cpassword === this.dataPassword ||
+          "Password tidak cocok, silahkan periksa kembali",
       ],
-      listQuestion: [
-        {
-          id: 1,
-          question:
-            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia, velit?",
-          desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus saepe eaque autem nisi eligendi incidunt voluptatem voluptas! Minus perspiciatis voluptatem qui pariatur odit animi, libero at enim reprehenderit error officia.",
-        },
-        {
-          id: 2,
-          question:
-            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia, velit?",
-          desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus saepe eaque autem nisi eligendi incidunt voluptatem voluptas! Minus perspiciatis voluptatem qui pariatur odit animi, libero at enim reprehenderit error officia.",
-        },
-        {
-          id: 3,
-          question:
-            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia, velit?",
-          desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus saepe eaque autem nisi eligendi incidunt voluptatem voluptas! Minus perspiciatis voluptatem qui pariatur odit animi, libero at enim reprehenderit error officia.",
-        },
-        {
-          id: 4,
-          question:
-            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia, velit?",
-          desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus saepe eaque autem nisi eligendi incidunt voluptatem voluptas! Minus perspiciatis voluptatem qui pariatur odit animi, libero at enim reprehenderit error officia.",
-        },
-        {
-          id: 5,
-          question:
-            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia, velit?",
-          desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus saepe eaque autem nisi eligendi incidunt voluptatem voluptas! Minus perspiciatis voluptatem qui pariatur odit animi, libero at enim reprehenderit error officia.",
-        },
-        {
-          id: 6,
-          question:
-            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia, velit?",
-          desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus saepe eaque autem nisi eligendi incidunt voluptatem voluptas! Minus perspiciatis voluptatem qui pariatur odit animi, libero at enim reprehenderit error officia.",
-        },
+      emailValidation: [
+        (email) => !!email || "Masukkan email anda",
+        (email) =>
+          /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+            email
+          ) || "Pastikan E-mail Anda Benar",
       ],
     };
   },
-  methods: {
-    goHome() {
-      this.$router.push("/");
+  computed: {
+    ...mapFields("perusahaan", [
+      "dataCompany.name_company",
+      "dataCompany.address_company",
+      "dataCompany.sector",
+      "dataCompany.website",
+      "dataCompany.logo",
+    ]),
+    buttonText() {
+      return this.selectedFile ? this.selectedFile.name : "";
     },
   },
-  setup() {},
+  methods: {
+    validate() {
+      this.$refs.form.validate();
+    },
+    onButtonClick() {
+      window.addEventListener("focus", () => {});
+      this.$refs.uploader.click();
+    },
+    onFileChanged(e) {
+      console.log(e.target.files[0]);
+      this.selectedFile = e.target.files[0];
+    },
+  },
 };
 </script>
 <style>
-.imgcard {
-  padding-top: 20px !important;
+.inputPicture {
+  border: 0.5px solid gray !important;
 }
-.link,
-.detailAsk,
-.socmed > p,
-.develop > p,
-.help > p {
-  cursor: pointer;
+.cont {
+  width: 500px !important;
 }
-.link:hover,
-.socmed > p:hover,
-.develop > p:hover,
-.help > p:hover {
-  color: rgb(136, 132, 132);
+.body {
+  margin: 0;
 }
 </style>
