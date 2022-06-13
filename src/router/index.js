@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import LandingView from "../views/LandingView.vue";
+import SpecializationParent from "../views/SpecializationParent.vue"
 import SpecializationView from "../views/SpecializationView.vue"
 import SpecializationAdd from "../views/SpecializationAdd.vue"
 import EmployeeView from "../views/EmployeeView.vue"
@@ -20,16 +21,19 @@ const routes = [
     component: EmployeeView,
   },
   {
-    
-    path: "/",
-    name: "specializationview",
-    component : SpecializationView,
-    children:  [
+    path: "/specialization",
+    component : SpecializationParent,
+    children:[
+      {
+        path: "/",
+        name: "specializationview",
+        component : SpecializationView,
+      },
       {
         path : "add",
         name : "specializationadd",
         component : SpecializationAdd,
-      }
+      },
     ]
   },
   {

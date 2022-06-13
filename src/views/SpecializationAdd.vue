@@ -3,7 +3,7 @@
   <v-layout>
     <sideBar/>
     <v-main class="ma-5">
-    <router-link :to="'specialization/'" style="text-decoration:none; color: black">
+    <router-link :to="'/specialization'" style="text-decoration:none; color: black">
     <v-btn depressed
         class="ma-2"
         color=""

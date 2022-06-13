@@ -4,11 +4,12 @@
     <sideBar/>
     <v-main class="ma-5">
       <h3><b>Spesializations</b></h3>
-      <router-link :to="'specialization/add'" style="text-decoration:none; color: black"> 
-      <v-btn depressed color="" >
-      <span>Tambah Spesialization</span>
-      </v-btn>
+      <router-link :to="{name :'specializationadd'}" style="text-decoration:none; color: black"> 
+        <v-btn depressed color="" >
+          <span>Tambah Spesialization</span>
+        </v-btn>
       </router-link>
+      <!-- <router-view/> -->
       <p>Lihat daftar spesialization role yang di perusahaanmu
       </p>
           <v-data-table
