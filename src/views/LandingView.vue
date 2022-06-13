@@ -275,9 +275,6 @@ export default {
     };
   },
   methods: {
-    showAnswer(id) {
-      this.selectIndex = id;
-    },
     goHome() {
       this.$router.push("/");
     },
