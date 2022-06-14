@@ -8,34 +8,39 @@
           <p>
             Lengkapi form dibawah ini dengan menggunakan data Anda yang valid
           </p>
-          <v-text-field
-            label="Email Perusahaan"
-            :rules="emailValidation"
-            outlined
-            dense
-          ></v-text-field>
-          <v-text-field
-            label="Kata Sandi"
-            outlined
-            dense
-            :append-icon="password ? 'mdi-eye' : 'mdi-eye-off'"
-            @click:append="password = !password"
-            :type="password ? 'text' : 'password'"
-          >
-          </v-text-field>
-          <span class="d-flex">
-            <v-checkbox class="my-0 mx-0" label="Ingat Saya"> </v-checkbox>
-          </span>
-          <div class="d-flex">
-            <v-spacer></v-spacer>
-            <v-btn
-              class="text-capitalize white--text mt-2"
-              color="#484848"
-              depressed
+          <v-form v-model="valid" ref="form" @submit.prevent="btnLogin">
+            <v-text-field
+              label="Email Perusahaan"
+              :rules="emailValidation"
+              outlined
+              dense
+              v-model="email"
+            ></v-text-field>
+            <v-text-field
+              label="Kata Sandi"
+              outlined
+              dense
+              v-model="dataPassword"
+              :append-icon="password ? 'mdi-eye' : 'mdi-eye-off'"
+              @click:append="password = !password"
+              :type="password ? 'text' : 'password'"
             >
-              Masuk
-            </v-btn>
-          </div>
+            </v-text-field>
+            <span class="d-flex">
+              <v-checkbox class="my-0 mx-0" label="Ingat Saya"> </v-checkbox>
+            </span>
+            <div class="d-flex">
+              <v-spacer></v-spacer>
+              <v-btn
+                class="text-capitalize white--text mt-2"
+                color="#484848"
+                depressed
+                type="submit"
+              >
+                Masuk
+              </v-btn>
+            </div>
+          </v-form>
         </v-container>
       </v-col>
       <v-col cols="5">
@@ -53,6 +58,9 @@ export default {
   setup() {},
   data() {
     return {
+      valid: true,
+      email: "",
+      dataPassword: "",
       password: false,
       emailValidation: [
         (email) => !!email || "Masukkan email anda",
@@ -62,6 +70,14 @@ export default {
           ) || "Pastikan E-mail Anda Benar",
       ],
     };
+  },
+  methods: {
+    btnLogin() {
+      this.$store.dispatch("user/fetchLogin", {
+        email: this.email,
+        password: this.dataPassword,
+      });
+    },
   },
 };
 </script>
