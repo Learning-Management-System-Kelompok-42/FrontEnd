@@ -6,7 +6,7 @@ const state = () => ({
       address_company: "",
       sector: "",
       website: "",
-      logo: "",
+      logo: null,
       name_admin: "",
       phone_number: "",
       address_admin: "",
