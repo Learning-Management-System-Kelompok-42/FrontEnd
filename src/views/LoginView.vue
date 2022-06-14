@@ -27,11 +27,13 @@
             >
             </v-text-field>
             <span class="d-flex">
-              <v-checkbox class="my-0 mx-0" label="Ingat Saya"> </v-checkbox>
+              <v-checkbox class="my-0 mx-0" label="Ingat Saya" v-model="check">
+              </v-checkbox>
             </span>
             <div class="d-flex">
               <v-spacer></v-spacer>
               <v-btn
+                :disabled="!valid"
                 class="text-capitalize white--text mt-2"
                 color="#484848"
                 depressed
@@ -59,6 +61,7 @@ export default {
   data() {
     return {
       valid: true,
+      check: false,
       email: "",
       dataPassword: "",
       password: false,
@@ -73,10 +76,18 @@ export default {
   },
   methods: {
     btnLogin() {
-      this.$store.dispatch("user/fetchLogin", {
-        email: this.email,
-        password: this.dataPassword,
-      });
+      if (!this.check) {
+        this.$store.dispatch("user/fetchLogin", {
+          email: this.email,
+          password: this.dataPassword,
+        });
+      } else {
+        this.$store.commit("user/setUser", this.email, this.password);
+        this.$store.dispatch("user/fetchLogin", {
+          email: this.email,
+          password: this.dataPassword,
+        });
+      }
     },
   },
 };

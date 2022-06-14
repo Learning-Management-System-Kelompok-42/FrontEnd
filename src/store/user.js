@@ -2,11 +2,20 @@ import axios from "axios";
 import router from "@/router";
 
 const state = () => ({
+  user: [
+    {
+      email: "",
+      password: "",
+    },
+  ],
   token: null,
 });
 const mutations = {
   setToken(state, param) {
     state.token = param;
+  },
+  setUser(state, param1, param2) {
+    (state.user.email = param1), (state.user.password = param2);
   },
 };
 const actions = {

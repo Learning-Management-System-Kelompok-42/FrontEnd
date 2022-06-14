@@ -304,27 +304,6 @@ export default {
           .catch((error) => {
             console.error(error);
           });
-        //   const options = {
-        //     methods: "POST",
-        //     URL: "",
-        //     Headers: {
-        // Accept: "application/json",
-        // "Content-Type": "application/json",
-        //     },
-        //     data: {},
-        //   };
-        //   axios
-        //     .request(options)
-        //     .then(function (response) {
-        //       console.log(response.data);
-        // this.$store.dispatch("user/fetchLogin", {
-        //   email: this.email_admin,
-        //   password: this.password_admin,
-        // });
-        //     })
-        //     .catch(function (error) {
-        //       console.error(error);
-        //     });
       }
     },
     onButtonClick() {

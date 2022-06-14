@@ -1,16 +1,14 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import LandingView from "../views/LandingView.vue";
-
-import EmployeeView from "../views/EmployeeView.vue"
-import DashboardView from "../views/DashBoard.vue"
-
+import EmployeeView from "../views/EmployeeView.vue";
+import DashboardView from "../views/DashBoard.vue";
 import LoginView from "../views/LoginView.vue";
-// import RegisterAdminView from "../views/RegisterAdminView.vue";
 import RegisterPerusahaanView from "../views/RegisterPerusahaanView.vue";
-// import RegisterView from "../views/RegisterView.vue";
 
 Vue.use(VueRouter);
+
+const cookie = require("tiny-cookie");
 
 const routes = [
   {
@@ -22,12 +20,25 @@ const routes = [
     path: "/employee",
     name: "employee",
     component: EmployeeView,
+    beforeEnter: (to, from, next) => {
+      if (!cookie.get("token")) {
+        return next("/masuk");
+      }
+      next();
+    },
   },
   {
     path: "/dashboard",
     name: "dashboard",
     component: DashboardView,
-  }, 
+    beforeEnter: (to, from, next) => {
+      if (!cookie.get("token")) {
+        return next("/masuk");
+      }
+      next();
+    },
+  },
+  {
     path: "/daftar",
     component: RegisterPerusahaanView,
     // children: [
