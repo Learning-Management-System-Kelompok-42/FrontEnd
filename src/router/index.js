@@ -8,6 +8,7 @@ import LoginView from "../views/LoginView.vue";
 import RegisterPerusahaanView from "../views/RegisterPerusahaanView.vue";
 import EmployeeView from "../views/EmployeeView.vue";
 import DashboardView from "../views/DashBoard.vue";
+import SideBarParents from "../views/SideBarParents.vue"
 
 Vue.use(VueRouter);
 
@@ -16,16 +17,6 @@ const routes = [
     path: "/",
     name: "home",
     component: LandingView,
-  },
-  {
-    path: "/employee",
-    name: "employee",
-    component: EmployeeView,
-  },
-  {
-    path: "/dashboard",
-    name: "dashboard",
-    component: DashboardView,
   },
   {
     path: "/daftar",
@@ -56,30 +47,36 @@ const routes = [
     component: LoginView,
   },
   {
-    path: "/employee",
-    name: "employee",
-    component: EmployeeView,
-  },
-  {
-    path: "/specialization",
-    component: SpecializationParent,
-    children: [
+    path: "/dashboard",
+    component: SideBarParents,
+    children :[
       {
         path: "/",
-        name: "specializationview",
-        component: SpecializationView,
+        name: "dashboard",
+        component: DashboardView,
       },
       {
-        path: "add",
-        name: "specializationadd",
-        component: SpecializationAdd,
+        path: "/employee",
+        name: "employee",
+        component: EmployeeView,
       },
-    ],
-  },
-  {
-    path: "/dashboard",
-    name: "dashboard",
-    component: DashboardView,
+      {
+        path: "/specialization",
+        component: SpecializationParent,
+        children: [
+          {
+            path: "/",
+            name: "specializationview",
+            component: SpecializationView,
+          },
+          {
+            path: "add",
+            name: "specializationadd",
+            component: SpecializationAdd,
+          },
+        ],
+      },
+    ]
   },
 ];
 

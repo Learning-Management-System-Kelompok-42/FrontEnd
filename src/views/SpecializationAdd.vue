@@ -1,7 +1,7 @@
 <template>
 <v-app>
   <v-layout>
-    <sideBar/>
+    <!-- <sideBar/> -->
     <v-main class="ma-5">
     <router-link :to="'/specialization'" style="text-decoration:none; color: black">
     <v-btn depressed
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import sideBar from '../components/SideBar.vue'
+// import sideBar from '../components/SideBar.vue'
 export default {
   data () {
       return {
@@ -100,9 +100,9 @@ export default {
         detailItem : {},       
       }
     },
-  components:{
-    sideBar
-  },
+  // components:{
+  //   sideBar
+  // },
   methods:{
     showDetail(item){
       this.dialogDetail = true,
@@ -111,7 +111,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
