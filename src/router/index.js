@@ -6,10 +6,8 @@ import SpecializationView from "../views/SpecializationView.vue";
 import SpecializationAdd from "../views/SpecializationAdd.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterPerusahaanView from "../views/RegisterPerusahaanView.vue";
-import RegisterView from "../views/RegisterView.vue";
 import EmployeeView from "../views/EmployeeView.vue";
 import DashboardView from "../views/DashBoard.vue";
-
 
 Vue.use(VueRouter);
 
@@ -28,7 +26,8 @@ const routes = [
     path: "/dashboard",
     name: "dashboard",
     component: DashboardView,
-  }, 
+  },
+  {
     path: "/daftar",
     component: RegisterPerusahaanView,
     // children: [
