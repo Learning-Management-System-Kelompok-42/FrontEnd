@@ -8,7 +8,7 @@ import LoginView from "../views/LoginView.vue";
 import RegisterPerusahaanView from "../views/RegisterPerusahaanView.vue";
 import EmployeeView from "../views/EmployeeView.vue";
 import DashboardView from "../views/DashBoard.vue";
-import SideBarParents from "../views/SideBarParents.vue"
+import SideBarParents from "../views/SideBarParents.vue";
 
 Vue.use(VueRouter);
 
@@ -49,15 +49,13 @@ const routes = [
   {
     path: "/dashboard",
     component: SideBarParents,
-    children :[
+    children: [
       {
         path: "/",
-        name: "dashboard",
         component: DashboardView,
       },
       {
         path: "/employee",
-        name: "employee",
         component: EmployeeView,
       },
       {
@@ -76,7 +74,7 @@ const routes = [
           },
         ],
       },
-    ]
+    ],
   },
 ];
 
