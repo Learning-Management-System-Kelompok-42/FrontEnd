@@ -1,6 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import LandingView from "../views/LandingView.vue";
+
+import SpecializationParent from "../views/SpecializationParent.vue"
+import SpecializationView from "../views/SpecializationView.vue"
+import SpecializationAdd from "../views/SpecializationAdd.vue"
 import LoginView from "../views/LoginView.vue";
 import RegisterAdminView from "../views/RegisterAdminView.vue";
 import RegisterPerusahaanView from "../views/RegisterPerusahaanView.vue";
@@ -12,7 +16,7 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
+    path: "/home",
     name: "home",
     component: LandingView,
   },
@@ -48,6 +52,22 @@ const routes = [
     path: "/employee",
     name: "employee",
     component: EmployeeView,
+  },
+  {
+    path: "/specialization",
+    component : SpecializationParent,
+    children:[
+      {
+        path: "/",
+        name: "specializationview",
+        component : SpecializationView,
+      },
+      {
+        path : "add",
+        name : "specializationadd",
+        component : SpecializationAdd,
+      },
+    ]
   },
   {
     path: "/dashboard",
