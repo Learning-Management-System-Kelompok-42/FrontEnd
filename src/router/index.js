@@ -4,7 +4,11 @@ import LandingView from "../views/LandingView.vue";
 import EmployeeView from "../views/EmployeeView.vue";
 import DashboardView from "../views/DashBoard.vue";
 import LoginView from "../views/LoginView.vue";
-import RegisterPerusahaanView from "../views/RegisterPerusahaanView.vue";
+import RegisterView from "../views/RegisterView.vue";
+import SuccessView from "../views/SuccessRegisView.vue";
+import SuccessLoginView from "../views/SuccessLoginView.vue";
+import Course from "../views/course/course.vue";
+import AddCourse from "../views/course/addcourse.vue";
 
 Vue.use(VueRouter);
 
@@ -32,39 +36,42 @@ const routes = [
     name: "dashboard",
     component: DashboardView,
     beforeEnter: (to, from, next) => {
-      if (!cookie.get("token")) {
+      if (cookie.get("token") === null || !cookie.get("token")) {
         return next("/masuk");
       }
       next();
     },
   },
   {
-    path: "/daftar",
-    component: RegisterPerusahaanView,
-    // children: [
-    //   {
-    //     path: "",
-    //     component: RegisterPerusahaanView,
-    //   },
-    //   {
-    //     path: "admin",
-    //     component: RegisterAdminView,
-    //   },
-    // ],
+    path: "/kursus",
+    component: Course,
+    beforeEnter: (to, form, next) => {
+      if (cookie.get("token") === null || !cookie.get("token")) {
+        return next("/masuk");
+      }
+      next();
+    },
   },
-  // {
-  //   path: "/admin",
-  //   name: "admin",
-  //   component: RegisterAdminView,
-  // },
-  // {
-  //   path: "/daftar",
-  //   component: RegisterPerusahaanView,
-  // },
+  {
+    path: "/kursus/tambah",
+    component: AddCourse,
+  },
+  {
+    path: "/daftar",
+    component: RegisterView,
+  },
   {
     path: "/masuk",
     name: "masuk",
     component: LoginView,
+  },
+  {
+    path: "/sukses",
+    component: SuccessView,
+  },
+  {
+    path: "/sukseslogin",
+    component: SuccessLoginView,
   },
 ];
 

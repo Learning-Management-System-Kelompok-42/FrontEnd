@@ -212,6 +212,16 @@ export default {
   components: {
     sideBar,
   },
+  methods: {
+    gettoken() {
+      const cookie = require("tiny-cookie");
+      return cookie.get("token");
+    },
+  },
+  mounted() {
+    console.log(this.$store.state.user.userid);
+    console.log(this.gettoken());
+  },
 };
 </script>
 
