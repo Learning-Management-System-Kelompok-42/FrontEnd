@@ -194,11 +194,9 @@
   </v-app>
 </template>
 
-// <script>
-// import sideBar from '../components/SideBar.vue'
-// export default {
-//     components :{
-//         sideBar
-//     }
-// }
-// </script>
+<script>
+
+export default {
+  
+}
+</script>

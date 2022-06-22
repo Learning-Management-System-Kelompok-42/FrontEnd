@@ -20,23 +20,26 @@
         <v-list-item v-for="item in items" :key="item.title" link>
           <router-link
             :to="'/' + item.value"
-            style="text-decoration: none; color: black"
+            style="text-decoration: none;"
           >
             <v-row>
               <v-list-item-icon>
-                <v-icon>{{ item.icon }}</v-icon>
+                <v-card :elevation="0" class="card pa-1" color="#F3F8F6"><v-icon class="icon" color="#C2C2C2">{{ item.icon }}</v-icon></v-card>
               </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-              </v-list-item-content></v-row
-            >
+              <v-list-item-content class="title" >
+                <v-list-item-title style="color:#C2C2C2">{{ item.title }}</v-list-item-title>
+              </v-list-item-content>
+            </v-row>
           </router-link>
         </v-list-item>
       </v-list>
 
-      <template v-slot:append>
-        <div class="pa-2">
-          <v-btn block class="text-capitalize"> Logout </v-btn>
+      <template v-slot:append >
+        <div class="pl-0 pa-2">
+        <v-btn class="text-capitalize px-1" text  color="warning">
+          <v-card :elevation="0" class="ml-0 pa-1 mr-2" color="warning2"><v-icon color="warning">mdi-export</v-icon></v-card>
+          Keluar
+        </v-btn>
         </div>
       </template>
     </v-navigation-drawer>
@@ -48,28 +51,40 @@ export default {
   data() {
     return {
       items: [
-        { title: "Dashboard", icon: "mdi-view-dashboard", value: "dashboard" },
+        { title: "Dashboard", icon: "mdi-chart-box-outline", value: "dashboard" },
         {
-          title: "Specializations",
+          title: "Spesialisasi",
           icon: "mdi-account-box",
           value: "specialization",
         },
-        { title: "Courses", icon: "mdi-table-account", value: "course" },
+        { title: "Kursus", icon: "mdi-file-document-outline", value: "course" },
         {
-          title: "Employees",
-          icon: "mdi-account-supervisor-outline",
+          title: "Karyawan",
+          icon: "mdi-account-group-outline",
           value: "employee",
         },
         {
-          title: "Course Request",
-          icon: "mdi-chart-box-plus-outline",
+          title: "Permintaan",
+          icon: "mdi-bookmark-minus-outline",
           value: "request",
         },
-        { title: "Settings", icon: "mdi-cog-outline", value: "setting" },
+        { title: "Pengaturan", icon: "mdi-cog-outline", value: "setting" },
       ],
     };
   },
 };
 </script>
 
-<style></style>
+<style>
+/* .title:visited , .icon:visited{
+  color : #286F6C !important ;
+}
+.card:visited{
+  color : #D8F7EB !important ;
+} */
+router-link.title:active {
+  color : #286F6C !important;
+}
+
+
+</style>

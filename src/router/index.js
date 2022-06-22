@@ -9,6 +9,13 @@ import RegisterPerusahaanView from "../views/RegisterPerusahaanView.vue";
 import EmployeeView from "../views/EmployeeView.vue";
 import DashboardView from "../views/DashBoard.vue";
 import SideBarParents from "../views/SideBarParents.vue";
+import EmployeeParent from "../views/EmployeeParent.vue"
+import EmployeeDetail from "../views/EmployeeDetail.vue"
+import SettingView from "../views/SettingView.vue"
+import SettingMenu from "../views/SettingMenu.vue"
+import SettingProfile from "../views/SettingProfile.vue"
+import SettingCompany from "../views/SettingCompany.vue"
+import SettingPassword from "../views/SettingPassword.vue"
 
 Vue.use(VueRouter);
 
@@ -56,7 +63,19 @@ const routes = [
       },
       {
         path: "/employee",
-        component: EmployeeView,
+        component: EmployeeParent,
+        children :[
+          {
+          path:'/',
+          name : 'employeeView',
+          component: EmployeeView,
+          },
+          {
+            path:'detail',
+            name : 'employeeDetail',
+            component: EmployeeDetail,           
+          }
+        ]
       },
       {
         path: "/specialization",
@@ -74,6 +93,31 @@ const routes = [
           },
         ],
       },
+      {
+        path: "/setting",
+        component : SettingView,
+        children :[
+          {
+            path : '/',
+            component : SettingMenu,
+          },
+          {
+            path : 'profile',
+            name : 'settingProfile',
+            component : SettingProfile, 
+          },
+          {
+            path : 'company',
+            name : 'settingCompany',
+            component : SettingCompany,
+          },
+          {
+            path :'password',
+            name : 'settingPassword',
+            component : SettingPassword,
+          }
+        ],
+      }
     ],
   },
 ];
