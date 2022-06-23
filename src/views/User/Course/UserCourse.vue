@@ -102,7 +102,7 @@
                     <v-card-actions>
                     <v-btn
                         class="text-capitalize"
-                        @click="reveal = false"
+                        to="urcourse/detail"
                         text
                         color="primary"
                     >
@@ -130,7 +130,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 h3{
     color: #286F6C;
 }
