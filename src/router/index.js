@@ -11,11 +11,11 @@ import DashboardView from "../views/DashBoard.vue";
 import SideBarParents from "../views/SideBarParents.vue";
 import EmployeeParent from "../views/EmployeeParent.vue"
 import EmployeeDetail from "../views/EmployeeDetail.vue"
-import SettingView from "../views/SettingView.vue"
-import SettingMenu from "../views/SettingMenu.vue"
-import SettingProfile from "../views/SettingProfile.vue"
-import SettingCompany from "../views/SettingCompany.vue"
-import SettingPassword from "../views/SettingPassword.vue"
+import SettingView from "../views/Setting/SettingView.vue"
+import SettingMenu from "../views/Setting/SettingMenu.vue"
+import SettingProfile from "../views/Setting/SettingProfile.vue"
+import SettingCompany from "../views/Setting/SettingCompany.vue"
+import SettingPassword from "../views/Setting/SettingPassword.vue"
 
 Vue.use(VueRouter);
 

@@ -7,7 +7,7 @@
             <v-img src=" "></v-img>
           </v-list-item-avatar>
         </v-list-item>
-
+      
         <v-list-item link>
           <v-list-item-content>
             <v-list-item-title class="text-h6">
@@ -17,21 +17,23 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item v-for="item in items" :key="item.title" link>
-          <router-link
-            :to="'/' + item.value"
-            style="text-decoration: none;"
-          >
-            <v-row>
-              <v-list-item-icon>
-                <v-card :elevation="0" class="card pa-1" color="#F3F8F6"><v-icon class="icon" color="#C2C2C2">{{ item.icon }}</v-icon></v-card>
-              </v-list-item-icon>
-              <v-list-item-content class="title" >
-                <v-list-item-title style="color:#C2C2C2">{{ item.title }}</v-list-item-title>
-              </v-list-item-content>
-            </v-row>
-          </router-link>
-        </v-list-item>
+        <v-list-item-group active-class="visit">
+          <v-list-item v-for="item in items" :key="item.title" link>
+            <router-link
+              :to="'/' + item.value"
+              style="text-decoration: none"
+            >
+              <v-row>
+                <v-list-item-icon>
+                  <v-card :elevation="0" class="card pa-1"><v-icon>{{ item.icon }}</v-icon></v-card>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title class="title">{{ item.title }}</v-list-item-title>
+                </v-list-item-content>
+              </v-row>
+            </router-link>
+          </v-list-item>
+        </v-list-item-group>
       </v-list>
 
       <template v-slot:append >
@@ -76,14 +78,23 @@ export default {
 </script>
 
 <style>
-/* .title:visited , .icon:visited{
-  color : #286F6C !important ;
+.card {
+  color:#F3F8F6;
 }
-.card:visited{
-  color : #D8F7EB !important ;
-} */
-router-link.title:active {
-  color : #286F6C !important;
+.icon,.title {
+  color: #C2C2C2;
+}
+.router-link-exact-active router-link-active.v-list-item__title{
+color: #286F6C !important;
+}
+.router-link-exact-active router-link-active.v-list-item__icon{
+color: #286F6C !important;
+}
+.router-link-exact-active router-link-active.theme--light.v-card.card{
+color: #D8F7EB;
+}
+.visit{
+  background-color: #286F6C
 }
 
 

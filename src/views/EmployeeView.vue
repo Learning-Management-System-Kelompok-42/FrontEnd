@@ -1,6 +1,5 @@
 <template>
-<v-app>
-  <v-layout>
+<v-app> 
     <v-main class="ml-10 ma-5">
 <!-- HEADER -->
       <v-container style="display:flex">
@@ -87,7 +86,6 @@
         </v-col>
       </v-row>    
     </v-main>
-  </v-layout>
 </v-app>
 </template>
 
@@ -101,12 +99,12 @@ export default {
 </script>
 
 <style scoped>
-/* .v-card--reveal {
+.v-card--reveal {
   bottom: 0;
   opacity: 1 !important;
   position: absolute;
   width: 100%;
-} */
+}
 
 
 </style>
