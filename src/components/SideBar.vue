@@ -42,10 +42,15 @@
 
       <template v-slot:append>
         <div class="pl-0 pa-2">
-          <v-btn class="text-capitalize px-1" text color="warning">
-            <v-card :elevation="0" class="ml-0 pa-1 mr-2" color="warning2"
-              ><v-icon color="warning">mdi-export</v-icon></v-card
-            >
+          <v-btn
+            class="text-capitalize px-1"
+            text
+            color="warning"
+            @click="logout"
+          >
+            <v-card :elevation="0" class="ml-0 pa-1 mr-2" color="warning2">
+              <v-icon color="warning">mdi-export</v-icon>
+            </v-card>
             Keluar
           </v-btn>
         </div>
@@ -55,6 +60,7 @@
 </template>
 
 <script>
+let cookie = require("tiny-cookie");
 export default {
   data() {
     return {
@@ -83,6 +89,12 @@ export default {
         { title: "Pengaturan", icon: "mdi-cog-outline", value: "setting" },
       ],
     };
+  },
+  methods: {
+    logout() {
+      cookie.remove("token");
+      this.$router.push("/login");
+    },
   },
 };
 </script>

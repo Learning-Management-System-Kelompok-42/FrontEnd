@@ -10,7 +10,7 @@
           depressed
           color="primary"
           class="white--text mx-2 text-capitalize"
-          to="/daftar"
+          to="/register"
         >
           Daftar
         </v-btn>
@@ -18,7 +18,7 @@
           depressed
           outlined
           class="priamry--text text-capitalize"
-          to="/masuk"
+          to="/login"
         >
           Masuk
         </v-btn>
@@ -38,7 +38,7 @@
                 depressed
                 color="primary"
                 class="white--text mt-6"
-                to="/daftar"
+                to="/register"
               >
                 <span class="text-capitalize"> Daftarkan Perusahaan </span>
               </v-btn>
@@ -143,7 +143,12 @@
               bidang mereka
             </p>
           </v-container>
-          <v-btn depressed class="text-capitalize" color="primary" to="daftar">
+          <v-btn
+            depressed
+            class="text-capitalize"
+            color="primary"
+            to="register"
+          >
             gabung disini
           </v-btn>
         </v-card>

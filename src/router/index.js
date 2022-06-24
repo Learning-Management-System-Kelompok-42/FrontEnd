@@ -32,11 +32,11 @@ const routes = [
     component: LandingView,
   },
   {
-    path: "/daftar",
+    path: "/register",
     component: RegisterView,
   },
   {
-    path: "/masuk",
+    path: "/login",
     name: "masuk",
     component: LoginView,
   },
@@ -49,7 +49,7 @@ const routes = [
     component: SideBarParents,
     beforeEnter: (to, from, next) => {
       if (cookie.get("token") === null || !cookie.get("token")) {
-        return next("/masuk");
+        return next("/login");
       }
       next();
     },
