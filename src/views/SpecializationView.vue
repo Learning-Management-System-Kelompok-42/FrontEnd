@@ -1,7 +1,7 @@
 <template>
 <v-app>
   <v-layout>
-    <sideBar/>
+    <!-- <sideBar/> -->
     <v-main class="ma-5">
       <h3><b>Spesializations</b></h3>
       <router-link :to="{name :'specializationadd'}" style="text-decoration:none; color: black"> 
@@ -9,7 +9,7 @@
           <span>Tambah Spesialization</span>
         </v-btn>
       </router-link>
-      <!-- <router-view/> -->
+
       <p>Lihat daftar spesialization role yang di perusahaanmu
       </p>
           <v-data-table
@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import sideBar from '../components/SideBar.vue'
+// import sideBar from '../components/SideBar.vue'
 export default {
   data () {
       return {
@@ -102,9 +102,9 @@ export default {
         detailItem : {},       
       }
     },
-  components:{
-    sideBar
-  },
+  // components:{
+  //   sideBar
+  // },
   methods:{
     showDetail(item){
       this.dialogDetail = true,
@@ -113,7 +113,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

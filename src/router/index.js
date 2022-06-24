@@ -8,6 +8,14 @@ import LoginView from "../views/LoginView.vue";
 import RegisterPerusahaanView from "../views/RegisterPerusahaanView.vue";
 import EmployeeView from "../views/EmployeeView.vue";
 import DashboardView from "../views/DashBoard.vue";
+import SideBarParents from "../views/SideBarParents.vue";
+import EmployeeParent from "../views/EmployeeParent.vue"
+import EmployeeDetail from "../views/EmployeeDetail.vue"
+import SettingView from "../views/Setting/SettingView.vue"
+import SettingMenu from "../views/Setting/SettingMenu.vue"
+import SettingProfile from "../views/Setting/SettingProfile.vue"
+import SettingCompany from "../views/Setting/SettingCompany.vue"
+import SettingPassword from "../views/Setting/SettingPassword.vue"
 
 Vue.use(VueRouter);
 
@@ -16,16 +24,6 @@ const routes = [
     path: "/",
     name: "home",
     component: LandingView,
-  },
-  {
-    path: "/employee",
-    name: "employee",
-    component: EmployeeView,
-  },
-  {
-    path: "/dashboard",
-    name: "dashboard",
-    component: DashboardView,
   },
   {
     path: "/daftar",
@@ -56,30 +54,71 @@ const routes = [
     component: LoginView,
   },
   {
-    path: "/employee",
-    name: "employee",
-    component: EmployeeView,
-  },
-  {
-    path: "/specialization",
-    component: SpecializationParent,
+    path: "/dashboard",
+    component: SideBarParents,
     children: [
       {
         path: "/",
-        name: "specializationview",
-        component: SpecializationView,
+        component: DashboardView,
       },
       {
-        path: "add",
-        name: "specializationadd",
-        component: SpecializationAdd,
+        path: "/employee",
+        component: EmployeeParent,
+        children :[
+          {
+          path:'/',
+          name : 'employeeView',
+          component: EmployeeView,
+          },
+          {
+            path:'detail',
+            name : 'employeeDetail',
+            component: EmployeeDetail,           
+          }
+        ]
       },
+      {
+        path: "/specialization",
+        component: SpecializationParent,
+        children: [
+          {
+            path: "/",
+            name: "specializationview",
+            component: SpecializationView,
+          },
+          {
+            path: "add",
+            name: "specializationadd",
+            component: SpecializationAdd,
+          },
+        ],
+      },
+      {
+        path: "/setting",
+        component : SettingView,
+        children :[
+          {
+            path : '/',
+            component : SettingMenu,
+          },
+          {
+            path : 'profile',
+            name : 'settingProfile',
+            component : SettingProfile, 
+          },
+          {
+            path : 'company',
+            name : 'settingCompany',
+            component : SettingCompany,
+          },
+          {
+            path :'password',
+            name : 'settingPassword',
+            component : SettingPassword,
+          }
+        ],
+      }
     ],
-  },
-  {
-    path: "/dashboard",
-    name: "dashboard",
-    component: DashboardView,
   },
 ];
 

@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-layout>
-      <sideBar/>
+      <!-- <sideBar/> -->
     <v-main class="ma-5">
       <h3><b>Dashboard</b></h3> 
       <p>Lihat informasi statistik milikmu</p>
@@ -195,14 +195,8 @@
 </template>
 
 <script>
-import sideBar from '../components/SideBar.vue'
+
 export default {
-    components :{
-        sideBar
-    }
+  
 }
 </script>
-
-<style>
-
-</style>
