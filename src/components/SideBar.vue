@@ -10,8 +10,7 @@
 
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title class="text-h6">
-              Ahmad Junaidi
+            <v-list-item-title class="text-h6" v-text="getUser.full_name">
             </v-list-item-title>
             <v-list-item-subtitle>PT. Intan Abadi</v-list-item-subtitle>
           </v-list-item-content>
@@ -90,11 +89,19 @@ export default {
       ],
     };
   },
+  computed: {
+    getUser() {
+      return this.$store.state.user.user;
+    },
+  },
   methods: {
     logout() {
       cookie.remove("token");
       this.$router.push("/login");
     },
+  },
+  mounted() {
+    this.$store.dispatch("user/getUserById");
   },
 };
 </script>
