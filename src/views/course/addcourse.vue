@@ -111,6 +111,146 @@
               persistent-hint
             ></v-text-field>
           </div>
+          <div class="modulquiz pa-5 my-3">
+            <div class="header-quiz">
+              <div class="d-flex my-3">
+                <h4>Quiz</h4>
+                <v-spacer></v-spacer>
+                <v-btn plain small class="text-capitalize" color="danger">
+                  <v-icon class="me-2" small> mdi-plus-thick </v-icon>
+                  tambah soal quiz
+                </v-btn>
+              </div>
+              <div class="soal">
+                <div class="d-flex">
+                  <v-card
+                    color="#D8F7EB"
+                    height="55"
+                    width="50"
+                    class="mx-3"
+                    flat
+                  >
+                    <v-row align="center" justify="center" class="ma-auto">
+                      <v-card-title class="text-body-1 font-weight-bold">
+                        1
+                      </v-card-title>
+                    </v-row>
+                  </v-card>
+                  <v-textarea
+                    auto-grow
+                    outlined
+                    placeholder="Tuliskan Pertanyaan Disini"
+                  ></v-textarea>
+                </div>
+                <div class="answer ms-6">
+                  <v-container class="mx-6 px-6">
+                    <div class="d-flex">
+                      <v-card
+                        color="#FEEBD8"
+                        height="55"
+                        width="50"
+                        class="mx-3"
+                        flat
+                      >
+                        <v-row align="center" justify="center" class="ma-auto">
+                          <v-card-title
+                            class="text-body-1 font-weight-bold danger--text"
+                          >
+                            A
+                          </v-card-title>
+                        </v-row>
+                      </v-card>
+                      <v-text-field
+                        hide-details=""
+                        placeholder="Masukan Opsi A"
+                        outlined
+                      ></v-text-field>
+                    </div>
+                  </v-container>
+                  <v-container class="mx-6 px-6">
+                    <div class="d-flex">
+                      <v-card
+                        color="#FEEBD8"
+                        height="55"
+                        width="50"
+                        class="mx-3"
+                        flat
+                      >
+                        <v-row align="center" justify="center" class="ma-auto">
+                          <v-card-title
+                            class="text-body-1 font-weight-bold danger--text"
+                          >
+                            B
+                          </v-card-title>
+                        </v-row>
+                      </v-card>
+                      <v-text-field
+                        hide-details=""
+                        placeholder="Masukan Opsi B"
+                        outlined
+                      ></v-text-field>
+                    </div>
+                  </v-container>
+                  <v-container class="mx-6 px-6">
+                    <div class="d-flex">
+                      <v-card
+                        color="#FEEBD8"
+                        height="55"
+                        width="50"
+                        class="mx-3"
+                        flat
+                      >
+                        <v-row align="center" justify="center" class="ma-auto">
+                          <v-card-title
+                            class="text-body-1 font-weight-bold danger--text"
+                          >
+                            C
+                          </v-card-title>
+                        </v-row>
+                      </v-card>
+                      <v-text-field
+                        hide-details=""
+                        placeholder="Masukan Opsi C"
+                        outlined
+                      ></v-text-field>
+                    </div>
+                  </v-container>
+                  <v-container class="mx-6 px-6">
+                    <div class="d-flex">
+                      <v-card
+                        color="#FEEBD8"
+                        height="55"
+                        width="50"
+                        class="mx-3"
+                        flat
+                      >
+                        <v-row align="center" justify="center" class="ma-auto">
+                          <v-card-title
+                            class="text-body-1 font-weight-bold danger--text"
+                          >
+                            D
+                          </v-card-title>
+                        </v-row>
+                      </v-card>
+                      <v-text-field
+                        hide-details=""
+                        placeholder="Masukan Opsi D"
+                        outlined
+                      ></v-text-field>
+                    </div>
+                  </v-container>
+                  <v-container class="mx-6 px-6">
+                    <v-select
+                      class="ms-3"
+                      outlined
+                      label="Opsi Jawaban Benar"
+                      append-icon="mdi-chevron-down"
+                    ></v-select>
+                  </v-container>
+                </div>
+              </div>
+            </div>
+          </div>
         </v-card>
       </div>
     </v-container>

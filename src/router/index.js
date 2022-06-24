@@ -9,6 +9,7 @@ import SuccessView from "../views/SuccessRegisView.vue";
 import SuccessLoginView from "../views/SuccessLoginView.vue";
 import Course from "../views/course/course.vue";
 import AddCourse from "../views/course/addcourse.vue";
+import DetailCourse from "../views/course/detailcourse.vue";
 
 Vue.use(VueRouter);
 
@@ -45,16 +46,20 @@ const routes = [
   {
     path: "/kursus",
     component: Course,
-    beforeEnter: (to, form, next) => {
-      if (cookie.get("token") === null || !cookie.get("token")) {
-        return next("/masuk");
-      }
-      next();
-    },
+    // beforeEnter: (to, form, next) => {
+    //   if (cookie.get("token") === null || !cookie.get("token")) {
+    //     return next("/masuk");
+    //   }
+    //   next();
+    // },
   },
   {
     path: "/kursus/tambah",
     component: AddCourse,
+  },
+  {
+    path: "/kursus/detail",
+    component: DetailCourse,
   },
   {
     path: "/daftar",

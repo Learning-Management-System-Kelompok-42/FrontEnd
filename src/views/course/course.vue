@@ -71,7 +71,13 @@
                 {{ list.deskripsi | truncate(63, "...") }}
               </v-card-text>
               <v-card-actions>
-                <v-btn plain class="text-capitalize" width="100%" small>
+                <v-btn
+                  plain
+                  class="text-capitalize"
+                  width="100%"
+                  small
+                  to="/kursus/detail"
+                >
                   Lihat detail
                   <v-spacer></v-spacer>
                   <v-icon> mdi-chevron-right </v-icon>
