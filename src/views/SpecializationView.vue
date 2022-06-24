@@ -2,6 +2,8 @@
   <v-app>
     <v-main class="ml-10 ma-5">
       <!-- HEADER -->
+        
+              
       <v-container style="display: flex">
         <div class="header">
           <h3><b>Spesialisasi</b></h3>
@@ -11,17 +13,24 @@
         <v-btn class="text-capitalize" dark depressed>Tambah Spesialisasi</v-btn>
       </v-container>
       <!-- FILTER -->
-      <v-container class="d-inline-flex">
-        <v-spacer />
-        <v-col cols="9">
+      <v-col class="px-0" cols="12">
+            <v-card
+                class="ml-0 mx-auto"
+                outlined
+                width="100%"
+            >
+             <v-container class="d-inline-flex">
+                <v-col cols="12">
           <v-text-field
-            class="pt-0"
+            class="pt-1"
             label="Cari Spesialisasi"
             outlined
             dense
           ></v-text-field>
         </v-col>
-        <v-btn class="mt-3 text-capitalize" dark depressed>Telusuri</v-btn>      </v-container>
+        <v-btn class="mt-4 text-capitalize" dark depressed>Cari</v-btn>      </v-container>
+            </v-card>
+        </v-col>
       <!-- ITEMS -->
 
       <v-row v-for="n in 2" :key="n">
@@ -78,6 +87,7 @@
     </v-main>
   </v-app>
 </template>
+
 
 <script>
 export default {

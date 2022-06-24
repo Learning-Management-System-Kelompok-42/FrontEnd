@@ -2,51 +2,52 @@
 <v-app>
   <v-layout>
     <sideBar/>
-    <v-main class="ma-5">
-    <router-link :to="'/specialization'" style="text-decoration:none; color: black">
-    <v-btn depressed
-        class="ma-2"
-        color=""
-        dark
-      >
-        <v-icon
-          dark
-          left
-        >
-          mdi-arrow-left
-        </v-icon>Back
-      </v-btn>
-      </router-link>
-      <h3><b>Tambah Spesialization</b></h3> 
+    
+    <v-main class="ma-5" ml-10>
+<!-- HEAD -->
+    <router-link :to="'/specialization/add'" style="text-decoration:none; color: black">
+            <v-btn class="text-capitalize pl-2 pr-3" depressed>
+                <v-icon class="pt-1 pl-0">mdi-chevron-left</v-icon>
+                Kembali
+            </v-btn>
+        </router-link>
+
+      <div class="d-flex justify-start mt-2">
+            <p class="text-h6 mt-2 mb-2"><b>Tambah Spesialisasi</b></p>
+            <v-spacer />
+        </div>
+        <div>   
+            <p >Masukkan data dari spesialisasi baru</p>
+        </div>
+
+    <!-- FILTER -->
+      <v-col class="px-0" cols="12">
       
-      <p>Lihat daftar spesialization role yang di perusahaanmu
-      </p>
-      <template>
-      
-        <v-col>
+            <v-card
+                class="ml-0 mx-auto"
+                outlined
+                width="100%"
+            >
+             <v-container class="d-inline-flex">
+                <v-col cols="10">
           <v-text-field
-            label="Nama Specialization"
+            class="pt-1"
+            label="Nama Spesialisasi"
             outlined
+            dense
           ></v-text-field>
+          <v-text-field
+            class="pt-1"
+            label="Link"
+            outlined
+            dense
+          ></v-text-field>
+          <p class="text- mt-1 mb-2" style="color:grey">Gunakan link diatas untuk mengundang employee ke spesialization ini</p>
+          <v-btn class="mt-5 text-capitalize" dark depressed>Salin Tautan</v-btn>   
         </v-col>
-         <v-col >
-        <v-textarea
-          solo
-          name="input-7-4"
-          label="Solo textarea"
-        ></v-textarea>
-      </v-col>
-      
-      <v-btn depressed
-        class="ma-2"
-        color=""
-        dark
-        right
-      >
-        Save
-      </v-btn>
-</template>
-            
+           </v-container>
+            </v-card>
+        </v-col>                  
     </v-main>
   </v-layout>
 </v-app>

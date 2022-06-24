@@ -5,6 +5,7 @@ import LandingView from "../views/LandingView.vue";
 import SpecializationParent from "../views/SpecializationParent.vue"
 import SpecializationView from "../views/SpecializationView.vue"
 import SpecializationAdd from "../views/SpecializationAdd.vue"
+import SpecializationDetail from "../views/SpecializationDetail.vue"
 import LoginView from "../views/LoginView.vue";
 import RegisterAdminView from "../views/RegisterAdminView.vue";
 import RegisterPerusahaanView from "../views/RegisterPerusahaanView.vue";
@@ -66,6 +67,11 @@ const routes = [
         path : "add",
         name : "specializationadd",
         component : SpecializationAdd,
+      },
+      {
+        path : "detail",
+        name : "specializationdetail",
+        component : SpecializationDetail,
       },
     ]
   },
