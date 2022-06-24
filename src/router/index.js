@@ -19,6 +19,8 @@ import SettingPassword from "../views/Setting/SettingPassword.vue"
 
 Vue.use(VueRouter);
 
+const cookie = require("tiny-cookie");
+
 const routes = [
   {
     path: "/",
@@ -27,35 +29,26 @@ const routes = [
   },
   {
     path: "/daftar",
-    component: RegisterPerusahaanView,
-    // children: [
-    //   {
-    //     path: "",
-    //     component: RegisterPerusahaanView,
-    //   },
-    //   {
-    //     path: "admin",
-    //     component: RegisterAdminView,
-    //   },
-    // ],
+    component: RegisterView,
   },
-  // {
-  //   path: "/admin",
-  //   name: "admin",
-  //   component: RegisterAdminView,
-  // },
-  // {
-  //   path: "/daftar",
-  //   component: RegisterPerusahaanView,
-  // },
   {
     path: "/masuk",
     name: "masuk",
     component: LoginView,
   },
   {
+    path: "/sukseslogin",
+    component: SuccessLoginView,
+    },
+    {
     path: "/dashboard",
     component: SideBarParents,
+    beforeEnter: (to, from, next) => {
+      if (cookie.get("token") === null || !cookie.get("token")) {
+        return next("/masuk");
+      }
+      next();
+    },
     children: [
       {
         path: "/",
@@ -93,6 +86,18 @@ const routes = [
           },
         ],
       },
+      {
+    path: "/course",
+    component: Course,
+  },
+  {
+    path: "/course/add",
+    component: AddCourse,
+  },
+  {
+    path: "/course/detail",
+    component: DetailCourse,
+  },
       {
         path: "/setting",
         component : SettingView,

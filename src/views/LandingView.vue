@@ -8,7 +8,7 @@
         <p class="mx-2 my-2 link">Features</p>
         <v-btn
           depressed
-          color="#484848"
+          color="primary"
           class="white--text mx-2 text-capitalize"
           to="/daftar"
         >
@@ -17,7 +17,7 @@
         <v-btn
           depressed
           outlined
-          class="#484848--text text-capitalize"
+          class="priamry--text text-capitalize"
           to="/masuk"
         >
           Masuk
@@ -34,7 +34,12 @@
                 Bantu mereka untuk berkembang dengan memberikan tempat belajar
                 yang sesuai dengan bidang mereka
               </p>
-              <v-btn depressed color="#484848" class="white--text mt-6">
+              <v-btn
+                depressed
+                color="primary"
+                class="white--text mt-6"
+                to="/daftar"
+              >
                 <span class="text-capitalize"> Daftarkan Perusahaan </span>
               </v-btn>
             </div>
@@ -47,7 +52,7 @@
         </v-row>
       </div>
       <div class="companyCourse py-6 my-6">
-        <p class="caption font-weight-bold my-0 py-0 primary--text">
+        <p class="caption font-weight-bold my-0 py-0 danger--text">
           Kenapa Harus LMS
         </p>
         <v-row>
@@ -62,22 +67,26 @@
       <div class="companyCourseList mb-6">
         <v-row>
           <v-col cols="3" v-for="(course, index) in listCourse" :key="index">
-            <v-card hover>
+            <v-card hover outlined>
               <v-img
-                class="ms-4 imgcard"
+                class="ms-4 mt-2 imgcard"
                 :src="course.img"
                 width="50"
                 height="50"
               >
               </v-img>
               <v-card-title>{{ course.title }}</v-card-title>
-              <v-card-subtitle>{{ course.description }}</v-card-subtitle>
+              <v-card-subtitle class="#8C8C8C--text">{{
+                course.description
+              }}</v-card-subtitle>
             </v-card>
           </v-col>
         </v-row>
       </div>
       <div class="partner my-6 pt-6">
-        <p class="caption text-capitalize my-0 py-0">bagian dari kami</p>
+        <p class="caption text-capitalize my-0 py-0 danger--text">
+          bagian dari kami
+        </p>
         <v-row>
           <v-col cols="7">
             <h1 class="text-capitalize">perusahaan yang percaya dengan kami</h1>
@@ -98,7 +107,7 @@
       </div>
       <div class="frequentlyAsk mt-6 mb-6">
         <p
-          class="caption bold grey--text text-center text-capitalize mt-6 mb-0 pt-6"
+          class="caption bold danger--text text-center text-capitalize mt-6 mb-0 pt-6"
         >
           kamu kebingungan?
         </p>
@@ -106,13 +115,13 @@
           pertanyaan yang sering ditanyakan
         </h1>
 
-        <v-expansion-panels multiple hover>
+        <v-expansion-panels multiple hover flat>
           <v-expansion-panel
             v-for="(question, index) in listQuestion"
             :key="index"
             class="my-1 rounded-lg"
           >
-            <v-expansion-panel-header class="font-weight-bold">
+            <v-expansion-panel-header class="font-weight-bold primary--text">
               {{ question.question }}
             </v-expansion-panel-header>
             <v-expansion-panel-content color="#EEEEEE" class="caption">
@@ -122,18 +131,24 @@
         </v-expansion-panels>
       </div>
       <div class="joinNow mt-6 pt-6 text-center">
-        <v-card class="pa-6" flat color="#ECECFB">
-          <h1 class="text-capitalize">tunggu apalagi? mulai gabung sekarang</h1>
-          <p class="text-caption py-6">
-            Bantu pekerejamu untuk berkembang dengan memberikan tempat belajar
-            yang sesuai dengan bidang mereka
-          </p>
-          <v-btn depressed class="text-capitalize" color="primary">
+        <v-card class="pa-6" flat color="#E3F3F3">
+          <v-container>
+            <h1 class="text-capitalize">
+              tunggu apalagi? mulai<br />
+              <span class="danger--text wrap-text">gabung sekarang</span>
+            </h1>
+            <p class="text-caption py-4">
+              Bantu pekerejamu untuk berkembang dengan memberikan tempat belajar
+              yang sesuai dengan<br />
+              bidang mereka
+            </p>
+          </v-container>
+          <v-btn depressed class="text-capitalize" color="primary" to="daftar">
             gabung disini
           </v-btn>
         </v-card>
       </div>
-      <v-footer class="mt-6" color="white">
+      <v-footer class="mt-6" color="#F3F8F6">
         <v-row>
           <v-col cols="4">
             <div class="logo">
