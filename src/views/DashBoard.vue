@@ -1,23 +1,24 @@
 <template>
   <v-app>
     <v-layout>
-      <sideBar />
-      <v-main class="ma-5">
-        <h3><b>Dashboard</b></h3>
-        <p>Lihat informasi statistik milikmu</p>
-        <v-row class="ma-2" app>
-          <v-col class="mx-4" cols="3" app>
-            <v-card height="100px">
-              <v-list-item two-line>
-                <v-list-item-avatar tile size="60" color="grey">
-                </v-list-item-avatar>
-                <v-list-item-content>
-                  <v-list-item-title class="text-h8 mb-1"
-                    >Specializations</v-list-item-title
-                  >
-                  <v-list-item-subtitle>4</v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
+    <v-main class="ma-5">
+      <h3><b>Dashboard</b></h3> 
+      <p>Lihat informasi statistik milikmu</p>
+    <v-row class="ma-2" app>
+        <v-col class="mx-4" cols="3" app>
+            <v-card height="100px"> 
+               <v-list-item two-line>
+                   <v-list-item-avatar
+                   tile
+                   size="60"
+                   color="grey"
+                   >
+                   </v-list-item-avatar>
+                   <v-list-item-content>
+                       <v-list-item-title class="text-h8 mb-1">Specializations</v-list-item-title>
+                       <v-list-item-subtitle>4</v-list-item-subtitle>
+                   </v-list-item-content>
+               </v-list-item> 
             </v-card>
             <br />
             <!-- PROGRESS-->
@@ -207,11 +208,7 @@
 </template>
 
 <script>
-import sideBar from "../components/SideBar.vue";
 export default {
-  components: {
-    sideBar,
-  },
   methods: {
     gettoken() {
       const cookie = require("tiny-cookie");
@@ -224,5 +221,3 @@ export default {
   },
 };
 </script>
-
-<style></style>
