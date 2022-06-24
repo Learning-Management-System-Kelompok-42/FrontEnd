@@ -5,17 +5,21 @@ import SpecializationParent from "../views/SpecializationParent.vue";
 import SpecializationView from "../views/SpecializationView.vue";
 import SpecializationAdd from "../views/SpecializationAdd.vue";
 import LoginView from "../views/LoginView.vue";
-import RegisterPerusahaanView from "../views/RegisterPerusahaanView.vue";
+import RegisterView from "../views/RegisterView.vue";
 import EmployeeView from "../views/EmployeeView.vue";
 import DashboardView from "../views/DashBoard.vue";
 import SideBarParents from "../views/SideBarParents.vue";
-import EmployeeParent from "../views/EmployeeParent.vue"
-import EmployeeDetail from "../views/EmployeeDetail.vue"
-import SettingView from "../views/Setting/SettingView.vue"
-import SettingMenu from "../views/Setting/SettingMenu.vue"
-import SettingProfile from "../views/Setting/SettingProfile.vue"
-import SettingCompany from "../views/Setting/SettingCompany.vue"
-import SettingPassword from "../views/Setting/SettingPassword.vue"
+import EmployeeParent from "../views/EmployeeParent.vue";
+import EmployeeDetail from "../views/EmployeeDetail.vue";
+import SettingView from "../views/Setting/SettingView.vue";
+import SettingMenu from "../views/Setting/SettingMenu.vue";
+import SettingProfile from "../views/Setting/SettingProfile.vue";
+import SettingCompany from "../views/Setting/SettingCompany.vue";
+import SettingPassword from "../views/Setting/SettingPassword.vue";
+import SuccessLoginView from "../views/SuccessLoginView.vue";
+import Course from "../views/course/course.vue";
+import AddCourse from "../views/course/addcourse.vue";
+import DetailCourse from "../views/course/detailcourse.vue";
 
 Vue.use(VueRouter);
 
@@ -39,8 +43,8 @@ const routes = [
   {
     path: "/sukseslogin",
     component: SuccessLoginView,
-    },
-    {
+  },
+  {
     path: "/dashboard",
     component: SideBarParents,
     beforeEnter: (to, from, next) => {
@@ -57,18 +61,18 @@ const routes = [
       {
         path: "/employee",
         component: EmployeeParent,
-        children :[
+        children: [
           {
-          path:'/',
-          name : 'employeeView',
-          component: EmployeeView,
+            path: "/",
+            name: "employeeView",
+            component: EmployeeView,
           },
           {
-            path:'detail',
-            name : 'employeeDetail',
-            component: EmployeeDetail,           
-          }
-        ]
+            path: "detail",
+            name: "employeeDetail",
+            component: EmployeeDetail,
+          },
+        ],
       },
       {
         path: "/specialization",
@@ -87,42 +91,42 @@ const routes = [
         ],
       },
       {
-    path: "/course",
-    component: Course,
-  },
-  {
-    path: "/course/add",
-    component: AddCourse,
-  },
-  {
-    path: "/course/detail",
-    component: DetailCourse,
-  },
+        path: "/course",
+        component: Course,
+      },
+      {
+        path: "/course/add",
+        component: AddCourse,
+      },
+      {
+        path: "/course/detail",
+        component: DetailCourse,
+      },
       {
         path: "/setting",
-        component : SettingView,
-        children :[
+        component: SettingView,
+        children: [
           {
-            path : '/',
-            component : SettingMenu,
+            path: "/",
+            component: SettingMenu,
           },
           {
-            path : 'profile',
-            name : 'settingProfile',
-            component : SettingProfile, 
+            path: "profile",
+            name: "settingProfile",
+            component: SettingProfile,
           },
           {
-            path : 'company',
-            name : 'settingCompany',
-            component : SettingCompany,
+            path: "company",
+            name: "settingCompany",
+            component: SettingCompany,
           },
           {
-            path :'password',
-            name : 'settingPassword',
-            component : SettingPassword,
-          }
+            path: "password",
+            name: "settingPassword",
+            component: SettingPassword,
+          },
         ],
-      }
+      },
     ],
   },
 ];
