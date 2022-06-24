@@ -1,5 +1,9 @@
 <template>
+<<<<<<< HEAD
 <v-app> 
+=======
+  <v-app>
+>>>>>>> 3ac6895cf03eb6e5739ece9baa95736448ae9dd6
     <v-main class="ml-10 ma-5">
       <!-- HEADER -->
       <v-container style="display: flex">
@@ -86,7 +90,11 @@
         </v-col>
       </v-row>
     </v-main>
+<<<<<<< HEAD
 </v-app>
+=======
+  </v-app>
+>>>>>>> 3ac6895cf03eb6e5739ece9baa95736448ae9dd6
 </template>
 
 <script>
@@ -104,6 +112,11 @@ export default {
   opacity: 1 !important;
   position: absolute;
   width: 100%;
+<<<<<<< HEAD
 }
 </style>
 
+=======
+} */
+</style>
+>>>>>>> 3ac6895cf03eb6e5739ece9baa95736448ae9dd6
