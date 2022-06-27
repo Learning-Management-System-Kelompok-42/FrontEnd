@@ -15,6 +15,11 @@ import SettingMenu from "../views/Setting/SettingMenu.vue";
 import SettingProfile from "../views/Setting/SettingProfile.vue";
 import SettingCompany from "../views/Setting/SettingCompany.vue";
 import SettingPassword from "../views/Setting/SettingPassword.vue";
+import RegisterView from "../views/RegisterView.vue";
+import SuccessLoginView from "../views/SuccesLoginView.vue";
+import Course from "../views/course/course.vue";
+import AddCourse from "../views/course/addcourse.vue";
+import DetailCourse from "../views/course/detailcourse.vue";
 
 Vue.use(VueRouter);
 
