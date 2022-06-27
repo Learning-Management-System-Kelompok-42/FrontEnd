@@ -18,7 +18,7 @@
         </v-btn>
         <v-btn
           class="text-capitalize white--text mx-2"
-          color="danger"
+          color="warning"
           depressed
         >
           <v-icon class="me-3">mdi-delete-outline</v-icon>
@@ -28,7 +28,7 @@
       <div class="total d-flex">
         <v-card class="pa-2" flat>
           <div class="d-flex pa-4">
-            <v-card class="ma-auto pa-3" flat color="danger">
+            <v-card class="ma-auto pa-3" flat color="warning">
               <v-icon color="white">mdi-file</v-icon>
             </v-card>
             <div class="mx-2 px-5">
@@ -39,12 +39,12 @@
         </v-card>
         <v-card class="pa-2 mx-6" flat>
           <div class="d-flex pa-4">
-            <v-card class="ma-auto pa-3" flat color="danger">
+            <v-card class="ma-auto pa-3" flat color="warning">
               <v-icon color="white">mdi-account-group-outline</v-icon>
             </v-card>
             <v-spacer></v-spacer>
             <div class="mx-2 px-5">
-              <p class="text-capitalize my-0">total modul</p>
+              <p class="text-capitalize my-0">total karyawan</p>
               <p class="font-weight-bold">17</p>
             </div>
           </div>
@@ -125,6 +125,9 @@ import btnback from "@/components/BackButton.vue";
 export default {
   name: "DetailCourseView",
   setup() {},
+  created() {
+    document.title = "Course | Detail";
+  },
   components: { btnback },
   data() {
     return {

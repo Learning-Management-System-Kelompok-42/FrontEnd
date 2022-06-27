@@ -143,6 +143,9 @@ export default {
     };
   },
   methods: {},
+  created() {
+    document.title = "Course";
+  },
   filters: {
     truncate: (text, length, suffix) => {
       if (text.length > length) {

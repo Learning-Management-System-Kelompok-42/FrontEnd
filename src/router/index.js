@@ -5,7 +5,6 @@ import EmployeeView from "../views/EmployeeView.vue";
 import DashboardView from "../views/DashBoard.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
-import SuccessView from "../views/SuccessRegisView.vue";
 import SuccessLoginView from "../views/SuccessLoginView.vue";
 import Course from "../views/course/course.vue";
 import AddCourse from "../views/course/addcourse.vue";
@@ -69,10 +68,6 @@ const routes = [
     path: "/masuk",
     name: "masuk",
     component: LoginView,
-  },
-  {
-    path: "/sukses",
-    component: SuccessView,
   },
   {
     path: "/sukseslogin",

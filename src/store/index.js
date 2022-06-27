@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import user from "./user";
 import perusahaan from "./perusahaan";
 import createPresistedState from "vuex-persistedstate";
+import modul from "./moduls";
 
 Vue.use(Vuex);
 
@@ -20,6 +21,10 @@ export default new Vuex.Store({
     user: {
       namespaced: true,
       ...user,
+    },
+    moduls: {
+      namespaced: true,
+      ...modul,
     },
   },
 });

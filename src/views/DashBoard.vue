@@ -222,6 +222,9 @@ export default {
     console.log(this.$store.state.user.userid);
     console.log(this.gettoken());
   },
+  created() {
+    document.title = "Dashboard";
+  },
 };
 </script>
 
