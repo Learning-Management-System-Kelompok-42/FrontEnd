@@ -30,7 +30,7 @@
               depressed
               color="primary"
               class="white--text mx-2 text-capitalize"
-              to="/daftar"
+              to="/register"
             >
               Daftar
             </v-btn>
@@ -39,7 +39,7 @@
               outlined
               color="primary"
               class="text-capitalize"
-              to="/masuk"
+              to="/login"
             >
               Masuk
             </v-btn>
@@ -215,7 +215,7 @@
             depressed
             class="text-capitalize text-caption"
             color="warning"
-            to="daftar"
+            to="register"
           >
             bergabung disini
           </v-btn>
