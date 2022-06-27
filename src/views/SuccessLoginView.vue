@@ -1,28 +1,50 @@
 <template>
   <div class="mt-6">
-    <v-container class="contain mt-6 text-center">
-      <v-img
-        class="img mx-auto"
-        src="http://placehold.jp/50x50.png"
-        width="250"
-        height="250"
-      ></v-img>
+    <v-container class="text-center">
+      <div></div>
+      <v-card
+        class="rounded-circle mx-auto d-flex justify-center align-center"
+        :img="sukses"
+        width="280"
+        height="280"
+        color="#D8F7EB"
+        flat
+      >
+      </v-card>
       <div>
-        <h1 class="text-capitalize">berhasil masuk</h1>
+        <h1 class="text-capitalize primary--text">berhasil masuk</h1>
         <p class="text-caption mx-5">
           Sebentar lagi kamu akan dialihkan ke halaman dashboard milikmu
         </p>
+      </div>
+      <div v-if="isLoading" class="mt-6">
+        <loader />
+        <p class="text-caption">Tunggu Sebentar</p>
       </div>
     </v-container>
   </div>
 </template>
 <script>
+import loader from "@/components/Loader.vue";
 export default {
+  components: { loader },
   setup() {},
+  data() {
+    return {
+      sukses: require("@/assets/target.png"),
+      isLoading: false,
+    };
+  },
+  methods: {
+    loading() {
+      this.isLoading = true;
+      setTimeout(() => {
+        this.$router.push("/dashboard");
+      }, 3000);
+    },
+  },
   mounted() {
-    setTimeout(() => {
-      this.$router.push("/dashboard");
-    }, 3000);
+    this.loading();
   },
 };
 </script>

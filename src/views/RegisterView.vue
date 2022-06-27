@@ -5,7 +5,7 @@
         <v-container class="cont">
           <v-form v-model="valid" ref="form" @submit.prevent="btnRegister">
             <div class="form" v-if="!form">
-              <h4 class="my-3">LMS</h4>
+              <h4 class="my-3 pointer" @click="goHome"><logo /></h4>
               <div class="my-6">
                 <h1>Informasi Perusahaan</h1>
                 <p class="caption">
@@ -194,7 +194,9 @@
   </div>
 </template>
 <script>
+import Logo from "@/components/Logo.vue";
 export default {
+  components: { Logo },
   setup() {},
   data() {
     return {
@@ -246,12 +248,18 @@ export default {
       ],
     };
   },
+  created() {
+    document.title = "Edemia | Register";
+  },
   computed: {
     buttonText() {
       return this.user.logo ? this.user.logo.name : "";
     },
   },
   methods: {
+    goHome() {
+      this.$router.push("/");
+    },
     goBack() {
       this.form = !this.form;
     },
@@ -277,6 +285,9 @@ export default {
 };
 </script>
 <style>
+.pointer {
+  cursor: pointer;
+}
 .imgfull {
   background-size: 100% 100%;
 }

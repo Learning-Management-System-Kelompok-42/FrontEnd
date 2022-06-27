@@ -45,7 +45,7 @@
               </v-card>
               <v-spacer></v-spacer>
               <div class="mx-2 px-5">
-                <p class="text-capitalize my-0">total modul</p>
+                <p class="text-capitalize my-0">total karyawan</p>
                 <p class="font-weight-bold">17</p>
               </div>
             </div>
@@ -127,6 +127,9 @@ import btnback from "@/components/BackButton.vue";
 export default {
   name: "DetailCourseView",
   setup() {},
+  created() {
+    document.title = "Course | Detail";
+  },
   components: { btnback },
   data() {
     return {

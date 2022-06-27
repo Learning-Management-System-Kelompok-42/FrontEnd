@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="7">
         <v-container class="contain">
-          <h4 class="mb-5">LMS</h4>
+          <h4 class="mb-5 pointer" @click="goHome"><logo /></h4>
           <h1>Selamat Datang</h1>
           <p>
             Lengkapi form dibawah ini dengan menggunakan data Anda yang valid
@@ -42,11 +42,9 @@
                 <v-icon small class="me-2"> mdi-login </v-icon>
                 Masuk
               </v-btn>
-              <v-dialog v-model="isLoading" width="500">
-                <v-row class="fill-height ma-0" align="center" justify="center">
-                  <loader />
-                </v-row>
-              </v-dialog>
+              <v-overlay :value="isLoading" width="500">
+                <loader />
+              </v-overlay>
               <v-dialog v-model="error" width="500">
                 <v-card>
                   <v-card-title> Terjadi Kesalahan </v-card-title>
@@ -81,6 +79,7 @@
   </div>
 </template>
 <script>
+import logo from "@/components/Logo.vue";
 import axios from "axios";
 import loader from "@/components/Loader.vue";
 import { mapState } from "vuex";
@@ -88,6 +87,7 @@ export default {
   setup() {},
   components: {
     loader,
+    logo,
   },
   data() {
     return {
@@ -108,6 +108,9 @@ export default {
       ],
     };
   },
+  created() {
+    document.title = "Edemia | Login";
+  },
   mounted() {
     console.log(this.isLoading);
   },
@@ -115,6 +118,9 @@ export default {
     ...mapState("user", ["isLoading"]),
   },
   methods: {
+    goHome() {
+      this.$router.push("/");
+    },
     btnLogin() {
       if (!this.check) {
         axios.interceptors.request.use(
@@ -159,6 +165,9 @@ export default {
 };
 </script>
 <style>
+.pointer {
+  cursor: pointer;
+}
 .side {
   background-size: 100% 100%;
 }

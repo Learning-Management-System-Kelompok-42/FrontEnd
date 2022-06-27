@@ -101,7 +101,7 @@ const actions = {
     });
     store.commit("setToken", response.data.data.token);
     store.commit("setUserId", response.data.data.user_id);
-    router.push("/sukseslogin");
+    router.push("/redirect");
   },
 };
 export default {

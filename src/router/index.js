@@ -41,7 +41,7 @@ const routes = [
     component: LoginView,
   },
   {
-    path: "/sukseslogin",
+    path: "/redirect",
     component: SuccessLoginView,
   },
   {
