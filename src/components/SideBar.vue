@@ -8,8 +8,7 @@
 
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title class="text-h6 primary--text font-weight-bold">
-              Ahmad Junaidi
+            <v-list-item-title class="text-h6 primary--text font-weight-bold" v-text="getUser.full_name">
             </v-list-item-title>
             <v-list-item-subtitle>PT. Intan Abadi</v-list-item-subtitle>
           </v-list-item-content>
@@ -46,9 +45,9 @@
             color="warning"
             @click="logout"
           >
-            <v-card :elevation="0" class="ml-0 pa-1 mr-2" color="warning2"
-              ><v-icon color="warning">mdi-export</v-icon></v-card
-            >
+            <v-card :elevation="0" class="ml-0 pa-1 mr-2" color="warning2">
+              <v-icon color="warning">mdi-export</v-icon>
+            </v-card>
             Keluar
           </v-btn>
         </div>
@@ -59,6 +58,7 @@
 
 <script>
 import logo from "@/components/Logo.vue";
+let cookie = require("tiny-cookie");
 export default {
   components: { logo },
   data() {
@@ -89,12 +89,19 @@ export default {
       ],
     };
   },
+  computed: {
+    getUser() {
+      return this.$store.state.user.user;
+    },
+  },
   methods: {
     logout() {
-      let cookie = require("tiny-cookie");
       cookie.remove("token");
       this.$router.push("/login");
     },
+  },
+  mounted() {
+    this.$store.dispatch("user/getUserById");
   },
 };
 </script>

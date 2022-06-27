@@ -61,7 +61,7 @@
                 depressed
                 color="primary"
                 class="white--text mt-6"
-                to="/daftar"
+                to="/register"
               >
                 <span class="text-capitalize"> Daftarkan Perusahaan </span>
               </v-btn>
