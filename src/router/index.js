@@ -16,7 +16,7 @@ import SettingProfile from "../views/Setting/SettingProfile.vue";
 import SettingCompany from "../views/Setting/SettingCompany.vue";
 import SettingPassword from "../views/Setting/SettingPassword.vue";
 import RegisterView from "../views/RegisterView.vue";
-import SuccessLoginView from "../views/SuccesLoginView.vue";
+import SuccessLoginView from "../views/SuccessLoginView.vue";
 import Course from "../views/course/course.vue";
 import AddCourse from "../views/course/addcourse.vue";
 import DetailCourse from "../views/course/detailcourse.vue";
@@ -32,16 +32,16 @@ const routes = [
     component: LandingView,
   },
   {
-    path: "/daftar",
+    path: "/register",
     component: RegisterView,
   },
   {
-    path: "/masuk",
+    path: "/login",
     name: "masuk",
     component: LoginView,
   },
   {
-    path: "/sukseslogin",
+    path: "/redirect",
     component: SuccessLoginView,
   },
   {
@@ -49,7 +49,7 @@ const routes = [
     component: SideBarParents,
     beforeEnter: (to, from, next) => {
       if (cookie.get("token") === null || !cookie.get("token")) {
-        return next("/masuk");
+        return next("/login");
       }
       next();
     },

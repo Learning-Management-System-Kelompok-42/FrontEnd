@@ -1,13 +1,7 @@
 <template>
   <div>
     <v-container>
-      <v-app-bar
-        flat
-        elevate-on-scroll
-        class="mt-0"
-        scroll-target="#scroll"
-        fixed
-      >
+      <v-app-bar flat elevate-on-scroll class="mt-0" fixed>
         <v-container class="d-flex">
           <v-toolbar-title>
             <logo />
@@ -43,7 +37,8 @@
             <v-btn
               depressed
               outlined
-              class="priamry--text text-capitalize"
+              color="primary"
+              class="text-capitalize"
               to="/masuk"
             >
               Masuk
@@ -79,8 +74,40 @@
                 alt="Image"
                 width="300"
                 height="360"
-                class="rounded-lg"
+                class="image rounded-lg"
               ></v-img>
+              <v-card class="free d-flex rounded-lg" width="266" height="107">
+                <v-avatar size="62" color="#B3F0DD" class="mx-3 my-auto">
+                  <v-img :src="wallet" width="70" height="70"></v-img>
+                </v-avatar>
+                <div>
+                  <v-card-title class="mb-0 pb-0">100% Gratis</v-card-title>
+                  <div>
+                    <v-card-subtitle class="text-caption ps-4 pt-0">
+                      Semua layanan dapat digunakan dengan gratis
+                    </v-card-subtitle>
+                  </div>
+                </div>
+              </v-card>
+              <v-card class="rating rounded-lg" width="158" height="91">
+                <div>
+                  <v-card-title class="mb-0 pb-0 text-body-1 font-weight-bold"
+                    >Penilaian</v-card-title
+                  >
+                  <div class="d-flex">
+                    <v-rating
+                      class="mx-3"
+                      dense
+                      readonly
+                      color="#FDB63F"
+                      :value="4.6"
+                      half-increments
+                      size="12"
+                    ></v-rating>
+                    <span class="gray7--text">4.6</span>
+                  </div>
+                </div>
+              </v-card>
             </div>
           </v-col>
         </v-row>
@@ -244,6 +271,7 @@ export default {
     return {
       border: require("@/assets/borderluar.png"),
       image: require("@/assets/contentborder.png"),
+      wallet: require("@/assets/Wallet.png"),
       show: true,
       selectIndex: null,
       showText: false,
@@ -368,6 +396,18 @@ export default {
 };
 </script>
 <style>
+.rating {
+  margin-top: -300px;
+  margin-left: 100px;
+  margin-bottom: 250px;
+}
+.free {
+  margin-top: -130px !important;
+  margin-left: 200px !important;
+}
+.image {
+  margin-left: 150px;
+}
 .link,
 .detailAsk,
 .socmed > p,

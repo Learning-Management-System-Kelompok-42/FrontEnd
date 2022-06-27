@@ -2,15 +2,13 @@
   <v-main>
     <v-navigation-drawer class="pa-4" app permanent>
       <v-list flat>
-        <v-list-item class="px-2">
-          <v-list-item-avatar>
-            <v-img src=" "></v-img>
-          </v-list-item-avatar>
-        </v-list-item>
+        <v-subheader class="mx-2 px-2">
+          <logo />
+        </v-subheader>
 
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title class="text-h6">
+            <v-list-item-title class="text-h6 primary--text font-weight-bold">
               Ahmad Junaidi
             </v-list-item-title>
             <v-list-item-subtitle>PT. Intan Abadi</v-list-item-subtitle>
@@ -42,7 +40,12 @@
 
       <template v-slot:append>
         <div class="pl-0 pa-2">
-          <v-btn class="text-capitalize px-1" text color="warning">
+          <v-btn
+            class="text-capitalize px-1"
+            text
+            color="warning"
+            @click="logout"
+          >
             <v-card :elevation="0" class="ml-0 pa-1 mr-2" color="warning2"
               ><v-icon color="warning">mdi-export</v-icon></v-card
             >
@@ -55,7 +58,9 @@
 </template>
 
 <script>
+import logo from "@/components/Logo.vue";
 export default {
+  components: { logo },
   data() {
     return {
       items: [
@@ -83,6 +88,13 @@ export default {
         { title: "Pengaturan", icon: "mdi-cog-outline", value: "setting" },
       ],
     };
+  },
+  methods: {
+    logout() {
+      let cookie = require("tiny-cookie");
+      cookie.remove("token");
+      this.$router.push("/login");
+    },
   },
 };
 </script>
