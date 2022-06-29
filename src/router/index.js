@@ -2,10 +2,10 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import LandingView from "../views/LandingView.vue";
 
-import SpecializationParent from "../views/SpecializationParent.vue"
-import SpecializationView from "../views/SpecializationView.vue"
-import SpecializationAdd from "../views/SpecializationAdd.vue"
-import SpecializationDetail from "../views/SpecializationDetail.vue"
+import SpecializationParent from "../views/SpecializationParent.vue";
+import SpecializationView from "../views/SpecializationView.vue";
+import SpecializationAdd from "../views/SpecializationAdd.vue";
+import SpecializationDetail from "../views/SpecializationDetail.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterAdminView from "../views/RegisterAdminView.vue";
 import RegisterPerusahaanView from "../views/RegisterPerusahaanView.vue";
@@ -17,7 +17,7 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/home",
+    path: "/",
     name: "home",
     component: LandingView,
   },
@@ -56,24 +56,24 @@ const routes = [
   },
   {
     path: "/specialization",
-    component : SpecializationParent,
-    children:[
+    component: SpecializationParent,
+    children: [
       {
         path: "/",
         name: "specializationview",
-        component : SpecializationView,
+        component: SpecializationView,
       },
       {
-        path : "add",
-        name : "specializationadd",
-        component : SpecializationAdd,
+        path: "add",
+        name: "specializationadd",
+        component: SpecializationAdd,
       },
       {
-        path : "detail",
-        name : "specializationdetail",
-        component : SpecializationDetail,
+        path: "detail",
+        name: "specializationdetail",
+        component: SpecializationDetail,
       },
-    ]
+    ],
   },
   {
     path: "/dashboard",

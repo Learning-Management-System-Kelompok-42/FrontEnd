@@ -5,12 +5,9 @@
 </template>
 
 <script>
-
 export default {
   name: "App",
-  components: {
-    
-  },
+  components: {},
   data: () => ({
     //
   }),
@@ -19,5 +16,6 @@ export default {
 <style>
 #app {
   font-family: "Inter";
+  background: #f3f8f6;
 }
 </style>
