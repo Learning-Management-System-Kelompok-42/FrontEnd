@@ -1,9 +1,9 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import user from "./user";
-import perusahaan from "./perusahaan";
 import createPresistedState from "vuex-persistedstate";
 import modul from "./moduls";
+import company from "./company";
 
 Vue.use(Vuex);
 
@@ -14,9 +14,9 @@ const presistedDataState = createPresistedState({
 export default new Vuex.Store({
   plugins: [presistedDataState],
   modules: {
-    perusahaan: {
+    company: {
       namespaced: true,
-      ...perusahaan,
+      ...company,
     },
     user: {
       namespaced: true,

@@ -15,6 +15,7 @@
               placeholder="Masukan Judul Kursus"
               dense
               outlined
+              v-model="course.title"
               clearable
             ></v-text-field>
             <label class="text-capitalize font-weight-bold">
@@ -23,6 +24,7 @@
             <v-textarea
               outlined
               auto-grow
+              v-model="course.description"
               placeholder="Tuliskan deskripsi singkat mengenai kursus ini"
             ></v-textarea>
             <div class="gambar d-flex">
@@ -77,36 +79,53 @@
                 plain
                 class="text-capitalize warning--text"
                 small
-                @click="addModul"
+                @click="addModules"
               >
                 <v-icon small class="me-2">mdi-plus-thick</v-icon>
                 tambah modul
               </v-btn>
             </div>
-            <div class="mainmodul" v-for="(modul, index) in modul" :key="index">
-              <p class="text-capitalize font-weight-bold my-6">
-                modul {{ index + 1 }}
-              </p>
+            <div
+              class="mainmodul"
+              v-for="(modul, index) in module"
+              :key="index"
+            >
+              <div class="d-flex">
+                <p class="text-capitalize font-weight-bold my-6">
+                  Modul {{ index + 1 }}
+                </p>
+                <v-spacer></v-spacer>
+                <v-btn
+                  small
+                  plain
+                  class="text-capitalize my-4"
+                  color="warning"
+                  @click="removeModules"
+                >
+                  <v-icon class="me-3" small> mdi-delete-outline</v-icon>
+                  hapus modul
+                </v-btn>
+              </div>
               <label class="text-capitalize font-weight-bold">nama modul</label>
               <v-text-field
                 clearable
                 placeholder="Masukan Nama Modul"
                 outlined
                 dense
-                v-model="modul.namamodul"
+                v-model="modul.title"
               ></v-text-field>
               <div>
                 <label class="text-capitalize font-weight-bold mt-4"
-                  >link slides materi</label
-                >
+                  >link slides materi
+                </label>
                 <v-text-field
                   outlined
                   clearable
+                  v-model="modul.slide_url"
                   placeholder="Masukan Link Slides Materi"
                   hint="Kosongkan bila tidak diperlukan"
                   persistent-hint
                   dense
-                  v-model="modul.linkslides"
                 ></v-text-field>
               </div>
               <div class="mt-3">
@@ -117,10 +136,10 @@
                   clearable
                   dense
                   outlined
+                  v-model="modul.youtube_url"
                   placeholder="Masukan Link Video Presentasi"
                   hint="Kosongkan bila tidak diperlukan"
                   persistent-hint
-                  v-model="modul.linkvideo"
                 ></v-text-field>
               </div>
               <div class="modulquiz pa-5 my-3">
@@ -139,11 +158,7 @@
                       tambah soal quiz
                     </v-btn>
                   </div>
-                  <div
-                    class="soal"
-                    v-for="(quiz, index) in modul.quiz"
-                    :key="index"
-                  >
+                  <div class="soal" v-for="(quis, index) in quiz" :key="index">
                     <div class="d-flex">
                       <v-card
                         color="#D8F7EB"
@@ -153,18 +168,15 @@
                         flat
                       >
                         <v-row align="center" justify="center" class="ma-auto">
-                          <v-card-title
-                            class="text-body-1 font-weight-bold"
-                            v-text="index + 1"
-                          >
+                          <v-card-title class="text-body-1 font-weight-bold">
                           </v-card-title>
                         </v-row>
                       </v-card>
                       <v-textarea
                         auto-grow
                         outlined
+                        v-model="quis.question"
                         placeholder="Tuliskan Pertanyaan Disini"
-                        v-model="quiz.question"
                       ></v-textarea>
                     </div>
                     <div class="answer ms-6">
@@ -191,9 +203,9 @@
                           </v-card>
                           <v-text-field
                             hide-details=""
+                            v-model="quis.multiple_choice[0]"
                             placeholder="Masukan Opsi A"
                             outlined
-                            v-model="quiz.optiona"
                           ></v-text-field>
                         </div>
                       </v-container>
@@ -220,9 +232,9 @@
                           </v-card>
                           <v-text-field
                             hide-details=""
+                            v-model="quis.multiple_choice[1]"
                             placeholder="Masukan Opsi B"
                             outlined
-                            v-model="quiz.optionb"
                           ></v-text-field>
                         </div>
                       </v-container>
@@ -249,9 +261,9 @@
                           </v-card>
                           <v-text-field
                             hide-details=""
+                            v-model="quis.multiple_choice[2]"
                             placeholder="Masukan Opsi C"
                             outlined
-                            v-model="quiz.optionc"
                           ></v-text-field>
                         </div>
                       </v-container>
@@ -278,9 +290,9 @@
                           </v-card>
                           <v-text-field
                             hide-details=""
+                            v-model="quis.multiple_choice[3]"
                             placeholder="Masukan Opsi D"
                             outlined
-                            v-model="quiz.optiond"
                           ></v-text-field>
                         </div>
                       </v-container>
@@ -288,9 +300,10 @@
                         <v-select
                           class="ms-3"
                           outlined
+                          :items="quis.multiple_choice"
+                          v-model="quis.answer"
                           label="Opsi Jawaban Benar"
                           append-icon="mdi-chevron-down"
-                          v-model="quiz.optioncorect"
                         ></v-select>
                       </v-container>
                     </div>
@@ -316,13 +329,35 @@
 </template>
 <script>
 import goback from "@/components/BackButton.vue";
-import { mapMultiRowFields } from "vuex-map-fields";
-import { mapMutations } from "vuex";
+// import { mapFields, mapMultiRowFields } from "vuex-map-fields";
+// import { mapMutations } from "vuex";
 export default {
   name: "AddCourseView",
   components: { goback },
   data() {
     return {
+      module: [
+        {
+          orders: "1",
+          title: "",
+          slide_url: "",
+          youtube_url: "",
+          quizzes: this.quiz,
+        },
+      ],
+      quiz: [
+        {
+          question: "",
+          answer: "",
+          multiple_choice: ["", "", "", ""],
+        },
+      ],
+      course: {
+        title: "",
+        description: "",
+        thumbnail: null,
+        modules: this.module,
+      },
       gambarmodul: null,
       url: null,
     };
@@ -332,20 +367,45 @@ export default {
   },
   computed: {
     buttonText() {
-      return this.gambarmodul ? this.gambarmodul.name : "";
+      return this.course.thumbnail ? this.course.thumbnail.name : "";
     },
-    ...mapMultiRowFields("moduls", ["modul", "modul.quiz"]),
   },
   methods: {
+    addQuiz() {
+      this.quis.push({
+        question: "",
+        answer: "",
+        multiple_choice: [],
+      });
+    },
+    addModules() {
+      let num = this.module.orders;
+      var order = num++;
+      this.module.push({
+        orders: order,
+        title: "",
+        slide_url: "",
+        youtube_url: "",
+        quizzes: [],
+      });
+    },
+    removeModules() {
+      this.module.pop({
+        orders: 0,
+        title: "",
+        slide_url: "",
+        youtube_url: "",
+        quizzes: this.quiz,
+      });
+    },
     onButtonClick() {
       window.addEventListener("focus", () => {});
       this.$refs.uploader.click();
     },
-    ...mapMutations("moduls", ["addModul", "addQuiz"]),
     onFileChanged(e) {
       console.log(e.target.files[0]);
       const file = e.target.files[0];
-      this.gambarmodul = file;
+      this.course.thumbnail = file;
       this.url = URL.createObjectURL(file);
     },
   },

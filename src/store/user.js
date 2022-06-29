@@ -45,7 +45,7 @@ const actions = {
   },
   async getUserById({ state, commit }) {
     const response = await axios.get(
-      `https://api-lms-42.herokuapp.com/v1/users/${state.userid}`,
+      `http://54.254.240.107:4001/v1/users/${state.userid}`,
       {
         headers: {
           Authorization: `Bearer ${state.token}`,
@@ -56,7 +56,7 @@ const actions = {
   },
   async fetchRegister({ dispatch }, param) {
     await axios.post(
-      "https://api-lms-42.herokuapp.com/v1/company/register",
+      "http://54.254.240.107:4001/v1/company/register",
       {
         name_company: param.name_company,
         address_company: param.address_company,
@@ -83,17 +83,17 @@ const actions = {
   },
   async fetchLogin(store, param) {
     const response = await axios.post(
-      "https://api-lms-42.herokuapp.com/v1/auth/login",
+      "http://54.254.240.107:4001/v1/login",
       {
         email: param.email,
         password: param.password,
-      },
-      {
-        Headers: {
-          Accept: "multipart/form-data",
-          "Content-Type": "multipart/form-data",
-        },
       }
+      // {
+      //   Headers: {
+      //     Accept: "multipart/form-data",
+      //     "Content-Type": "multipart/form-data",
+      //   },
+      // }
     );
     cookie.set("token", response.data.data.token, {
       path: "/",
