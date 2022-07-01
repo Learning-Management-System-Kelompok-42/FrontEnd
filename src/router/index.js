@@ -4,18 +4,19 @@ import LandingView from "../views/LandingView.vue";
 import SpecializationParent from "../views/SpecializationParent.vue";
 import SpecializationView from "../views/SpecializationView.vue";
 import SpecializationAdd from "../views/SpecializationAdd.vue";
+import SpecializationDetail from "../views/SpecializationDetail.vue";
 import LoginView from "../views/LoginView.vue";
-import RegisterView from "../views/RegisterView.vue";
-import EmployeeView from "../views/EmployeeView.vue";
+import EmployeeView from "../views/Employee/EmployeeView.vue";
 import DashboardView from "../views/DashBoard.vue";
 import SideBarParents from "../views/SideBarParents.vue";
-import EmployeeParent from "../views/EmployeeParent.vue";
-import EmployeeDetail from "../views/EmployeeDetail.vue";
-import SettingView from "../views/Setting/SettingView.vue";
-import SettingMenu from "../views/Setting/SettingMenu.vue";
-import SettingProfile from "../views/Setting/SettingProfile.vue";
-import SettingCompany from "../views/Setting/SettingCompany.vue";
-import SettingPassword from "../views/Setting/SettingPassword.vue";
+import EmployeeParent from "../views/Employee/EmployeeParent.vue"
+import EmployeeDetail from "../views/Employee/EmployeeDetail.vue"
+import SettingView from "../views/Setting/SettingView.vue"
+import SettingMenu from "../views/Setting/SettingMenu.vue"
+import SettingProfile from "../views/Setting/SettingProfile.vue"
+import SettingCompany from "../views/Setting/SettingCompany.vue"
+import SettingPassword from "../views/Setting/SettingPassword.vue"
+import RegisterView from "../views/RegisterView.vue";
 import SuccessLoginView from "../views/SuccessLoginView.vue";
 import Course from "../views/course/course.vue";
 import AddCourse from "../views/course/addcourse.vue";
@@ -88,6 +89,11 @@ const routes = [
             path: "add",
             name: "specializationadd",
             component: SpecializationAdd,
+          },
+          {
+            path: "detail",
+            name: "specializationdetail",
+            component: SpecializationDetail,
           },
         ],
       },
