@@ -41,7 +41,7 @@
           <v-row>
             <v-col cols="3" v-for="data in items" :key="data">
               <v-card flat>
-                <v-card-title class="text-body-1">
+                <v-card-title class="text-body-1 font-weight-bold">
                   {{ data.title }}
                 </v-card-title>
                 <v-card-subtitle class="d-flex align-center mt-1">
@@ -50,63 +50,27 @@
                   </v-card>
                   {{ data.kursus }} Kursus
                 </v-card-subtitle>
-                <v-card-subtitle class="d-flex py-0">
+                <v-card-subtitle class="d-flex py-0 align-center">
                   <v-card color="#FEEBD8" class="pa-1 me-2" flat>
                     <v-icon color="#F26440">mdi-account-group-outline</v-icon>
                   </v-card>
                   {{ data.karyawan }} Karyawan
                 </v-card-subtitle>
+                <v-card-action class="mx-2">
+                  <v-btn
+                    class="text-capitalize my-3"
+                    plain
+                    small
+                    to="/specialization/detail"
+                  >
+                    lihat detail
+                    <v-icon class="ms-2">mdi-chevron-right</v-icon>
+                  </v-btn>
+                </v-card-action>
               </v-card>
             </v-col>
           </v-row>
         </div>
-        <v-row v-for="n in 2" :key="n" class="my-2">
-          <v-col v-for="n in 4" :key="n" cols="3">
-            <v-card width="100%" outlined>
-              <div class="pl-3 pr-0">
-                <v-list-item style="display: block">
-                  <v-list-item-content style="display: ">
-                    <v-list-item-title class="text-h8 mb-1 pt-0">
-                      <b>Backend Engineer</b>
-                    </v-list-item-title>
-                  </v-list-item-content>
-                  <div class="mt-0 mb-1 pt-0" style="display: flex">
-                    <v-list-item-avatar
-                      class="mt-2 mr-3"
-                      tile
-                      size="15"
-                      color="grey"
-                    ></v-list-item-avatar>
-
-                    <v-col cols="">
-                      <v-list-item-content>
-                        <v-list-item-title>8 Kursus</v-list-item-title>
-                        <v-list-item-title>6 Karyawan</v-list-item-title>
-                      </v-list-item-content>
-                    </v-col>
-                  </div>
-                </v-list-item>
-
-                <v-card-actions class="px-1">
-                  <router-link
-                    :to="{ name: 'employeeDetail' }"
-                    style="text-decoration: none; color: black"
-                  >
-                    <v-btn
-                      class="text-capitalize pl-2 pr-3"
-                      @click="reveal = false"
-                      text
-                    >
-                      Lihat Detail<v-icon class="pt-1 pr-0"
-                        >mdi-chevron-right</v-icon
-                      >
-                    </v-btn>
-                  </router-link>
-                </v-card-actions>
-              </div>
-            </v-card>
-          </v-col>
-        </v-row>
       </v-container>
     </v-main>
   </v-app>

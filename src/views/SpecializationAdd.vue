@@ -8,6 +8,8 @@
           to="/specialization"
           outlined
           color="primary"
+          plain
+          small
         >
           <v-icon class="pt-1 pl-0">mdi-chevron-left</v-icon>
           Kembali
