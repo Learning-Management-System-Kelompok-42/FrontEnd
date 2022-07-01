@@ -1,115 +1,131 @@
 <template>
-<v-app>
-  <v-layout>
-    <!-- <sideBar/> -->
-    <v-main class="ma-5">
-      <h3><b>Spesializations</b></h3>
-      <router-link :to="{name :'specializationadd'}" style="text-decoration:none; color: black"> 
-        <v-btn depressed color="" >
-          <span>Tambah Spesialization</span>
-        </v-btn>
-      </router-link>
-
-      <p>Lihat daftar spesialization role yang di perusahaanmu
-      </p>
-          <v-data-table
-            :headers="headers"
-            :items="specialization"
-            class="elevation-1"
-            app
+  <v-app>
+    <v-main class="ml-10 ma-5">
+      <!-- HEADER -->
+      <v-container>
+        <div style="display: flex">
+          <div class="header">
+            <h3 class="primary--text">Spesialisasi</h3>
+            <p class="gray6--text">
+              Lihat daftar spesialisasi yang di perusahaanmu
+            </p>
+          </div>
+          <v-spacer />
+          <v-btn
+            class="text-capitalize text-body-2"
+            color="primary"
+            depressed
+            to="/specialization/add"
           >
-            <template v-slot:[`item.status`]='{item}'> 
-              <v-chip small>{{item.status}}</v-chip>
-            </template>
-
-            <template v-slot:[`item.action`]='{item}'> 
-              <v-btn class="text-capitalize" small @click="showDetail(item)">{{item.action}}</v-btn>
-            </template>
-          </v-data-table>
-
-          <v-dialog v-model="dialogDetail">
-            <v-card>
-              <v-container>
-                <v-row>
-                  <v-col cols= '4'>
-                    Nama
-                  </v-col>
-                  <v-col cols= '8'>
-                    : {{detailItem.name}}
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col cols= '4'>
-                    Description
-                  </v-col>
-                  <v-col cols= '8'>
-                    : {{detailItem.description}}
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-card>
-          </v-dialog>  
+            <v-icon small class="me-2">mdi-plus-thick</v-icon>
+            Tambah Spesialisasi
+          </v-btn>
+        </div>
+        <!-- FILTER -->
+        <v-card class="pa-4" outlined>
+          <div class="d-flex">
+            <v-text-field
+              hide-details=""
+              label="Cari Spesialisasi"
+              outlined
+              dense
+            ></v-text-field>
+            <v-btn class="text-capitalize mx-2" color="primary" depressed>
+              <v-icon small class="me-3">mdi-magnify</v-icon>
+              Cari
+            </v-btn>
+          </div>
+        </v-card>
+        <!-- ITEMS -->
+        <div class="items mt-3">
+          <v-row>
+            <v-col cols="3" v-for="data in items" :key="data">
+              <v-card flat>
+                <v-card-title class="text-body-1 font-weight-bold">
+                  {{ data.title }}
+                </v-card-title>
+                <v-card-subtitle class="d-flex align-center mt-1">
+                  <v-card color="#FEEBD8" class="pa-1 me-2" flat>
+                    <v-icon color="#F26440">mdi-file</v-icon>
+                  </v-card>
+                  {{ data.kursus }} Kursus
+                </v-card-subtitle>
+                <v-card-subtitle class="d-flex py-0 align-center">
+                  <v-card color="#FEEBD8" class="pa-1 me-2" flat>
+                    <v-icon color="#F26440">mdi-account-group-outline</v-icon>
+                  </v-card>
+                  {{ data.karyawan }} Karyawan
+                </v-card-subtitle>
+                <v-card-action class="mx-2">
+                  <v-btn
+                    class="text-capitalize my-3"
+                    plain
+                    small
+                    to="/specialization/detail"
+                  >
+                    lihat detail
+                    <v-icon class="ms-2">mdi-chevron-right</v-icon>
+                  </v-btn>
+                </v-card-action>
+              </v-card>
+            </v-col>
+          </v-row>
+        </div>
+      </v-container>
     </v-main>
-  </v-layout>
-</v-app>
+  </v-app>
 </template>
 
 <script>
-// import sideBar from '../components/SideBar.vue'
 export default {
-  data () {
-      return {
-         headers: [
-          {
-            text: 'No.',
-            align: 'start',
-            value: 'index',
-          },
-          { text: "Specialization Name", value: 'name' },
-          { text: "Description", value: 'description' },
-          { text: 'Total Courses', value: 'totalCourses' },
-          { text: 'Total Users', value: 'totalUsers' },
-          { text: 'Action', value: 'action' },
-        ],
-        specialization: [
-          {
-            index: '1.',
-            name: 'Backend Engineer',
-            description: 'Course yang dibuat untuk para backend',
-            totalCourses: '12',
-            totalUsers: '12',
-            action: 'detail',
-          },
-          {
-            index: '2.',
-            name: 'Backend Engineer',
-            description: 'Course yang dibuat untuk para backend',
-            totalCourses: '12',
-            totalUsers: '12',
-            action: 'detail',
-          },
-          {
-            index: '3.',
-            name: 'Backend Engineer',
-            description: 'Course yang dibuat untuk para backend',
-            totalCourses: '12',
-            totalUsers: '12',
-            action: 'detail',
-          },          
-          
-        ],
-        dialogDetail : false,
-        detailItem : {},       
-      }
-    },
-  // components:{
-  //   sideBar
-  // },
-  methods:{
-    showDetail(item){
-      this.dialogDetail = true,
-      this.detailItem = item
-    }
-  }
-}
+  data: () => ({
+    items: [
+      {
+        title: "Backend Engineer",
+        kursus: 8,
+        karyawan: 8,
+      },
+      {
+        title: "UI Designer",
+        kursus: 8,
+        karyawan: 8,
+      },
+      {
+        title: "UX Writer",
+        kursus: 8,
+        karyawan: 8,
+      },
+      {
+        title: "Frontend Endgineer",
+        kursus: 8,
+        karyawan: 8,
+      },
+      {
+        title: "Content Writer",
+        kursus: 8,
+        karyawan: 8,
+      },
+      {
+        title: "UX Designer",
+        kursus: 8,
+        karyawan: 8,
+      },
+      {
+        title: "Android Developer",
+        kursus: 8,
+        karyawan: 8,
+      },
+    ],
+    reveal: false,
+  }),
+};
 </script>
+
+<style scoped>
+/* .v-card--reveal {
+  bottom: 0;
+  opacity: 1 !important;
+  position: absolute;
+  width: 100%;
+} */
+</style>

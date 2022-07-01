@@ -4,6 +4,7 @@ import LandingView from "../views/LandingView.vue";
 import SpecializationParent from "../views/SpecializationParent.vue";
 import SpecializationView from "../views/SpecializationView.vue";
 import SpecializationAdd from "../views/SpecializationAdd.vue";
+import SpecializationDetail from "../views/SpecializationDetail.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import EmployeeView from "../views/EmployeeView.vue";
@@ -44,7 +45,6 @@ const routes = [
     path: "/redirect",
     component: SuccessLoginView,
   },
-  {
     path: "/dashboard",
     component: SideBarParents,
     beforeEnter: (to, from, next) => {
@@ -87,6 +87,11 @@ const routes = [
             path: "add",
             name: "specializationadd",
             component: SpecializationAdd,
+          },
+          {
+            path: "detail",
+            name: "specializationdetail",
+            component: SpecializationDetail,
           },
         ],
       },
