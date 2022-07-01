@@ -66,7 +66,7 @@ export default {
         },
         {
           title: "Spesialisasi",
-          icon: "mdi-account-box",
+          icon: "mdi-briefcase-variant-outline",
           value: "specialization",
         },
         { title: "Kursus", icon: "mdi-file-document-outline", value: "course" },

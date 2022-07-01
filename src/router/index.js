@@ -6,11 +6,11 @@ import SpecializationView from "../views/SpecializationView.vue";
 import SpecializationAdd from "../views/SpecializationAdd.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterPerusahaanView from "../views/RegisterPerusahaanView.vue";
-import EmployeeView from "../views/EmployeeView.vue";
+import EmployeeView from "../views/Employee/EmployeeView.vue";
 import DashboardView from "../views/DashBoard.vue";
 import SideBarParents from "../views/SideBarParents.vue";
-import EmployeeParent from "../views/EmployeeParent.vue"
-import EmployeeDetail from "../views/EmployeeDetail.vue"
+import EmployeeParent from "../views/Employee/EmployeeParent.vue"
+import EmployeeDetail from "../views/Employee/EmployeeDetail.vue"
 import SettingView from "../views/Setting/SettingView.vue"
 import SettingMenu from "../views/Setting/SettingMenu.vue"
 import SettingProfile from "../views/Setting/SettingProfile.vue"
