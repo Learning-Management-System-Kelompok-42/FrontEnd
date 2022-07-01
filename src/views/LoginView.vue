@@ -42,7 +42,7 @@
                 <v-icon small class="me-2"> mdi-login </v-icon>
                 Masuk
               </v-btn>
-              <v-overlay :value="isLoading">
+              <v-overlay :value="!isLoading">
                 <loader />
               </v-overlay>
               <v-dialog v-model="error" width="500">
