@@ -4,8 +4,8 @@
       <v-container>
         <goback />
         <div class="header">
-          <h2 class="text-capitalize">tambah kursus</h2>
-          <p>Masukan data kursus baru yang ingin kamu buat</p>
+          <h2 class="text-capitalize">edit kursus</h2>
+          <p>Ubah data kursus sesuai keinginanmu</p>
         </div>
         <div class="detailkursus">
           <v-card class="pa-6">
@@ -15,7 +15,7 @@
               placeholder="Masukan Judul Kursus"
               dense
               outlined
-              v-model="course.title"
+              v-model="getCourseById.title"
               clearable
             ></v-text-field>
             <label class="text-capitalize font-weight-bold">
@@ -24,12 +24,12 @@
             <v-textarea
               outlined
               auto-grow
-              v-model="course.description"
+              v-model="getCourseById.description"
               placeholder="Tuliskan deskripsi singkat mengenai kursus ini"
             ></v-textarea>
             <div class="gambar d-flex">
               <v-img
-                :src="url"
+                :src="getCourseById.thumbnail"
                 height="70"
                 max-width="100"
                 :aspect-ratio="1"
@@ -70,7 +70,7 @@
             </div>
           </v-card>
         </div>
-        <div class="modulkursus my-5">
+        <!-- <div class="modulkursus my-5">
           <v-card class="pa-5">
             <div class="headermodul d-flex">
               <h2 class="text-capitalize">modul kursus</h2>
@@ -333,102 +333,30 @@
           <v-overlay :value="getLoading">
             <Loader />
           </v-overlay>
-        </div>
+        </div> -->
       </v-container>
     </v-main>
   </v-app>
 </template>
 <script>
+// import Loader from "@/components/Loader.vue";
 import goback from "@/components/BackButton.vue";
-import Loader from "@/components/Loader.vue";
-// import { mapFields, mapMultiRowFields } from "vuex-map-fields";
-// import { mapMutations } from "vuex";
 export default {
-  name: "AddCourseView",
-  components: { goback, Loader },
+  name: "UpdateCourseView",
+  components: { goback },
+  setup() {},
   data() {
     return {
-      course: {
-        title: "",
-        description: "",
-        thumbnail: "",
-        modules: [
-          {
-            orders: 1,
-            name: "",
-            slide_url: "",
-            youtube_url: "",
-            quizzes: [
-              {
-                question: "",
-                answer: "",
-                multiple_choice: ["", "", "", ""],
-              },
-            ],
-          },
-        ],
-      },
-      success: "false",
-      error: "false",
-      gambarmodul: null,
+      thumbnail: null,
       url: null,
     };
   },
-  created() {
-    document.title = "Course | Add Course";
-  },
   computed: {
-    buttonText() {
-      return this.gambarmodul ? this.gambarmodul.name : "";
-    },
-    getStatus() {
-      return this.$store.state.modul.code;
-    },
-    getLoading() {
-      return this.$store.state.modul.isLoading;
+    getCourseById() {
+      return this.$store.state.course.courseById;
     },
   },
   methods: {
-    addQuiz(orders) {
-      console.log(this.course.modules[orders - 1]);
-      this.course.modules[orders - 1].quizzes.push({
-        question: "",
-        answer: "",
-        multiple_choice: ["", "", "", ""],
-      });
-    },
-    addModules() {
-      let num = this.course.modules.length;
-      num++;
-      console.log(num);
-      this.course.modules.push({
-        orders: num,
-        name: "",
-        slide_url: "",
-        youtube_url: "",
-        quizzes: [
-          {
-            question: "",
-            answer: "",
-            multiple_choice: ["", "", "", ""],
-          },
-        ],
-      });
-    },
-    removeModules() {
-      this.course.modules.pop({
-        name: "",
-        slide_url: "",
-        youtube_url: "",
-        quizzes: [
-          {
-            question: "",
-            answer: "",
-            multiple_choice: ["", "", "", ""],
-          },
-        ],
-      });
-    },
     onButtonClick() {
       window.addEventListener("focus", () => {});
       this.$refs.uploader.click();
@@ -440,9 +368,8 @@ export default {
       this.url = URL.createObjectURL(file);
       this.getBase64(e.target.files[0]).then((data) => {
         console.log(data);
-        this.course.thumbnail = data;
+        this.thumbnail = data;
       });
-      // console.log(this.course.thumbnail);
     },
     getBase64(file) {
       return new Promise((resolve, reject) => {
@@ -452,21 +379,6 @@ export default {
         reader.onerror = (error) => reject(error);
       });
     },
-    addCourse() {
-      console.log(this.course);
-      this.$store.dispatch("modul/addCourse", this.course);
-      if (this.getStatus === 200) {
-        this.success = true;
-      } else {
-        this.error = true;
-      }
-      // this.$store.dispatch("moduls/addCourse", this.course);
-    },
-  },
-  setup() {},
-  mounted() {
-    console.log(this.success);
-    console.log(this.getLoading);
   },
 };
 </script>

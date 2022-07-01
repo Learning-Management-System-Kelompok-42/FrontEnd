@@ -8,9 +8,15 @@
 
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title class="text-h6 primary--text font-weight-bold" v-text="getUser.full_name">
+            <v-list-item-title
+              class="text-h6 primary--text font-weight-bold"
+              v-text="getCompany.NameAdmin"
+            >
+              {{ getCompany.CompanyID }}
             </v-list-item-title>
-            <v-list-item-subtitle>PT. Intan Abadi</v-list-item-subtitle>
+            <v-list-item-subtitle
+              v-text="getCompany.NameCompany"
+            ></v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
 
@@ -93,6 +99,10 @@ export default {
     getUser() {
       return this.$store.state.user.user;
     },
+    getCompany() {
+      console.log(this.$store.state.company.dataCompany);
+      return this.$store.state.company.dataCompany;
+    },
   },
   methods: {
     logout() {
@@ -102,6 +112,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("user/getUserById");
+    this.$store.dispatch("company/fetchCompany");
   },
 };
 </script>

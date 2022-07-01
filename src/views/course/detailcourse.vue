@@ -6,14 +6,19 @@
         <div class="header d-flex">
           <div class="judul">
             <h2 class="primary--text text-capitalize">
-              junior javascript mastery
+              {{ getCourseById.title }}
             </h2>
             <p class="text-caption">
-              Detail dari Kursus Junior Javascript Mastery
+              Detail dari Kursus {{ getCourseById.title }}
             </p>
           </div>
           <v-spacer></v-spacer>
-          <v-btn class="text-capitalize mx-2" color="primary" depressed>
+          <v-btn
+            class="text-capitalize mx-2"
+            color="primary"
+            depressed
+            @click="updateCourse(getCourseById.id)"
+          >
             <v-icon class="me-3">mdi-pencil-box-outline</v-icon>
             ubah kursus
           </v-btn>
@@ -34,7 +39,7 @@
               </v-card>
               <div class="mx-2 px-5">
                 <p class="text-capitalize my-0">total modul</p>
-                <p class="font-weight-bold">20</p>
+                <p class="font-weight-bold">{{ getModuleById.length }}</p>
               </div>
             </div>
           </v-card>
@@ -184,6 +189,23 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    updateCourse(id) {
+      this.$store.dispatch("course/fetchModuleById", id);
+      this.$router.push(`/course/update/${id}`);
+    },
+  },
+  computed: {
+    getCourseById() {
+      return this.$store.state.course.courseById;
+    },
+    getModuleById() {
+      return this.$store.state.course.moduleById;
+    },
+  },
+  mounted() {
+    this.$store.dispatch("course/fetchCourseById");
   },
 };
 </script>

@@ -4,8 +4,10 @@
       <v-container>
         <div class="d-flex mx-auto my-auto header">
           <div>
-            <h2>Kursus</h2>
-            <p class="text-caption">Lihat daftar kursus yang di perusahaanmu</p>
+            <h2 class="primary--text">Kursus</h2>
+            <p class="text-caption gray6--text">
+              Lihat daftar kursus yang di perusahaanmu
+            </p>
           </div>
           <v-spacer></v-spacer>
           <v-btn
@@ -23,7 +25,7 @@
             <v-col cols="6">
               <v-card class="">
                 <v-container fluid class="d-flex my-auto">
-                  <p class="my-auto">Filter :</p>
+                  <p class="my-auto gray6--text">Filter :</p>
                   <v-select
                     hide-details=""
                     class="align-center ma-3"
@@ -66,16 +68,16 @@
               md="4"
               lg="4"
               sm="6"
-              v-for="list in listkursus"
-              :key="list.id"
+              v-for="course in getCourse"
+              :key="course.id"
             >
               <v-card>
-                <v-img :src="list.img" height="100"></v-img>
+                <v-img :src="course.thumbnail" height="100"></v-img>
                 <v-card-subtitle class="font-weight-bold black--text">
-                  {{ list.judul }}
+                  {{ course.title }}
                 </v-card-subtitle>
-                <v-card-text>
-                  {{ list.deskripsi | truncate(63, "...") }}
+                <v-card-text class="gray6--text">
+                  {{ course.description | truncate(63, "...") }}
                 </v-card-text>
                 <v-card-actions>
                   <v-btn
@@ -83,7 +85,7 @@
                     class="text-capitalize"
                     width="100%"
                     small
-                    to="/course/detail"
+                    @click="goToDetails(course.id)"
                   >
                     Lihat detail
                     <v-spacer></v-spacer>
@@ -102,6 +104,11 @@
 export default {
   name: "CourseView",
   setup() {},
+  computed: {
+    getCourse() {
+      return this.$store.state.course.course;
+    },
+  },
   data() {
     return {
       listkursus: [
@@ -150,9 +157,17 @@ export default {
       ],
     };
   },
-  methods: {},
+  methods: {
+    goToDetails(id) {
+      this.$store.dispatch("course/setCourseIdFromVue", id);
+      this.$router.push(`/course/detail/${id}`);
+    },
+  },
   created() {
     document.title = "Course";
+  },
+  mounted() {
+    this.$store.dispatch("course/fetchCourse");
   },
   filters: {
     truncate: (text, length, suffix) => {
