@@ -2,8 +2,9 @@ import Vue from "vue";
 import Vuex from "vuex";
 import user from "./user";
 import createPresistedState from "vuex-persistedstate";
-import modul from "./moduls";
+import modul from "./modul";
 import company from "./company";
+import course from "./course";
 
 Vue.use(Vuex);
 
@@ -22,9 +23,13 @@ export default new Vuex.Store({
       namespaced: true,
       ...user,
     },
-    moduls: {
+    modul: {
       namespaced: true,
       ...modul,
+    },
+    course: {
+      namespaced: true,
+      ...course,
     },
   },
 });

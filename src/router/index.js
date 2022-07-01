@@ -20,6 +20,7 @@ import SuccessLoginView from "../views/SuccessLoginView.vue";
 import Course from "../views/course/course.vue";
 import AddCourse from "../views/course/addcourse.vue";
 import DetailCourse from "../views/course/detailcourse.vue";
+import UpdateCourse from "../views/course/updatecourse.vue";
 
 Vue.use(VueRouter);
 
@@ -99,8 +100,12 @@ const routes = [
         component: AddCourse,
       },
       {
-        path: "/course/detail",
+        path: "/course/detail/:id",
         component: DetailCourse,
+      },
+      {
+        path: "/course/update/:id",
+        component: UpdateCourse,
       },
       {
         path: "/setting",

@@ -23,15 +23,15 @@ const mutations = {
   },
 };
 const actions = {
-  async fetchCompany(store) {
+  async fetchCompany({ commit }) {
     const response = await axios.get("http://54.254.240.107:4001/v1/company", {
       headers: {
         Authorization: `Bearer ${this.state.user.token}`,
       },
     });
-    if (response.code >= 200 < 400) {
-      store.commit("setError", response.message);
-      store.commit("setDataCompany", response.data.data);
+    if (response.status >= 200 || response.status < 400) {
+      commit("setError", response.message);
+      commit("setDataCompany", response.data.data);
     } else {
       console.log(response);
     }

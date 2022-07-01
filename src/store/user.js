@@ -82,18 +82,10 @@ const actions = {
     });
   },
   async fetchLogin(store, param) {
+    console.log(param);
     const response = await axios.post(
       "http://54.254.240.107:4001/v1/login",
-      {
-        email: param.email,
-        password: param.password,
-      }
-      // {
-      //   Headers: {
-      //     Accept: "multipart/form-data",
-      //     "Content-Type": "multipart/form-data",
-      //   },
-      // }
+      param
     );
     cookie.set("token", response.data.data.token, {
       path: "/",
