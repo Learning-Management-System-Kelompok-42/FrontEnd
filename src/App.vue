@@ -1,6 +1,6 @@
 <template>
   <v-app id="app">
-    <router-view></router-view>
+    <router-view />
   </v-app>
 </template>
 
@@ -16,6 +16,6 @@ export default {
 <style>
 #app {
   font-family: "Inter";
-  background: #f3f8f6;
+  background-color: #f3f8f6;
 }
 </style>
