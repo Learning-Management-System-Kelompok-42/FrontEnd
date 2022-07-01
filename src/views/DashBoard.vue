@@ -174,7 +174,6 @@
 </template>
 
 <script>
-
 export default {
 data(){
     return{
@@ -182,16 +181,27 @@ data(){
             {text:'Nama Spesialisasi',align:"start", sortable:false, value:"name"},
             {text:'Jumlah Anggota', sortable:false, value:'amount'},
             {text:'Aksi', sortable:false, value:'amount'},
-
-
         ],
         special :[
             {name:'Backend Engineer', amount: 16},
             {name:'Frontend Engineer', amount: 12},
             {name:'UI/UX Designer', amount: 8},
             {name:'Quality Asurance', amount: 6},
-        ]
+        ],
     }
-}
-}
+  },
+  methods: {
+    gettoken() {
+      const cookie = require("tiny-cookie");
+      return cookie.get("token");
+      },
+    },
+    mounted() {
+      console.log(this.$store.state.user.userid);
+      console.log(this.gettoken());
+    },
+    created() {
+      document.title = "Dashboard";
+    },
+  };
 </script>

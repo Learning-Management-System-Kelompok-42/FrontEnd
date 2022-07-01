@@ -4,8 +4,8 @@ import LandingView from "../views/LandingView.vue";
 import SpecializationParent from "../views/SpecializationParent.vue";
 import SpecializationView from "../views/SpecializationView.vue";
 import SpecializationAdd from "../views/SpecializationAdd.vue";
+import SpecializationDetail from "../views/SpecializationDetail.vue";
 import LoginView from "../views/LoginView.vue";
-import RegisterPerusahaanView from "../views/RegisterPerusahaanView.vue";
 import EmployeeView from "../views/Employee/EmployeeView.vue";
 import DashboardView from "../views/DashBoard.vue";
 import SideBarParents from "../views/SideBarParents.vue";
@@ -16,8 +16,16 @@ import SettingMenu from "../views/Setting/SettingMenu.vue"
 import SettingProfile from "../views/Setting/SettingProfile.vue"
 import SettingCompany from "../views/Setting/SettingCompany.vue"
 import SettingPassword from "../views/Setting/SettingPassword.vue"
+import RegisterView from "../views/RegisterView.vue";
+import SuccessLoginView from "../views/SuccessLoginView.vue";
+import Course from "../views/course/course.vue";
+import AddCourse from "../views/course/addcourse.vue";
+import DetailCourse from "../views/course/detailcourse.vue";
+import UpdateCourse from "../views/course/updatecourse.vue";
 
 Vue.use(VueRouter);
+
+const cookie = require("tiny-cookie");
 
 const routes = [
   {
@@ -26,36 +34,27 @@ const routes = [
     component: LandingView,
   },
   {
-    path: "/daftar",
-    component: RegisterPerusahaanView,
-    // children: [
-    //   {
-    //     path: "",
-    //     component: RegisterPerusahaanView,
-    //   },
-    //   {
-    //     path: "admin",
-    //     component: RegisterAdminView,
-    //   },
-    // ],
+    path: "/register",
+    component: RegisterView,
   },
-  // {
-  //   path: "/admin",
-  //   name: "admin",
-  //   component: RegisterAdminView,
-  // },
-  // {
-  //   path: "/daftar",
-  //   component: RegisterPerusahaanView,
-  // },
   {
-    path: "/masuk",
+    path: "/login",
     name: "masuk",
     component: LoginView,
   },
   {
+    path: "/redirect",
+    component: SuccessLoginView,
+  },
+  {
     path: "/dashboard",
     component: SideBarParents,
+    beforeEnter: (to, from, next) => {
+      if (cookie.get("token") === null || !cookie.get("token")) {
+        return next("/login");
+      }
+      next();
+    },
     children: [
       {
         path: "/",
@@ -64,18 +63,18 @@ const routes = [
       {
         path: "/employee",
         component: EmployeeParent,
-        children :[
+        children: [
           {
-          path:'/',
-          name : 'employeeView',
-          component: EmployeeView,
+            path: "/",
+            name: "employeeView",
+            component: EmployeeView,
           },
           {
-            path:'detail',
-            name : 'employeeDetail',
-            component: EmployeeDetail,           
-          }
-        ]
+            path: "detail",
+            name: "employeeDetail",
+            component: EmployeeDetail,
+          },
+        ],
       },
       {
         path: "/specialization",
@@ -91,33 +90,54 @@ const routes = [
             name: "specializationadd",
             component: SpecializationAdd,
           },
+          {
+            path: "detail",
+            name: "specializationdetail",
+            component: SpecializationDetail,
+          },
         ],
       },
       {
+        path: "/course",
+        component: Course,
+      },
+      {
+        path: "/course/add",
+        component: AddCourse,
+      },
+      {
+        path: "/course/detail/:id",
+        component: DetailCourse,
+      },
+      {
+        path: "/course/update/:id",
+        component: UpdateCourse,
+      },
+      {
         path: "/setting",
-        component : SettingView,
-        children :[
+        component: SettingView,
+        children: [
           {
-            path : '/',
-            component : SettingMenu,
+            path: "/",
+            component: SettingMenu,
           },
           {
-            path : 'profile',
-            name : 'settingProfile',
-            component : SettingProfile, 
+            path: "profile",
+            name: "settingProfile",
+            component: SettingProfile,
           },
           {
-            path : 'company',
-            name : 'settingCompany',
-            component : SettingCompany,
+            path: "company",
+            name: "settingCompany",
+            component: SettingCompany,
           },
           {
-            path :'password',
-            name : 'settingPassword',
-            component : SettingPassword,
-          }
+            path: "password",
+            name: "settingPassword",
+            component: SettingPassword,
+          },
         ],
-      }
+      },
     ],
   },
 ];

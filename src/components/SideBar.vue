@@ -2,18 +2,21 @@
   <v-main>
     <v-navigation-drawer class="pa-4" app permanent>
       <v-list flat>
-        <v-list-item class="px-2">
-          <v-list-item-avatar>
-            <v-img src=" "></v-img>
-          </v-list-item-avatar>
-        </v-list-item>
+        <v-subheader class="mx-2 px-2">
+          <logo />
+        </v-subheader>
 
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title class="text-h6">
-              Ahmad Junaidi
+            <v-list-item-title
+              class="text-h6 primary--text font-weight-bold"
+              v-text="getCompany.NameAdmin"
+            >
+              {{ getCompany.CompanyID }}
             </v-list-item-title>
-            <v-list-item-subtitle>PT. Intan Abadi</v-list-item-subtitle>
+            <v-list-item-subtitle
+              v-text="getCompany.NameCompany"
+            ></v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
 
@@ -42,10 +45,15 @@
 
       <template v-slot:append>
         <div class="pl-0 pa-2">
-          <v-btn class="text-capitalize px-1" text color="warning">
-            <v-card :elevation="0" class="ml-0 pa-1 mr-2" color="warning2"
-              ><v-icon color="warning">mdi-export</v-icon></v-card
-            >
+          <v-btn
+            class="text-capitalize px-1"
+            text
+            color="warning"
+            @click="logout"
+          >
+            <v-card :elevation="0" class="ml-0 pa-1 mr-2" color="warning2">
+              <v-icon color="warning">mdi-export</v-icon>
+            </v-card>
             Keluar
           </v-btn>
         </div>
@@ -55,7 +63,10 @@
 </template>
 
 <script>
+import logo from "@/components/Logo.vue";
+let cookie = require("tiny-cookie");
 export default {
+  components: { logo },
   data() {
     return {
       items: [
@@ -83,6 +94,25 @@ export default {
         { title: "Pengaturan", icon: "mdi-cog-outline", value: "setting" },
       ],
     };
+  },
+  computed: {
+    getUser() {
+      return this.$store.state.user.user;
+    },
+    getCompany() {
+      console.log(this.$store.state.company.dataCompany);
+      return this.$store.state.company.dataCompany;
+    },
+  },
+  methods: {
+    logout() {
+      cookie.remove("token");
+      this.$router.push("/login");
+    },
+  },
+  mounted() {
+    this.$store.dispatch("user/getUserById");
+    this.$store.dispatch("company/fetchCompany");
   },
 };
 </script>

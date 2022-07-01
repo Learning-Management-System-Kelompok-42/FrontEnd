@@ -3,8 +3,8 @@
     <v-row>
       <v-col cols="7">
         <v-container class="contain">
-          <h4 class="mb-5">LMS</h4>
-          <h1>Masuk</h1>
+          <h4 class="mb-5 pointer" @click="goHome"><logo /></h4>
+          <h1>Selamat Datang</h1>
           <p>
             Lengkapi form dibawah ini dengan menggunakan data Anda yang valid
           </p>
@@ -27,38 +27,75 @@
             >
             </v-text-field>
             <span class="d-flex">
-              <v-checkbox class="my-0 mx-0" label="Ingat Saya"> </v-checkbox>
+              <v-checkbox class="my-0 mx-0" label="Ingat Saya" v-model="check">
+              </v-checkbox>
             </span>
             <div class="d-flex">
               <v-spacer></v-spacer>
               <v-btn
+                :disabled="!valid"
                 class="text-capitalize white--text mt-2"
-                color="#484848"
+                color="primary"
                 depressed
                 type="submit"
               >
+                <v-icon small class="me-2"> mdi-login </v-icon>
                 Masuk
               </v-btn>
+              <v-overlay :value="isLoading">
+                <loader />
+              </v-overlay>
+              <v-dialog v-model="error" width="500">
+                <v-card>
+                  <v-card-title> Terjadi Kesalahan </v-card-title>
+                  <v-card-text> {{ messageeerror }} </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                      class="text-capitalize"
+                      color="primary"
+                      text
+                      @click="error = false"
+                    >
+                      Tutup
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
             </div>
           </v-form>
         </v-container>
       </v-col>
-      <v-col cols="5">
+      <v-col cols="5" class="pa-0">
         <v-img
-          src="http://placehold.jp/20x20.png"
+          :src="loginimage"
+          class="side"
           width="100%"
-          height="560"
+          max-height="100%"
+          :aspect-ratio="15 / 18"
         ></v-img>
       </v-col>
     </v-row>
   </div>
 </template>
 <script>
+import logo from "@/components/Logo.vue";
+import axios from "axios";
+import loader from "@/components/Loader.vue";
+import { mapState } from "vuex";
 export default {
   setup() {},
+  components: {
+    loader,
+    logo,
+  },
   data() {
     return {
+      error: false,
+      messageeerror: {},
+      loginimage: require("@/assets/imagelogin.png"),
       valid: true,
+      check: false,
       email: "",
       dataPassword: "",
       password: false,
@@ -71,18 +108,71 @@ export default {
       ],
     };
   },
+  created() {
+    document.title = "Edemia | Login";
+  },
+  mounted() {
+    console.log(this.isLoading);
+  },
+  computed: {
+    ...mapState("user", ["isLoading"]),
+  },
   methods: {
+    goHome() {
+      this.$router.push("/");
+    },
     btnLogin() {
-      this.$store.dispatch("user/fetchLogin", {
-        email: this.email,
-        password: this.dataPassword,
-      });
+      if (!this.check) {
+        axios.interceptors.request.use(
+          (config) => {
+            this.$store.commit("user/loading", true);
+            return config;
+          },
+          (error) => {
+            this.$store.commit("user/loading", false);
+            return Promise.reject(error);
+          }
+        );
+        axios.interceptors.response.use(
+          (response) => {
+            this.$store.commit("user/loading", false);
+            return response;
+          },
+          (error) => {
+            this.error = true;
+            if (error.code === "ERR_BAD_REQUEST") {
+              this.messageeerror =
+                "Email atau kata sandi salah, pastikan data yang anda masukan benar";
+            } else if (error.code === "ERR_NETWORK") {
+              this.messageeerror = "Internal Server Error";
+            }
+            this.$store.commit("user/loading", false);
+            return Promise.reject(error);
+          }
+        );
+        this.$store.dispatch("user/fetchLogin", {
+          email: this.email,
+          password: this.dataPassword,
+        });
+      } else {
+        this.$store.dispatch("user/fetchLogin", {
+          email: this.email,
+          password: this.dataPassword,
+        });
+      }
     },
   },
 };
 </script>
 <style>
+.pointer {
+  cursor: pointer;
+}
+.side {
+  background-size: 100% 100%;
+}
 .contain {
+  padding: 0 !important;
   margin-top: 50px !important;
   width: 400px !important;
 }
