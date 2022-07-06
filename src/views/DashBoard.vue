@@ -129,8 +129,11 @@
                         class="my-auto mx-4"
                     ></v-data-table>
 
-                    <!-- <template v-slot:item.actions="{ item }">
-                        <v-btn text color="grey">Lihat detail <v-icon>mdi-chevron-right</v-icon></v-btn>
+                    <!-- <template v-slot:item.actions="{item}" >
+                        <v-btn text color="grey" @click="()=>router.push(detail(item))">Lihat detail <v-icon>mdi-chevron-right</v-icon></v-btn>
+                    </template>
+                    <template v-slot:no-data>
+                        <p>There is no data</p>
                     </template> -->
                 </v-card>
             </v-col>
@@ -180,7 +183,7 @@ data(){
         headers :[
             {text:'Nama Spesialisasi',align:"start", sortable:false, value:"name"},
             {text:'Jumlah Anggota', sortable:false, value:'amount'},
-            {text:'Aksi', sortable:false, value:'amount'},
+            {text:'Aksi', sortable:false, value:'actions'},
         ],
         special :[
             {name:'Backend Engineer', amount: 16},

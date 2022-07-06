@@ -78,12 +78,7 @@ export default {
           icon: "mdi-briefcase-variant-outline",
           value: "specialization",
         },
-        { title: "Kursus", icon: "mdi-file-document-outline", value: "course" },
-        {
-          title: "Karyawan",
-          icon: "mdi-account-group-outline",
-          value: "employee",
-        },
+        { title: "Kursus Saya", icon: "mdi-file-document-outline", value: "course" },
         {
           title: "Permintaan",
           icon: "mdi-bookmark-minus-outline",
