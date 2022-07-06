@@ -22,7 +22,10 @@ import Course from "../views/course/course.vue";
 import AddCourse from "../views/course/addcourse.vue";
 import DetailCourse from "../views/course/detailcourse.vue";
 import UpdateCourse from "../views/course/updatecourse.vue";
+import UserView from "../views/User/UserView.vue";
+import CourseView from "../views/User/CourseView.vue"
 import UserDashboard from "../views/User/UserDashboard.vue";
+import UserCourse  from "../views/User/UserCourse.vue"
 
 
 Vue.use(VueRouter);
@@ -143,9 +146,25 @@ const routes = [
     ],
   },
   {
-    path : '/urdashboard',
-    name : 'userDashboard',
-    component : UserDashboard,
+    path: "/urdashboard",
+    component: UserView,
+    children: [
+      {
+        path: "/",
+        component:UserDashboard,
+      },
+      {
+        path: "/urcourse",
+        component: CourseView,
+        children: [
+          {
+            path: "/",
+            name : 'userCourse',
+            component : UserCourse,
+          },
+        ],
+      },
+    ],
   },
 ];
 
