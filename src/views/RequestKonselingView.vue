@@ -56,9 +56,9 @@
                             
                         </v-list-item-content>
                     </v-list-item>
-                    <v-card-action class="mx-2">
+                    <v-card-action class="mx-1">
                   <v-btn
-                    class="text-capitalize my-3"
+                    class="text-capitalize my-3 mt-1"
                     plain
                     small
                     to="/request/detail"
@@ -93,9 +93,9 @@
                             
                         </v-list-item-content>
                     </v-list-item>
-                    <v-card-action class="mx-2">
+                    <v-card-action class="mx-1">
                   <v-btn
-                    class="text-capitalize my-3"
+                    class="text-capitalize my-3 mt-1"
                     plain
                     small
                     to="/request/detail"
