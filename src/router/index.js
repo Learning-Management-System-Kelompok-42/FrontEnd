@@ -45,6 +45,7 @@ const routes = [
     path: "/redirect",
     component: SuccessLoginView,
   },
+  {
     path: "/dashboard",
     component: SideBarParents,
     beforeEnter: (to, from, next) => {
