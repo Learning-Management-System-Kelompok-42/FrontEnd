@@ -55,6 +55,7 @@
                     <v-card-action class="mx-1">
                   <v-btn
                     class="text-capitalize my-3 mt-1"
+                    color="green darken-4"
                     plain
                     small
                     to="/request/detail"
@@ -75,7 +76,7 @@
                 <v-chip
                         class="ma-4 my-4 mb-1"
                         color="green lighten-4"
-                        text-color="green"
+                        text-color="green darken-4"
                         >
                         <v-icon small class="me-2">mdi-checkbox-marked-circle</v-icon>
                     Sudah Selesai
@@ -92,6 +93,7 @@
                     <v-card-action class="mx-1">
                   <v-btn
                     class="text-capitalize my-3 mt-1"
+                    color="green darken-4"
                     plain
                     small
                     to="/request/detail"
