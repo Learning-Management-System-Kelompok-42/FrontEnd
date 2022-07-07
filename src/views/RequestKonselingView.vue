@@ -6,30 +6,24 @@
         <h3 class="primary--text"><b>Permintaan</b></h3>
         <p>Lihat daftar permintaan yang dibuat oleh employee</p>
 <!-- TOTAL -->
-<v-row class="mt-1">
-    <v-col class="pl-0 pr-6" cols="3">
-        <v-list-item >  
-            <v-chip
-                class="ma-2"
-                color="red"
-                text-color="white"
+<div
+      class="d-flex align-center mb-2"
+    >
+      <v-chip
+                class="ma-1 "
+                color="orange lighten-4"
+                text-color="orange darken-4"
                 >
             Permintaan Kursus
-            </v-chip>           
-        </v-list-item>        
-    </v-col>
-    <v-col class="pl-0 pr-6 mr-1" cols="3">
-        <v-list-item>  
+            </v-chip>
             <v-chip
-                class="ma-2 ml-0"
-                color="red"
+                class="ma-2"
+                color="orange darken-4"
                 text-color="white"
                 >
             Permintaan Konseling
-            </v-chip>           
-        </v-list-item>
-    </v-col>
-</v-row>
+            </v-chip>    
+  </div>
 
                 <v-row class="mt-1">
             <v-col class="pl-0 pr-6" cols="6">
@@ -39,9 +33,9 @@
                 outlined
                 >
                     <v-chip
-                        class="ma-4 my-4"
-                        color="red"
-                        text-color="white"
+                        class="ma-4 my-4 mb-1"
+                        color="red lighten-4"
+                        text-color="red accent-4"
                         >
                         <v-icon small outlined class="me-1">mdi-cancel</v-icon>
                     Belum Selesai
@@ -52,7 +46,9 @@
                     
                             
                         <v-list-item-title class="text-h9"><b>Ingin konsultasi mengenai penerapan Redux di ReactJS </b></v-list-item-title>
-                            <v-list-item-subtitle class="text-h7 pb-2">Fajar Eka Pambudi</v-list-item-subtitle>
+                            
+                            <v-list-item-subtitle class="text-h7 pb-2">Fajar Eka Pambudi 
+                            </v-list-item-subtitle>
                             
                         </v-list-item-content>
                     </v-list-item>
@@ -77,9 +73,9 @@
                 outlined
                 >
                 <v-chip
-                        class="ma-4 my-4"
-                        color="green"
-                        text-color="white"
+                        class="ma-4 my-4 mb-1"
+                        color="green lighten-4"
+                        text-color="green"
                         >
                         <v-icon small class="me-2">mdi-checkbox-marked-circle</v-icon>
                     Sudah Selesai
