@@ -8,6 +8,8 @@ import SpecializationDetail from "../views/SpecializationDetail.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import EmployeeView from "../views/EmployeeView.vue";
+import RequestKursusView from "../views/RequestKursusView.vue";
+import RequestKonselingView from "../views/RequestKonselingView.vue";
 import DashboardView from "../views/DashBoard.vue";
 import SideBarParents from "../views/SideBarParents.vue";
 import EmployeeParent from "../views/EmployeeParent.vue";
@@ -46,8 +48,26 @@ const routes = [
     component: SuccessLoginView,
   },
   {
+    path: "/kursus",
+    component: RequestKursusView,
+  },
+  {
+    path: "/konseling",
+    component: RequestKonselingView,
+  },
+  // {
+  //   path: "/request/detailKursus",
+  //   component: AddCourse,
+  // },
+  // {
+  //   path: "/request/detailKonseling",
+  //   component: DetailCourse,
+  // },
+  {
     path: "/dashboard",
-    component: SideBarParents,
+    component: 
+    
+    SideBarParents,
     beforeEnter: (to, from, next) => {
       if (cookie.get("token") === null || !cookie.get("token")) {
         return next("/login");
@@ -108,6 +128,7 @@ const routes = [
         path: "/course/detail",
         component: DetailCourse,
       },
+      
       {
         path: "/setting",
         component: SettingView,
