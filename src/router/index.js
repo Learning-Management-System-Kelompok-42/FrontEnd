@@ -23,11 +23,11 @@ import AddCourse from "../views/course/addcourse.vue";
 import DetailCourse from "../views/course/detailcourse.vue";
 import UpdateCourse from "../views/course/updatecourse.vue";
 import UserView from "../views/User/UserView.vue";
-import CourseView from "../views/User/CourseView.vue"
+import CourseView from "../views/User/CourseView.vue";
 import UserDashboard from "../views/User/UserDashboard.vue";
-import UserCourse  from "../views/User/UserCourse.vue"
-import InvitationUser from "../views/user/InvitationUser.vue";
-import RegistrationUser from "../views/user/RegistrationUser.vue"
+import UserCourse from "../views/User/UserCourse.vue";
+import InvitationUser from "../views/User/InvitationUser.vue";
+import RegistrationUser from "../views/User/RegistrationUser.vue";
 
 Vue.use(VueRouter);
 
@@ -157,10 +157,16 @@ const routes = [
   {
     path: "/urdashboard",
     component: UserView,
+    beforeEnter: (to, from, next) => {
+      if (cookie.get("token") === null || !cookie.get("token")) {
+        return next("/login");
+      }
+      next();
+    },
     children: [
       {
         path: "/",
-        component:UserDashboard,
+        component: UserDashboard,
       },
       {
         path: "/urcourse",
@@ -168,8 +174,8 @@ const routes = [
         children: [
           {
             path: "/",
-            name : 'userCourse',
-            component : UserCourse,
+            name: "userCourse",
+            component: UserCourse,
           },
         ],
       },

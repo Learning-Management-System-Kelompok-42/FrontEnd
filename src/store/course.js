@@ -10,6 +10,7 @@ const mutations = {
   setCourse(state, param) {
     state.course = param;
   },
+
   setCourseById(state, param) {
     state.courseById = param;
   },
@@ -36,6 +37,19 @@ const actions = {
     } else {
       console.log(response);
     }
+  },
+  async getAllCourseEmployee({ commit }) {
+    const response = await axios.get(
+      `https://api.rubick.tech/v1/employee/${this.state.user.userid}/course/${this.state.user.specializationId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${this.state.user.token}`,
+        },
+      }
+    );
+    if (response.status >= 200 || response.status < 400) {
+      commit("setCourse", response.data.data);
+    } else console.log(response);
   },
   async fetchModuleById({ state, commit }) {
     const response = await axios.get(

@@ -14,8 +14,12 @@ const state = () => ({
   status: 0,
   companyId: "",
   akses: "",
+  specializationId: "",
 });
 const mutations = {
+  setSpecializationId(state, param) {
+    state.specializationId = param;
+  },
   setCompanyId(state, param) {
     state.companyId = param;
   },
@@ -90,6 +94,19 @@ const actions = {
     );
     commit("setUserById", response.data.data);
   },
+  async getEmployeeById({ state, commit }) {
+    const response = await axios.get(
+      `https://api.rubick.tech/v1/employee/${state.userid}`,
+      {
+        headers: {
+          Authorization: `Bearer ${state.token}`,
+        },
+      }
+    );
+    if (response.status >= 200 || response.status < 400) {
+      commit("setUserById", response.data.data);
+    } else console.log(response);
+  },
   async fetchRegister({ dispatch, commit }, param) {
     commit("setLoading", true);
     try {
@@ -148,6 +165,7 @@ const actions = {
         commit("setUserId", response.data.data.user_id);
         commit("setCompanyId", response.data.data.company_id);
         commit("setAkses", response.data.data.level_access);
+        commit("setSpecializationId", response.data.data.specialization_id);
         commit("setLoading", false);
         router.push("/redirect");
       } else if (response.status > 400) {

@@ -44,7 +44,7 @@ export default {
     cekAccess() {
       if (this.getAccess === "admin") {
         this.$router.push("/dashboard");
-      }
+      } else this.$router.push("/urdashboard");
     },
     loading() {
       this.isLoading = true;

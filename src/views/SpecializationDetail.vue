@@ -83,8 +83,14 @@
           </v-card>
         </div>
         <!-- COURSE'S LIST -->
-
-        <p class="text-h6 mt-6"><b> Daftar Kursus</b></p>
+        <div class="d-flex mt-6 pt-5">
+          <p class="text-h6"><b> Daftar Kursus</b></p>
+          <v-spacer></v-spacer>
+          <v-btn class="text-capitalize text-body-2" color="primary" depressed>
+            <v-icon class="me-2" small>mdi-plus-thick</v-icon>
+            tambahkan kursus
+          </v-btn>
+        </div>
         <v-card class="pa-4" outlined>
           <div class="d-flex">
             <v-text-field
@@ -163,7 +169,7 @@
                   ></v-list-item-avatar>
                   <v-list-item-content>
                     <v-list-item-title class="text-h8 mb-1 pt-0">
-                      <b>{{ users.full_name }}i</b>
+                      <b class="text-capitalize">{{ users.full_name }}</b>
                     </v-list-item-title>
                     <v-list-item-subtitle>
                       {{ users.email }}
