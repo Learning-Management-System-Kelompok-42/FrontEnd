@@ -5,6 +5,8 @@ import createPresistedState from "vuex-persistedstate";
 import modul from "./modul";
 import company from "./company";
 import course from "./course";
+import specialization from "./specialization";
+import employee from "./employee";
 
 Vue.use(Vuex);
 
@@ -15,6 +17,14 @@ const presistedDataState = createPresistedState({
 export default new Vuex.Store({
   plugins: [presistedDataState],
   modules: {
+    employee: {
+      namespaced: true,
+      ...employee,
+    },
+    specialization: {
+      namespaced: true,
+      ...specialization,
+    },
     company: {
       namespaced: true,
       ...company,

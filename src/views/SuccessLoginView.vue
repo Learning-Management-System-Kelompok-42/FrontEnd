@@ -35,12 +35,20 @@ export default {
       isLoading: false,
     };
   },
+  computed: {
+    getAccess() {
+      return this.$store.state.user.akses;
+    },
+  },
   methods: {
+    cekAccess() {
+      if (this.getAccess === "admin") {
+        this.$router.push("/dashboard");
+      } else this.$router.push("/urdashboard");
+    },
     loading() {
       this.isLoading = true;
-      setTimeout(() => {
-        this.$router.push("/dashboard");
-      }, 3000);
+      setTimeout(this.cekAccess, 3000);
     },
   },
   mounted() {

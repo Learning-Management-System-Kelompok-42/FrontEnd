@@ -20,7 +20,7 @@ const actions = {
     commit("setIsLoading", true);
     try {
       const response = await axios.post(
-        "http://54.254.240.107:4001/v1/course",
+        `https://api.rubick.tech/v1/company/${this.state.user.companyId}/course`,
         param,
         {
           headers: {

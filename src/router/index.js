@@ -9,19 +9,25 @@ import LoginView from "../views/LoginView.vue";
 import EmployeeView from "../views/Employee/EmployeeView.vue";
 import DashboardView from "../views/DashBoard.vue";
 import SideBarParents from "../views/SideBarParents.vue";
-import EmployeeParent from "../views/Employee/EmployeeParent.vue"
-import EmployeeDetail from "../views/Employee/EmployeeDetail.vue"
-import SettingView from "../views/Setting/SettingView.vue"
-import SettingMenu from "../views/Setting/SettingMenu.vue"
-import SettingProfile from "../views/Setting/SettingProfile.vue"
-import SettingCompany from "../views/Setting/SettingCompany.vue"
-import SettingPassword from "../views/Setting/SettingPassword.vue"
+import EmployeeParent from "../views/Employee/EmployeeParent.vue";
+import EmployeeDetail from "../views/Employee/EmployeeDetail.vue";
+import SettingView from "../views/Setting/SettingView.vue";
+import SettingMenu from "../views/Setting/SettingMenu.vue";
+import SettingProfile from "../views/Setting/SettingProfile.vue";
+import SettingCompany from "../views/Setting/SettingCompany.vue";
+import SettingPassword from "../views/Setting/SettingPassword.vue";
 import RegisterView from "../views/RegisterView.vue";
 import SuccessLoginView from "../views/SuccessLoginView.vue";
 import Course from "../views/course/course.vue";
 import AddCourse from "../views/course/addcourse.vue";
 import DetailCourse from "../views/course/detailcourse.vue";
 import UpdateCourse from "../views/course/updatecourse.vue";
+import UserView from "../views/User/UserView.vue";
+import CourseView from "../views/User/CourseView.vue";
+import UserDashboard from "../views/User/UserDashboard.vue";
+import UserCourse from "../views/User/UserCourse.vue";
+import InvitationUser from "../views/User/InvitationUser.vue";
+import RegistrationUser from "../views/User/RegistrationUser.vue";
 
 Vue.use(VueRouter);
 
@@ -38,6 +44,10 @@ const routes = [
     component: RegisterView,
   },
   {
+    path: "/registeremployee",
+    component: RegistrationUser,
+  },
+  {
     path: "/login",
     name: "masuk",
     component: LoginView,
@@ -45,6 +55,10 @@ const routes = [
   {
     path: "/redirect",
     component: SuccessLoginView,
+  },
+  {
+    path: "/invitation",
+    component: InvitationUser,
   },
   {
     path: "/dashboard",
@@ -135,6 +149,33 @@ const routes = [
             path: "password",
             name: "settingPassword",
             component: SettingPassword,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: "/urdashboard",
+    component: UserView,
+    beforeEnter: (to, from, next) => {
+      if (cookie.get("token") === null || !cookie.get("token")) {
+        return next("/login");
+      }
+      next();
+    },
+    children: [
+      {
+        path: "/",
+        component: UserDashboard,
+      },
+      {
+        path: "/urcourse",
+        component: CourseView,
+        children: [
+          {
+            path: "/",
+            name: "userCourse",
+            component: UserCourse,
           },
         ],
       },

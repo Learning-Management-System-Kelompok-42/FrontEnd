@@ -10,6 +10,7 @@ const mutations = {
   setCourse(state, param) {
     state.course = param;
   },
+
   setCourseById(state, param) {
     state.courseById = param;
   },
@@ -24,7 +25,7 @@ const actions = {
   async fetchCourse({ state, commit }) {
     console.log(state.course);
     const response = await axios.get(
-      "http://54.254.240.107:4001/v1/course/dashboard",
+      `https://api.rubick.tech/v1/company/${this.state.user.companyId}/course`,
       {
         headers: {
           Authorization: `Bearer ${this.state.user.token}`,
@@ -37,9 +38,22 @@ const actions = {
       console.log(response);
     }
   },
+  async getAllCourseEmployee({ commit }) {
+    const response = await axios.get(
+      `https://api.rubick.tech/v1/employee/${this.state.user.userid}/course/${this.state.user.specializationId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${this.state.user.token}`,
+        },
+      }
+    );
+    if (response.status >= 200 || response.status < 400) {
+      commit("setCourse", response.data.data);
+    } else console.log(response);
+  },
   async fetchModuleById({ state, commit }) {
     const response = await axios.get(
-      `http://54.254.240.107:4001/v1/module/${state.courseId}`,
+      `https://api.rubick.tech/v1/module/${state.courseId}`,
       {
         headers: {
           Authorization: `Bearer ${this.state.user.token}`,
@@ -52,13 +66,13 @@ const actions = {
       console.log(response);
     }
   },
-  async setCourseIdFromVue(store, param) {
+  setCourseIdFromVue(store, param) {
     store.commit("setCourseId", param);
   },
   async fetchCourseById({ state, commit, dispatch }) {
     console.log(state.courseId);
     const response = await axios.get(
-      `http://54.254.240.107:4001/v1/course/${state.courseId}`,
+      `https://api.rubick.tech/v1/company/${this.state.user.companyId}/course/${state.courseId}`,
       {
         headers: {
           Authorization: `Bearer ${this.state.user.token}`,

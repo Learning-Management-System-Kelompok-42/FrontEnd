@@ -10,12 +10,11 @@
           <v-list-item-content>
             <v-list-item-title
               class="text-h6 primary--text font-weight-bold"
-              v-text="getCompany.NameAdmin"
+              v-text="getDataUser.full_name"
             >
-              {{ getCompany.CompanyID }}
             </v-list-item-title>
             <v-list-item-subtitle
-              v-text="getCompany.NameCompany"
+              v-text="getDataUser.email"
             ></v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -71,35 +70,26 @@ export default {
         {
           title: "Dashboard",
           icon: "mdi-chart-box-outline",
-          value: "dashboard",
+          value: "urdashboard",
         },
         {
-          title: "Spesialisasi",
-          icon: "mdi-briefcase-variant-outline",
-          value: "specialization",
-        },
-        { title: "Kursus", icon: "mdi-file-document-outline", value: "course" },
-        {
-          title: "Karyawan",
-          icon: "mdi-account-group-outline",
-          value: "employee",
+          title: "Kursus Saya",
+          icon: "mdi-file-document-outline",
+          value: "urcourse",
         },
         {
           title: "Permintaan",
           icon: "mdi-bookmark-minus-outline",
-          value: "request",
+          value: "urrequest",
         },
-        { title: "Pengaturan", icon: "mdi-cog-outline", value: "setting" },
+        { title: "Pengaturan", icon: "mdi-cog-outline", value: "ursetting" },
       ],
     };
   },
   computed: {
-    getUser() {
-      return this.$store.state.user.user;
-    },
-    getCompany() {
-      console.log(this.$store.state.company.dataCompany);
-      return this.$store.state.company.dataCompany;
+    getDataUser() {
+      console.log(this.$store.state.user.userById);
+      return this.$store.state.user.userById;
     },
   },
   methods: {
@@ -109,7 +99,7 @@ export default {
     },
   },
   mounted() {
-    this.$store.dispatch("company/fetchCompany");
+    this.$store.dispatch("user/getEmployeeById");
   },
 };
 </script>
