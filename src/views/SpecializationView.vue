@@ -15,7 +15,7 @@
             class="text-capitalize text-body-2"
             color="primary"
             depressed
-            to="/specialization/add"
+            @click="addSpecialization"
           >
             <v-icon small class="me-2">mdi-plus-thick</v-icon>
             Tambah Spesialisasi
@@ -39,34 +39,38 @@
         <!-- ITEMS -->
         <div class="items mt-3">
           <v-row>
-            <v-col cols="3" v-for="data in items" :key="data">
+            <v-col
+              cols="3"
+              v-for="specialization in getSpecialization"
+              :key="specialization.SpecializationID"
+            >
               <v-card flat>
                 <v-card-title class="text-body-1 font-weight-bold">
-                  {{ data.title }}
+                  {{ specialization.SpecializationName }}
                 </v-card-title>
                 <v-card-subtitle class="d-flex align-center mt-1">
                   <v-card color="#FEEBD8" class="pa-1 me-2" flat>
                     <v-icon color="#F26440">mdi-file</v-icon>
                   </v-card>
-                  {{ data.kursus }} Kursus
+                  {{ specialization.AmountCourse }} Kursus
                 </v-card-subtitle>
                 <v-card-subtitle class="d-flex py-0 align-center">
                   <v-card color="#FEEBD8" class="pa-1 me-2" flat>
                     <v-icon color="#F26440">mdi-account-group-outline</v-icon>
                   </v-card>
-                  {{ data.karyawan }} Karyawan
+                  {{ specialization.AmountEmployee }} Karyawan
                 </v-card-subtitle>
-                <v-card-action class="mx-2">
+                <v-card-actions class="mx-2">
                   <v-btn
                     class="text-capitalize my-3"
                     plain
                     small
-                    to="/specialization/detail"
+                    @click="toDetail(specialization.SpecializationID)"
                   >
                     lihat detail
                     <v-icon class="ms-2">mdi-chevron-right</v-icon>
                   </v-btn>
-                </v-card-action>
+                </v-card-actions>
               </v-card>
             </v-col>
           </v-row>
@@ -79,45 +83,26 @@
 <script>
 export default {
   data: () => ({
-    items: [
-      {
-        title: "Backend Engineer",
-        kursus: 8,
-        karyawan: 8,
-      },
-      {
-        title: "UI Designer",
-        kursus: 8,
-        karyawan: 8,
-      },
-      {
-        title: "UX Writer",
-        kursus: 8,
-        karyawan: 8,
-      },
-      {
-        title: "Frontend Endgineer",
-        kursus: 8,
-        karyawan: 8,
-      },
-      {
-        title: "Content Writer",
-        kursus: 8,
-        karyawan: 8,
-      },
-      {
-        title: "UX Designer",
-        kursus: 8,
-        karyawan: 8,
-      },
-      {
-        title: "Android Developer",
-        kursus: 8,
-        karyawan: 8,
-      },
-    ],
     reveal: false,
   }),
+  computed: {
+    getSpecialization() {
+      return this.$store.state.specialization.specialization;
+    },
+  },
+  methods: {
+    addSpecialization() {
+      this.$router.push("/specialization/add");
+    },
+    toDetail(id) {
+      this.$store.dispatch("specialization/actionSetSpecializationId", id);
+      this.$router.push("/specialization/detail");
+    },
+  },
+  mounted() {
+    this.$store.dispatch("specialization/fetchSpecialization");
+    console.log(this.getSpecialization);
+  },
 };
 </script>
 

@@ -28,20 +28,50 @@
         <!-- FILTER -->
         <div class="body">
           <v-card class="pa-3">
-            <v-text-field label="Nama Spesialisasi" outlined dense>
+            <v-text-field
+              label="Nama Spesialisasi"
+              outlined
+              dense
+              v-model="nameSpecialization"
+            >
             </v-text-field>
-            <div class="d-flex">
+            <div class="d-flex" hidden>
               <v-text-field
+                v-on:focus="$event.target.select()"
+                ref="linkGenerate"
                 label="Link"
                 outlined
                 dense
+                v-model="getLink.link"
+                readonly
                 persistent-hint
                 hint="Gunakan link diatas untuk mengundang employee ke spesialisasi ini"
               >
               </v-text-field>
-              <v-btn color="primary" outlined class="text-capitalize ms-4">
+              <v-btn
+                color="primary"
+                outlined
+                class="text-capitalize ms-4"
+                @click="salinTautan"
+              >
                 salin tautan
               </v-btn>
+              <v-snackbar v-model="snackbar" :timeout="timeout" color="primary">
+                Tautan berhasil di salin
+              </v-snackbar>
+              <v-snackbar
+                v-model="snackbarSuccess"
+                :timeout="timeout"
+                color="primary"
+              >
+                Berhasil Membuat Spesialisasi </v-snackbar
+              ><v-snackbar
+                v-model="snackbarFailed"
+                :timeout="timeout"
+                color="primary"
+              >
+                Gagal, Terjadi Kesalahan
+              </v-snackbar>
             </div>
             <div class="button d-flex mt-6">
               <v-spacer></v-spacer>
@@ -49,6 +79,7 @@
                 class="text-capitalize text-body-2"
                 color="primary"
                 depressed
+                @click="addSpecialization"
               >
                 <v-icon small class="me-2">mdi-plus-thick</v-icon>
                 tambah spesialisasi
@@ -66,52 +97,42 @@
 export default {
   data() {
     return {
-      headers: [
-        {
-          text: "No.",
-          align: "start",
-          value: "index",
-        },
-        { text: "Specialization Name", value: "name" },
-        { text: "Description", value: "description" },
-        { text: "Total Courses", value: "totalCourses" },
-        { text: "Total Users", value: "totalUsers" },
-        { text: "Action", value: "action" },
-      ],
-      specialization: [
-        {
-          index: "1.",
-          name: "Backend Engineer",
-          description: "Course yang dibuat untuk para backend",
-          totalCourses: "12",
-          totalUsers: "12",
-          action: "detail",
-        },
-        {
-          index: "2.",
-          name: "Backend Engineer",
-          description: "Course yang dibuat untuk para backend",
-          totalCourses: "12",
-          totalUsers: "12",
-          action: "detail",
-        },
-        {
-          index: "3.",
-          name: "Backend Engineer",
-          description: "Course yang dibuat untuk para backend",
-          totalCourses: "12",
-          totalUsers: "12",
-          action: "detail",
-        },
-      ],
-      dialogDetail: false,
-      detailItem: {},
+      nameSpecialization: "",
+      snackbar: false,
+      timeout: 2000,
+      snackbarSuccess: false,
+      snackbarFailed: false,
     };
   },
   methods: {
-    showDetail(item) {
-      (this.dialogDetail = true), (this.detailItem = item);
+    salinTautan() {
+      this.$refs.linkGenerate.focus();
+      document.execCommand("copy");
+      this.snackbar = !this.snackbar;
     },
+    addSpecialization() {
+      this.$store.dispatch("specialization/addSpecialization", {
+        name: this.nameSpecialization,
+        invitation: this.getLink.link,
+      });
+      if (this.getCode === 200) {
+        this.snackbarSuccess = !this.snackbarSuccess;
+        this.$router.push("/specialization");
+      } else {
+        this.snackbarFailed = !this.snackbarFailed;
+      }
+    },
+  },
+  computed: {
+    getLink() {
+      return this.$store.state.specialization.linkInvitation;
+    },
+    getCode() {
+      return this.$store.state.specialization.status;
+    },
+  },
+  mounted() {
+    this.$store.dispatch("specialization/generateInvitation");
   },
 };
 </script>

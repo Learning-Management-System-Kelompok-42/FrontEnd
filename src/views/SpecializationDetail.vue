@@ -16,55 +16,72 @@
           Kembali
         </v-btn>
         <div class="d-flex justify-start mt-2">
-          <p class="text-h6 mt-2 mb-2"><b>Frontend Engineer</b></p>
-          <v-avatar class="mt-4 mx-3" tile size="15" color="grey"></v-avatar>
-          <p class="text- mt-3 mb-2" style="color: grey">Ganti Nama</p>
+          <p class="text-h6 mt-2 mb-2 text-capitalize">
+            <b>{{ getSpecialization.name }}</b>
+          </p>
+          <v-btn plain color="warning" class="text-capitalize mt-2 ms-4">
+            <v-icon>mdi-pencil-box-outline</v-icon> Ganti Nama</v-btn
+          >
           <v-spacer />
-          <v-btn class="text-capitalize" dark depressed color="primary">
+          <v-text-field
+            v-model="getSpecialization.invitation"
+            v-show="false"
+            ref="mylink"
+          ></v-text-field>
+          <v-btn
+            class="text-capitalize"
+            dark
+            depressed
+            color="primary"
+            @click="copyLink(getSpecialization.invitation)"
+          >
             Tautan Undangan
           </v-btn>
+          <v-snackbar v-model="snackbar" :timeout="2000">
+            Tautan berhasil di salin
+          </v-snackbar>
         </div>
         <div>
-          <p>Detail dari spesialisasi Frontend Engineer</p>
+          <p class="gray6--text">
+            Detail dari spesialisasi {{ getSpecialization.name }}
+          </p>
         </div>
         <!-- ADDRESS -->
-        <v-row class="mt-1">
-          <v-col class="pl-0 pr-6" cols="3">
-            <v-card class="ml-3 mx-auto" outlined width="100%">
-              <v-list-item two-line>
-                <v-list-item-avatar
-                  class="my-1"
-                  rounded
-                  size="50"
-                  color="grey"
-                ></v-list-item-avatar>
-                <v-list-item-content class="my-3">
-                  <v-list-item-subtitle class="text-h7 pb-2"
-                    >Total Kursus</v-list-item-subtitle
-                  >
-                  <v-list-item-title class="text-h9">8</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-card>
-          </v-col>
-          <v-col cols="3">
-            <v-card class="mx-auto" outlined width="100%">
-              <v-list-item two-line>
-                <v-list-item-avatar
-                  rounded
-                  size="50"
-                  color="grey"
-                ></v-list-item-avatar>
-                <v-list-item-content class="my-3">
-                  <v-list-item-subtitle class="text-h7 pb-2"
-                    >Total Karyawan</v-list-item-subtitle
-                  >
-                  <v-list-item-title class="text-h9">15</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-card>
-          </v-col>
-        </v-row>
+        <div class="total d-flex">
+          <v-card class="pa-2" flat height="100" outlined>
+            <div class="d-flex pa-1">
+              <v-card class="ma-auto pa-3" flat color="warning">
+                <v-icon color="white">mdi-file</v-icon>
+              </v-card>
+              <div class="px-5 mt-2">
+                <p class="text-capitalize my-0 gray6--text">total kursus</p>
+                <p class="font-weight-bold">
+                  {{
+                    getSpecialization.courses
+                      ? getSpecialization.courses.length
+                      : 0
+                  }}
+                </p>
+              </div>
+            </div>
+          </v-card>
+          <v-card class="pa-2 mx-3" flat height="100" outlined>
+            <div class="d-flex pa-1">
+              <v-card class="ma-auto pa-3" flat color="warning">
+                <v-icon color="white">mdi-account-group-outline</v-icon>
+              </v-card>
+              <v-spacer></v-spacer>
+              <div class="mt-2 px-5">
+                <p class="text-capitalize my-0 gray6--text">total karyawan</p>
+                <p class="font-weight-bold">
+                  {{
+                    getSpecialization.users ? getSpecialization.users.length : 0
+                  }}
+                </p>
+              </div>
+            </div>
+          </v-card>
+        </div>
         <!-- COURSE'S LIST -->
 
         <p class="text-h6 mt-6"><b> Daftar Kursus</b></p>
@@ -82,29 +99,31 @@
             </v-btn>
           </div>
         </v-card>
-        <v-row v-for="n in 4" :key="n">
-          <v-col v-for="n in 3" :key="n" cols="4">
-            <v-card class="mx- my-3" width="100%" outlined>
+        <v-row class="mt-2">
+          <v-col
+            cols="4"
+            v-for="course in getSpecialization.courses"
+            :key="course.id"
+          >
+            <v-card class="" outlined>
               <v-list-item>
                 <v-list-item-content>
-                  <v-list-item-avatar
-                    class="mt-3"
-                    rounded
-                    height="80"
-                    color="grey"
-                  ></v-list-item-avatar>
+                  <v-img :src="course.thumbnail" height="100"></v-img>
                   <v-list-item-title class="text-h8 mb-1 pt-3">
-                    <b>Junior Javascript Mastery</b>
+                    <b>{{ course.title }}</b>
                   </v-list-item-title>
                   <v-list-item-subtitle style="display: block">
-                    Course yang dibuat untuk dasar pemahaman Javascript bagi
-                    engineer baru dalam bekerja.
+                    {{ course.description }}
                   </v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
 
               <v-card-actions>
-                <v-btn class="text-capitalize" @click="reveal = false" text>
+                <v-btn class="text-capitalize" plain color="#DD2E4B" small>
+                  <v-icon class="me-2" small>mdi-delete-outline</v-icon> hapus
+                </v-btn>
+                <v-spacer></v-spacer>
+                <v-btn class="text-capitalize" @click="reveal = false" plain>
                   Lihat Detail <v-icon class="pt-1">mdi-chevron-right</v-icon>
                 </v-btn>
               </v-card-actions>
@@ -113,23 +132,26 @@
         </v-row>
         <!-- EMPLOYEE'S LIST -->
         <p class="text-h6 mt-6"><b> Daftar Karyawan</b></p>
-        <v-col class="px-0" cols="12">
-          <v-card class="ml-0 mx-auto" outlined width="100%">
-            <v-container class="d-inline-flex">
-              <v-col cols="12">
-                <v-text-field
-                  class="pt-1"
-                  label="Cari Karyawan (Nama atau Email)"
-                  outlined
-                  dense
-                ></v-text-field>
-              </v-col>
-              <v-btn class="mt-4 text-capitalize" dark depressed>Cari</v-btn>
-            </v-container>
-          </v-card>
-        </v-col>
-        <v-row v-for="n in 2" :key="n">
-          <v-col v-for="n in 4" :key="n" cols="3">
+        <v-card class="pa-4" outlined>
+          <div class="d-flex">
+            <v-text-field
+              hide-details=""
+              label="Cari Spesialisasi"
+              outlined
+              dense
+            ></v-text-field>
+            <v-btn class="text-capitalize mx-2" color="primary" depressed>
+              <v-icon small class="me-3">mdi-magnify</v-icon>
+              Cari
+            </v-btn>
+          </div>
+        </v-card>
+        <v-row class="mt-2">
+          <v-col
+            v-for="users in getSpecialization.users"
+            :key="users.id"
+            cols="3"
+          >
             <v-card width="100%" outlined>
               <div class="pl-3 pr-0">
                 <v-list-item style="display: block">
@@ -141,11 +163,11 @@
                   ></v-list-item-avatar>
                   <v-list-item-content>
                     <v-list-item-title class="text-h8 mb-1 pt-0">
-                      <b>Fajar Eka Pambudi</b>
+                      <b>{{ users.full_name }}i</b>
                     </v-list-item-title>
-                    <v-list-item-subtitle
-                      >fajareka@intanabadi.com</v-list-item-subtitle
-                    >
+                    <v-list-item-subtitle>
+                      {{ users.email }}
+                    </v-list-item-subtitle>
                   </v-list-item-content>
                   <div class="mt-0 mb-1 pt-0" style="display: flex">
                     <v-list-item-avatar
@@ -154,26 +176,17 @@
                       size="15"
                       color="grey"
                     ></v-list-item-avatar>
-                    <v-list-item-content>
-                      <v-list-item-title>Frontend Engineer</v-list-item-title>
-                    </v-list-item-content>
                   </div>
                 </v-list-item>
                 <v-card-actions class="px-1">
-                  <router-link
-                    :to="{ name: 'employeeDetail' }"
-                    style="text-decoration: none; color: black"
+                  <v-btn
+                    class="text-capitalize pl-2 pr-3"
+                    @click="reveal = false"
+                    text
                   >
-                    <v-btn
-                      class="text-capitalize pl-2 pr-3"
-                      @click="reveal = false"
-                      text
-                    >
-                      Lihat Detail<v-icon class="pt-1 pr-0"
-                        >mdi-chevron-right</v-icon
-                      >
-                    </v-btn>
-                  </router-link>
+                    Lihat Detail
+                    <v-icon class="pt-1 pr-0"> mdi-chevron-right </v-icon>
+                  </v-btn>
                 </v-card-actions>
               </div>
             </v-card>
@@ -189,7 +202,26 @@ export default {
   data() {
     return {
       value: 55,
+      snackbar: false,
     };
+  },
+  methods: {
+    copyLink(link) {
+      try {
+        navigator.clipboard.writeText("localhost:8080/invitation?link=" + link);
+        this.snackbar = !this.snackbar;
+      } catch (e) {
+        console.log(e);
+      }
+    },
+  },
+  computed: {
+    getSpecialization() {
+      return this.$store.state.specialization.specialization;
+    },
+  },
+  mounted() {
+    this.$store.dispatch("specialization/getSpecializationById");
   },
 };
 </script>
