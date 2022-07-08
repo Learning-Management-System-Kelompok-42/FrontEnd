@@ -22,11 +22,11 @@ import Course from "../views/course/course.vue";
 import AddCourse from "../views/course/addcourse.vue";
 import DetailCourse from "../views/course/detailcourse.vue";
 import UpdateCourse from "../views/course/updatecourse.vue";
-import UserView from "../views/User/UserView.vue";
-import CourseView from "../views/User/CourseView.vue";
-import UserDashboard from "../views/User/UserDashboard.vue";
-import UserCourse from "../views/User/UserCourse.vue";
-import InvitationUser from "../views/User/invitationuser.vue";
+import UserView from "../views/user/UserView.vue";
+import CourseView from "../views/user/CourseView.vue";
+import UserDashboard from "../views/user/UserDashboard.vue";
+import UserCourse from "../views/User/userCourse.vue";
+import InvitationUser from "../views/user/invitationuser.vue";
 
 Vue.use(VueRouter);
 
