@@ -26,8 +26,7 @@ import UserView from "../views/User/UserView.vue";
 import CourseView from "../views/User/CourseView.vue";
 import UserDashboard from "../views/User/UserDashboard.vue";
 import UserCourse from "../views/User/UserCourse.vue";
-import InvitationUser from "../views/User/InvitationUser.vue";
-import RegistrationUser from "../views/User/RegistrationUser.vue";
+import InvitationUser from "../views/User/invitationuser.vue";
 
 Vue.use(VueRouter);
 
@@ -42,10 +41,6 @@ const routes = [
   {
     path: "/register",
     component: RegisterView,
-  },
-  {
-    path: "/registeremployee",
-    component: RegistrationUser,
   },
   {
     path: "/login",
