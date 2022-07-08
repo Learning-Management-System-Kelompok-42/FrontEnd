@@ -110,52 +110,7 @@ export default {
     },
   },
   data() {
-    return {
-      listkursus: [
-        {
-          id: 1,
-          img: "http://placehold.jp/50x50.png",
-          judul: "Basic HTML",
-          deskripsi:
-            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium, ratione culpa ipsum perferendis impedit possimus facilis dolores temporibus molestias? Veritatis.",
-        },
-        {
-          id: 2,
-          img: "http://placehold.jp/50x50.png",
-          judul: "Basic CSS",
-          deskripsi:
-            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium, ratione culpa ipsum perferendis impedit possimus facilis dolores temporibus molestias? Veritatis.",
-        },
-        {
-          id: 3,
-          img: "http://placehold.jp/50x50.png",
-          judul: "Junior Javascript Mastery",
-          deskripsi:
-            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium, ratione culpa ipsum perferendis impedit possimus facilis dolores temporibus molestias? Veritatis.",
-        },
-        {
-          id: 4,
-          img: "http://placehold.jp/50x50.png",
-          judul: "Intermedite Javascript Mastery",
-          deskripsi:
-            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium, ratione culpa ipsum perferendis impedit possimus facilis dolores temporibus molestias? Veritatis.",
-        },
-        {
-          id: 5,
-          img: "http://placehold.jp/50x50.png",
-          judul: "Senior Javascript Mastery",
-          deskripsi:
-            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium, ratione culpa ipsum perferendis impedit possimus facilis dolores temporibus molestias? Veritatis.",
-        },
-        {
-          id: 6,
-          img: "http://placehold.jp/50x50.png",
-          judul: "Dasar ReactJS",
-          deskripsi:
-            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium, ratione culpa ipsum perferendis impedit possimus facilis dolores temporibus molestias? Veritatis.",
-        },
-      ],
-    };
+    return {};
   },
   methods: {
     goToDetails(id) {

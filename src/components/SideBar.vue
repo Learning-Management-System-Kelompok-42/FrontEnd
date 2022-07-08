@@ -111,7 +111,6 @@ export default {
     },
   },
   mounted() {
-    this.$store.dispatch("user/getUserById");
     this.$store.dispatch("company/fetchCompany");
   },
 };

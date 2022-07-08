@@ -14,13 +14,13 @@
               :rules="emailValidation"
               outlined
               dense
-              v-model="email"
+              v-model="userlogin.email"
             ></v-text-field>
             <v-text-field
               label="Kata Sandi"
               outlined
               dense
-              v-model="dataPassword"
+              v-model="userlogin.password"
               :append-icon="password ? 'mdi-eye' : 'mdi-eye-off'"
               @click:append="password = !password"
               :type="password ? 'text' : 'password'"
@@ -42,7 +42,7 @@
                 <v-icon small class="me-2"> mdi-login </v-icon>
                 Masuk
               </v-btn>
-              <v-overlay :value="!isLoading">
+              <v-overlay :value="isLoading">
                 <loader />
               </v-overlay>
               <v-dialog v-model="error" width="500">
@@ -80,9 +80,9 @@
 </template>
 <script>
 import logo from "@/components/Logo.vue";
-import axios from "axios";
+// import axios from "axios";
 import loader from "@/components/Loader.vue";
-import { mapState } from "vuex";
+// import { mapState } from "vuex";
 export default {
   setup() {},
   components: {
@@ -92,12 +92,14 @@ export default {
   data() {
     return {
       error: false,
-      messageeerror: {},
+      messageeerror: "",
       loginimage: require("@/assets/imagelogin.png"),
       valid: true,
       check: false,
-      email: "",
-      dataPassword: "",
+      userlogin: {
+        email: "",
+        password: "",
+      },
       password: false,
       emailValidation: [
         (email) => !!email || "Masukkan email anda",
@@ -113,53 +115,45 @@ export default {
   },
   mounted() {
     console.log(this.isLoading);
+    console.log(this.status);
   },
   computed: {
-    ...mapState("user", ["isLoading"]),
+    isLoading() {
+      return this.$store.state.user.isLoading;
+    },
+    status() {
+      return this.$store.state.user.status;
+    },
+    getUserLogin() {
+      return this.$store.state.user.userlogin;
+    },
   },
   methods: {
     goHome() {
       this.$router.push("/");
     },
+    // tutup(){
+    //   this.error = false,
+    //   this.$store.commit("user/setLoading", false)
+    // },
     btnLogin() {
       if (!this.check) {
-        axios.interceptors.request.use(
-          (config) => {
-            this.$store.commit("user/loading", true);
-            return config;
-          },
-          (error) => {
-            this.$store.commit("user/loading", false);
-            return Promise.reject(error);
-          }
-        );
-        axios.interceptors.response.use(
-          (response) => {
-            this.$store.commit("user/loading", false);
-            return response;
-          },
-          (error) => {
-            this.error = true;
-            if (error.code === "ERR_BAD_REQUEST") {
-              this.messageeerror =
-                "Email atau kata sandi salah, pastikan data yang anda masukan benar";
-            } else if (error.code === "ERR_NETWORK") {
-              this.messageeerror = "Internal Server Error";
-            }
-            this.$store.commit("user/loading", false);
-            return Promise.reject(error);
-          }
-        );
-        this.$store.dispatch("user/fetchLogin", {
-          email: this.email,
-          password: this.dataPassword,
-        });
+        this.$store.dispatch("user/setUserLogin", "");
+        this.$store.dispatch("user/fetchLogin", this.userlogin);
       } else {
-        this.$store.dispatch("user/fetchLogin", {
-          email: this.email,
-          password: this.dataPassword,
-        });
+        this.$store.dispatch("user/setUserLogin", this.userlogin);
+        this.$store.dispatch("user/fetchLogin", this.userlogin);
       }
+      // if (this.status === "ERR_NETWORK") {
+      //   this.error = true;
+      //   this.messageeerror = "Internal Server Error";
+      // } else if (this.status === "ERR_BAD_REQUEST") {
+      //   this.error = true;
+      //   this.messageeerror =
+      //     "Email atau Sandi anda salah, pastikan anda memasukan data yang benar";
+      // } else {
+
+      // }
     },
   },
 };
