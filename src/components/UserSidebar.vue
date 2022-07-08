@@ -71,25 +71,15 @@ export default {
         {
           title: "Dashboard",
           icon: "mdi-chart-box-outline",
-          value: "dashboard",
+          value: "urdashboard",
         },
-        {
-          title: "Spesialisasi",
-          icon: "mdi-briefcase-variant-outline",
-          value: "specialization",
-        },
-        { title: "Kursus", icon: "mdi-file-document-outline", value: "course" },
-        {
-          title: "Karyawan",
-          icon: "mdi-account-group-outline",
-          value: "employee",
-        },
+        { title: "Kursus Saya", icon: "mdi-file-document-outline", value: "urcourse" },
         {
           title: "Permintaan",
           icon: "mdi-bookmark-minus-outline",
-          value: "request",
+          value: "urrequest",
         },
-        { title: "Pengaturan", icon: "mdi-cog-outline", value: "setting" },
+        { title: "Pengaturan", icon: "mdi-cog-outline", value: "ursetting" },
       ],
     };
   },
@@ -109,6 +99,7 @@ export default {
     },
   },
   mounted() {
+    this.$store.dispatch("user/getUserById");
     this.$store.dispatch("company/fetchCompany");
   },
 };

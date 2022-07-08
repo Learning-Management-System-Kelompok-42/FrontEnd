@@ -22,8 +22,12 @@ import Course from "../views/course/course.vue";
 import AddCourse from "../views/course/addcourse.vue";
 import DetailCourse from "../views/course/detailcourse.vue";
 import UpdateCourse from "../views/course/updatecourse.vue";
+import UserView from "../views/User/UserView.vue";
+import CourseView from "../views/User/CourseView.vue"
+import UserDashboard from "../views/User/UserDashboard.vue";
+import UserCourse  from "../views/User/UserCourse.vue"
 import InvitationUser from "../views/user/InvitationUser.vue";
-import RegistrationUser from "../views/user/RegistrationUser.vue";
+import RegistrationUser from "../views/user/RegistrationUser.vue"
 
 Vue.use(VueRouter);
 
@@ -145,6 +149,27 @@ const routes = [
             path: "password",
             name: "settingPassword",
             component: SettingPassword,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: "/urdashboard",
+    component: UserView,
+    children: [
+      {
+        path: "/",
+        component:UserDashboard,
+      },
+      {
+        path: "/urcourse",
+        component: CourseView,
+        children: [
+          {
+            path: "/",
+            name : 'userCourse',
+            component : UserCourse,
           },
         ],
       },
