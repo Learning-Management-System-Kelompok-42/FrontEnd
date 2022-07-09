@@ -23,9 +23,14 @@ import AddCourse from "../views/course/addcourse.vue";
 import DetailCourse from "../views/course/detailcourse.vue";
 import UpdateCourse from "../views/course/updatecourse.vue";
 import UserView from "../views/User/UserView.vue";
-import CourseView from "../views/User/CourseView.vue";
+import CourseView from "../views/User/Course/CourseView.vue";
 import UserDashboard from "../views/User/UserDashboard.vue";
-import UserCourse from "../views/User/UserCourse.vue";
+import UserCourse from "../views/User/Course/UserCourse.vue";
+import CourseDetail from "../views/User/Course/CourseDetail.vue";
+import UserSettingView from "../views/User/Setting/SettingView.vue";
+import UserSettingMenu from "../views/User/Setting/SettingMenu.vue";
+import UserSettingProfile from "../views/User/Setting/SettingProfile.vue";
+import UserSettingPassword from "../views/User/Setting/SettingPassword.vue";
 import InvitationUser from "../views/User/InvitationUser.vue";
 import RegistrationUser from "../views/User/RegistrationUser.vue";
 
@@ -176,6 +181,31 @@ const routes = [
             path: "/",
             name: "userCourse",
             component: UserCourse,
+          },
+          {
+            path: "detail",
+            name: "userCourseDetail",
+            component: CourseDetail,
+          },
+        ],
+      },
+      {
+        path: "/ursetting",
+        component: UserSettingView,
+        children: [
+          {
+            path: "/",
+            component: UserSettingMenu,
+          },
+          {
+            path: "urprofile",
+            name: "SettingProfile",
+            component: UserSettingProfile,
+          },
+          {
+            path: "urpassword",
+            name: "SettingPassword",
+            component: UserSettingPassword,
           },
         ],
       },
