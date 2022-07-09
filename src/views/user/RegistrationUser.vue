@@ -111,14 +111,6 @@
                 dense
                 ref="name_admin"
               ></v-text-field>
-              <!-- <v-select></v-select> -->
-              <!-- <VuePhoneNumberInput
-                v-model="user.phone_number"
-                ref="phone_number"
-                size="md"
-                default-country-code="ID"
-                no-flags
-              /> -->
               <v-text-field
                 label="Nomor Handphone"
                 :rules="nameValidation"
@@ -213,127 +205,10 @@
   </div>
 </template>
 <script>
-// import VuePhoneNumberInput from "vue-phone-country-code";
-import "vue-phone-number-input/dist/vue-phone-number-input.css";
 import Logo from "@/components/Logo.vue";
 export default {
+  name: "RegisterUserView",
   components: { Logo },
   setup() {},
-  data() {
-    return {
-      regisimage: require("@/assets/imageregis.png"),
-      user: {
-        name_company: "",
-        address_company: "",
-        sector: "",
-        website: "",
-        logo: null,
-        name_admin: "",
-        phone_number: "",
-        address_admin: "",
-        email_admin: "",
-        password_admin: "",
-      },
-      dataConfirmPassword: "",
-      formvalid: false,
-      checkbox: false,
-      valid: true,
-      nama: false,
-      email: false,
-      nomorhp: false,
-      alamat: false,
-      password: false,
-      passwordConfirm: false,
-
-      nameValidation: [(name) => !!name || "Tidak boleh kosong"],
-      nameCompanyValidation: [
-        (name) => !!name || "Silahkan Masukkan Nama Perushaan Anda",
-      ],
-      passwordValidation: [
-        (password) => !!password || "Silahkan masukkan password anda",
-        (password) =>
-          /(?=.*\d)(?=.*[a-z]).{8,}/.test(password) ||
-          "Password minimal 8 karakter dan Memiliki nomor",
-      ],
-      confirmPasswordValidation: [
-        (cpassword) => !!cpassword || "Konfirmasi password anda",
-        (cpassword) =>
-          /(?=.*\d)(?=.*[a-z]).{8,}/.test(cpassword) ||
-          "Password minimal 8 karakter",
-        (cpassword) =>
-          cpassword === this.user.password_admin ||
-          "Password tidak cocok, silahkan periksa kembali",
-      ],
-      emailValidation: [
-        (email) => !!email || "Tidak boleh kosong",
-        (email) =>
-          /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-            email
-          ) || "Pastikan E-mail Anda Benar",
-      ],
-    };
-  },
-  created() {
-    document.title = "Edemia | Register";
-  },
-  computed: {
-    buttonText() {
-      return this.user.logo ? this.user.logo.name : "";
-    },
-    form() {
-      return {
-        name_company: this.user.name_company,
-        address_company: this.user.address_company,
-        sector: this.user.sector,
-        website: this.user.website,
-        name_admin: this.user.name_admin,
-        phone_number: this.user.phone_number,
-        address_admin: this.user.address_admin,
-        email_admin: this.user.email_admin,
-      };
-    },
-  },
-  methods: {
-    goHome() {
-      this.$router.push("/");
-    },
-    goBack() {
-      this.formvalid = !this.formvalid;
-    },
-    validate() {
-      this.formvalid = !this.formvalid;
-      this.$refs.form.resetValidation();
-    },
-    btnRegister() {
-      if (this.$refs.form.validate()) {
-        this.$store.dispatch("user/fetchRegister", this.user);
-      }
-    },
-    onButtonClick() {
-      window.addEventListener("focus", () => {});
-      this.$refs.uploader.click();
-    },
-    onFileChanged(e) {
-      console.log(e.target.files[0]);
-      this.user.logo = e.target.files[0];
-    },
-  },
 };
 </script>
-<style>
-.pointer {
-  cursor: pointer;
-}
-.imgfull {
-  background-size: 100% 100%;
-}
-.inputPicture {
-  border: 0.5px solid gray !important;
-}
-.cont {
-  width: 500px !important;
-}
-.body {
-  margin: 0;
-}
-</style>

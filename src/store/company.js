@@ -24,11 +24,14 @@ const mutations = {
 };
 const actions = {
   async fetchCompany({ commit }) {
-    const response = await axios.get("http://54.254.240.107:4001/v1/company", {
-      headers: {
-        Authorization: `Bearer ${this.state.user.token}`,
-      },
-    });
+    const response = await axios.get(
+      `https://api.rubick.tech/v1/company/${this.state.user.companyId}/dashboard`,
+      {
+        headers: {
+          Authorization: `Bearer ${this.state.user.token}`,
+        },
+      }
+    );
     if (response.status >= 200 || response.status < 400) {
       commit("setError", response.message);
       commit("setDataCompany", response.data.data);

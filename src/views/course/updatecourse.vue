@@ -65,7 +65,9 @@
                   ref="uploader"
                   @change="onFileChanged"
                 />
-                <p class="pt-3 ps-4">{{ buttonText }}</p>
+                <p class="pt-3 ps-4">
+                  {{ getCourseById.thumbnail.split("/").pop() }}
+                </p>
               </v-toolbar>
             </div>
           </v-card>
@@ -361,6 +363,9 @@ export default {
       window.addEventListener("focus", () => {});
       this.$refs.uploader.click();
     },
+    // getNameFile(file) {
+    //   file.split('?')
+    // },
     onFileChanged(e) {
       console.log(e.target.files[0]);
       const file = e.target.files[0];
