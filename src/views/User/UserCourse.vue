@@ -49,7 +49,7 @@
                     color="grey6"
                     size="100%"
                   >
-                    <img src="@/assets/avajjm.png" />
+                    <img :src="course.thumbnail" />
                   </v-list-item-avatar>
                   <v-row class="ma-auto mt-2">
                     <v-rating
@@ -63,11 +63,10 @@
                     <span class="grey--text text-caption">{{ rating }}</span>
                   </v-row>
                   <v-list-item-title class="text-h8 mb-1 pt-3">
-                    <b>Junior Javascript Mastery</b>
+                    <b>{{ course.title }}</b>
                   </v-list-item-title>
                   <p class="text-h18 my-auto gray--text">
-                    Kalian akan mempelajari mengenai bahasa Javascript yang
-                    paling dasar.
+                    {{ course.description }}
                   </p>
                 </v-list-item-content>
               </v-list-item>

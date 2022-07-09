@@ -3,12 +3,16 @@ import { getField, updateField } from "vuex-map-fields";
 const state = () => ({
   dataCompany: {},
   errorMessage: "",
+  dataProfileCompany: "",
 });
 const getters = {
   getField,
 };
 const mutations = {
   updateField,
+  setDataProfileCompany(state, param) {
+    state.dataProfileCompany = param;
+  },
   setNameCompany(state, param) {
     state.dataCompany.name_company = param;
   },
@@ -35,6 +39,21 @@ const actions = {
     if (response.status >= 200 || response.status < 400) {
       commit("setError", response.message);
       commit("setDataCompany", response.data.data);
+    } else {
+      console.log(response);
+    }
+  },
+  async getDataProfileCompany({ commit }) {
+    const response = await axios.get(
+      `https://api.rubick.tech/v1/company/${this.state.user.companyId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${this.state.user.token}`,
+        },
+      }
+    );
+    if (response.status >= 200 || response.status < 400) {
+      commit("setDataProfileCompany", response.data.data);
     } else {
       console.log(response);
     }

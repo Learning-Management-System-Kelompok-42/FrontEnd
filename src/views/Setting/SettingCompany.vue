@@ -18,23 +18,37 @@
         <v-col class="px-0" cols="12">
           <v-card class="px-4 py-3">
             <p>Nama Perusahaan</p>
-            <v-text-field outlined dense depressed></v-text-field>
+            <v-text-field
+              outlined
+              dense
+              depressed
+              v-model="getDataCompany.name"
+            ></v-text-field>
             <p>Bidang Perusahaan</p>
-            <v-text-field outlined dense></v-text-field>
+            <v-text-field
+              outlined
+              dense
+              v-model="getDataCompany.sector"
+            ></v-text-field>
             <p>Website Perusahaan</p>
-            <v-text-field outlined dense></v-text-field>
+            <v-text-field
+              outlined
+              dense
+              v-model="getDataCompany.website"
+            ></v-text-field>
             <p>Alamat Perusahaan</p>
             <v-textarea
               auto-grow
               outlined
               dense
               rows="4"
+              v-model="getDataCompany.address"
               row-height="30"
             ></v-textarea>
             <p class="mb-1">Logo Perusahaan</p>
             <div class="d-flex">
               <v-img
-                :src="url"
+                :src="getDataCompany.logo"
                 height="70"
                 max-width="100"
                 :aspect-ratio="1"
@@ -100,9 +114,18 @@ export default {
     return {
       logo: null,
       url: " ",
+      // namecompany: this.getDataCompany.name,
+      // sectorcompany: this.getDataCompany.sector,
+      // websitecompany: this.getDataCompany.website,
+      // addresscompany: this.getDataCompany.address,
+      // logocompany: this.getDataCompany
     };
   },
+  watch: {},
   computed: {
+    getDataCompany() {
+      return this.$store.state.company.dataProfileCompany;
+    },
     buttonText() {
       return this.logo ? this.logo.name : "";
     },
@@ -121,6 +144,9 @@ export default {
       this.logo = file;
       this.url = URL.createObjectURL(file);
     },
+  },
+  mounted() {
+    this.$store.dispatch("company/getDataProfileCompany");
   },
 };
 </script>
