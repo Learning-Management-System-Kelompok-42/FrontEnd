@@ -10,12 +10,11 @@
           <v-list-item-content>
             <v-list-item-title
               class="text-h6 primary--text font-weight-bold"
-              v-text="getCompany.NameAdmin"
+              v-text="getDataUser.full_name"
             >
-              {{ getCompany.CompanyID }}
             </v-list-item-title>
             <v-list-item-subtitle
-              v-text="getCompany.NameCompany"
+              v-text="getDataUser.email"
             ></v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -73,7 +72,11 @@ export default {
           icon: "mdi-chart-box-outline",
           value: "urdashboard",
         },
-        { title: "Kursus Saya", icon: "mdi-file-document-outline", value: "urcourse" },
+        {
+          title: "Kursus Saya",
+          icon: "mdi-file-document-outline",
+          value: "urcourse",
+        },
         {
           title: "Permintaan",
           icon: "mdi-bookmark-minus-outline",
@@ -84,12 +87,9 @@ export default {
     };
   },
   computed: {
-    getUser() {
-      return this.$store.state.user.user;
-    },
-    getCompany() {
-      console.log(this.$store.state.company.dataCompany);
-      return this.$store.state.company.dataCompany;
+    getDataUser() {
+      console.log(this.$store.state.user.userById);
+      return this.$store.state.user.userById;
     },
   },
   methods: {
@@ -99,8 +99,7 @@ export default {
     },
   },
   mounted() {
-    this.$store.dispatch("user/getUserById");
-    this.$store.dispatch("company/fetchCompany");
+    this.$store.dispatch("user/getEmployeeById");
   },
 };
 </script>

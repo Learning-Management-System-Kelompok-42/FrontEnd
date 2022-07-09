@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="7">
         <v-container class="cont">
-          <v-form v-model="valid" ref="form">
+          <v-form v-model="valid" ref="form" @submit.prevent="btnRegister">
             <h4 class="my-3 pointer" @click="goHome"><logo /></h4>
             <h1>Informasi Dirimu</h1>
             <p class="caption">Lengkapi form dibawah ini dengan data kamu</p>
@@ -18,14 +18,6 @@
               dense
               ref="name_admin"
             ></v-text-field>
-            <!-- <v-select></v-select> -->
-            <!-- <VuePhoneNumberInput
-                v-model="user.phone_number"
-                ref="phone_number"
-                size="md"
-                default-country-code="ID"
-                no-flags
-              /> -->
             <label for="" class="text-body-2 font-weight-bold">
               Nomor Handphone
             </label>
@@ -229,9 +221,7 @@ export default {
       this.$refs.form.resetValidation();
     },
     btnRegister() {
-      if (this.$refs.form.validate()) {
-        this.$store.dispatch("employee/fetchRegisterEmployee", this.user);
-      }
+      this.$store.dispatch("employee/fetchRegisterEmployee", this.user);
     },
     onButtonClick() {
       window.addEventListener("focus", () => {});
@@ -243,11 +233,12 @@ export default {
     },
     async fetchRegisterUser() {
       const response = await axios.get(
-        `http://18.140.96.118/v1/invitation?link=${this.$route.query.link}`
+        `https://api.rubick.tech/v1/invitation?link=${this.$route.query.link}`
       );
       if (response.status >= 200 || response.status < 400) {
-        this.company_id = response.data.data.company_id;
-        this.specialization_id = response.data.data.id;
+        console.log(response.data.data);
+        this.user.company_id = response.data.data.company_id;
+        this.user.specialization_id = response.data.data.id;
       } else console.log(response);
     },
   },

@@ -38,6 +38,20 @@ const actions = {
       store.commit("setStatus", response.status);
     } else store.commit("setStatus", response.status);
   },
+  async addCourseToSpecialization({ state, commit }, param) {
+    const response = await axios.post(
+      `https://api.rubick.tech/v1/company/${this.state.user.companyId}/specialization/${state.specializationId}/course`,
+      param,
+      {
+        headers: {
+          Authorization: `Bearer ${this.state.user.token}`,
+        },
+      }
+    );
+    if (response.status >= 200 || response.status < 400) {
+      commit("setStatus", response.status);
+    } else console.log(response);
+  },
   async generateInvitation({ commit }) {
     const response = await axios.get(
       `https://api.rubick.tech/v1/company/${this.state.user.companyId}/specialization/generate`,

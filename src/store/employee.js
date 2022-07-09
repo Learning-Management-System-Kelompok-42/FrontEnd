@@ -22,10 +22,14 @@ const actions = {
     );
     if (response.status >= 200 || response.status < 400) {
       commit("setLoading", false);
-      dispatch("user/fetchLogin", {
-        email: param.email,
-        password: param.password,
-      });
+      dispatch(
+        "user/fetchLogin",
+        {
+          email: param.email,
+          password: param.password,
+        },
+        { root: true }
+      );
       console.log(response.data.data);
     } else {
       commit("setLoading", false);

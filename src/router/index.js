@@ -162,6 +162,12 @@ const routes = [
   {
     path: "/urdashboard",
     component: UserView,
+    beforeEnter: (to, from, next) => {
+      if (cookie.get("token") === null || !cookie.get("token")) {
+        return next("/login");
+      }
+      next();
+    },
     children: [
       {
         path: "/",
