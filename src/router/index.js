@@ -31,8 +31,8 @@ import UserSettingView from "../views/User/Setting/SettingView.vue"
 import UserSettingMenu from "../views/User/Setting/SettingMenu.vue"
 import UserSettingProfile from "../views/User/Setting/SettingProfile.vue"
 import UserSettingPassword from "../views/User/Setting/SettingPassword.vue";
-import InvitationUser from "../views/user/InvitationUser.vue";
-import RegistrationUser from "../views/user/RegistrationUser.vue"
+import InvitationUser from "../views/User/InvitationUser.vue";
+import RegistrationUser from "../views/User/RegistrationUser.vue"
 
 Vue.use(VueRouter);
 
