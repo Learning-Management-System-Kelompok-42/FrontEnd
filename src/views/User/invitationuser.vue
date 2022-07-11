@@ -132,6 +132,7 @@ import Logo from "@/components/Logo.vue";
 import loader from "@/components/Loader.vue";
 import axios from "axios";
 export default {
+  name: "InvitationUserView",
   components: { Logo, loader },
   setup() {},
   data() {
