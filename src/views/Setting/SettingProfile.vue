@@ -17,18 +17,32 @@
         <!-- EDIT -->
         <v-col class="px-0" cols="12">
           <v-card class="px-4 py-3">
-            <p>{{ getUserData.full_name }}</p>
-            <v-text-field outlined dense depressed></v-text-field>
+            <p>Nama Admin</p>
+            <v-text-field
+              outlined
+              dense
+              depressed
+              v-model="dataAdmin.full_name"
+            ></v-text-field>
             <p>Alamat Email</p>
-            <v-text-field outlined dense></v-text-field>
+            <v-text-field
+              outlined
+              dense
+              v-model="dataAdmin.email"
+            ></v-text-field>
             <p>Nomor Telepon</p>
-            <v-text-field outlined dense></v-text-field>
+            <v-text-field
+              outlined
+              dense
+              v-model="dataAdmin.phone_number"
+            ></v-text-field>
             <p>Alamat Lengkap</p>
             <v-textarea
               auto-grow
               outlined
               dense
               rows="4"
+              v-model="dataAdmin.address"
               row-height="30"
             ></v-textarea>
             <v-card-actions>
@@ -55,6 +69,14 @@
 export default {
   name: "SettingProfile",
   setup() {},
+  mounted() {
+    this.$store.dispatch("setting/getDataProfileAdmin");
+  },
+  computed: {
+    dataAdmin() {
+      return this.$store.state.setting.getProfileAdmin;
+    },
+  },
 };
 </script>
 

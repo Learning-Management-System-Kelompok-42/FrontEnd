@@ -1,54 +1,17 @@
 <template>
-  <v-app>
     <v-main class="ma-5 ml-10">
       <v-container>
-        <!-- HEAD -->
-        <router-link
-          :to="'/setting'"
-          style="text-decoration: none; color: black"
-        >
-          <v-btn class="text-capitalize pl-2 pr-3" depressed>
-            <v-icon class="pt-1 pl-0">mdi-chevron-left</v-icon>
-            Kembali
-          </v-btn>
-        </router-link>
-        <p class="text-h6 mt-6 mb-2 primary--text"><b>Perusahaan Saya</b></p>
-        <p>Masukkan informasi valid mengenai perusahaanmu</p>
-        <!-- EDIT -->
-        <v-col class="px-0" cols="12">
-          <v-card class="px-4 py-3">
-            <p>Nama Perusahaan</p>
-            <v-text-field
-              outlined
-              dense
-              depressed
-              v-model="getDataCompany.name"
-            ></v-text-field>
-            <p>Bidang Perusahaan</p>
-            <v-text-field
-              outlined
-              dense
-              v-model="getDataCompany.sector"
-            ></v-text-field>
-            <p>Website Perusahaan</p>
-            <v-text-field
-              outlined
-              dense
-              v-model="getDataCompany.website"
-            ></v-text-field>
-            <p>Alamat Perusahaan</p>
-            <v-textarea
-              auto-grow
-              outlined
-              dense
-              rows="4"
-              v-model="getDataCompany.address"
-              row-height="30"
-            ></v-textarea>
-            <p class="mb-1">Logo Perusahaan</p>
-            <div class="d-flex">
-              <v-img
-                :src="getDataCompany.logo"
+<!-- HEAD -->
+      <back/>
+      <p class="text-h6 mt-2 mb-2 primary--text"><b>Profil Saya</b></p>
+      <p>Masukkan informasi valid mengenai dirimu</p>
+<!-- EDIT -->
+      <v-col class="px-0" cols="12">
+        <v-card class="px-4 py-3">
+            <p class="mb-1">Foto Profil</p>
+          <div class="d-flex">
+          <v-img
+                :src="url"
                 height="70"
                 max-width="100"
                 :aspect-ratio="1"
@@ -90,49 +53,61 @@
                 <p class="text-caption pt-1">Format file jpg, jpeg, png dengan ukuran maksimal 500 kb</p>
               </v-col>
             </div>
+          <p>Nama Lengkap</p>
+          <v-text-field
+           outlined
+           dense
+           depressed
+          ></v-text-field>
+          <p>Alamat Email</p>
+          <v-text-field
+           outlined
+           dense
+          ></v-text-field>
+          <p>Nomor Telepon</p>
+          <v-text-field
+           outlined
+           dense
+          ></v-text-field>
+          <p>Alamat Lengkap</p>
+          <v-textarea
+           auto-grow
+           outlined
+           dense
+           rows="4"
+           row-height="30"
+          ></v-textarea>
           <v-card-actions>
                 <v-spacer/>
                 <v-btn
                 color="primary"
+                @click="dialog= false"
                 class="text-capitalize my-auto mb-4"
                 >
                 <v-icon class="me-2 my-auto" small rounded>mdi-checkbox-outline</v-icon>
                 Simpan Perubahan
-              </v-btn>
+                </v-btn>
             </v-card-actions>
-          </v-card>
-        </v-col>
+        </v-card> 
+      </v-col>
       </v-container>
     </v-main>
-  </v-app>
 </template>
-
 <script>
+import back from "@/components/BackButton.vue"
 export default {
-  data() {
-    return {
-      logo: null,
-      url: " ",
-      // namecompany: this.getDataCompany.name,
-      // sectorcompany: this.getDataCompany.sector,
-      // websitecompany: this.getDataCompany.website,
-      // addresscompany: this.getDataCompany.address,
-      // logocompany: this.getDataCompany
-    };
+    data(){
+    return{
+      logo : null,
+      url : " ",
+    }
   },
-  watch: {},
   computed: {
-    getDataCompany() {
-      return this.$store.state.company.dataProfileCompany;
-    },
     buttonText() {
       return this.logo ? this.logo.name : "";
     },
-    getDataUser() {
-      return this.$store.state.user.user;
-    },
   },
-  methods: {
+  methods:{
     onButtonClick() {
       window.addEventListener("focus", () => {});
       this.$refs.uploader.click();
@@ -144,10 +119,7 @@ export default {
       this.url = URL.createObjectURL(file);
     },
   },
-  mounted() {
-    this.$store.dispatch("company/getDataProfileCompany");
-  },
-};
-</script>
+  components : {back}
 
-<style></style>
+}
+</script>

@@ -19,9 +19,44 @@
           <p class="text-h6 mt-2 mb-2 text-capitalize">
             <b>{{ getSpecialization.name }}</b>
           </p>
-          <v-btn plain color="warning" class="text-capitalize mt-2 ms-4">
+          <v-btn
+            plain
+            color="warning"
+            class="text-capitalize mt-2 ms-4"
+            @click="dialogChangeName = true"
+          >
             <v-icon>mdi-pencil-box-outline</v-icon> Ganti Nama</v-btn
           >
+          <v-dialog v-model="dialogChangeName" width="900">
+            <v-card>
+              <div class="d-flex">
+                <v-card-title class="text-capitalize primary--text">
+                  ganti nama spesialisasi
+                </v-card-title>
+                <v-spacer></v-spacer>
+                <v-btn icon @click="dialogChangeName = false">
+                  <v-icon>mdi-close</v-icon>
+                </v-btn>
+              </div>
+              <v-card-text>
+                <v-text-field
+                  outlined
+                  dense
+                  label="Nama Spesialisasi Baru"
+                  v-model="newNameSpecialization"
+                ></v-text-field>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn
+                  color="primary"
+                  class="text-capitalize"
+                  @click="btnChangeName"
+                >
+                  Simpan Perubahan
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
           <v-spacer />
           <v-text-field
             v-model="getSpecialization.invitation"
@@ -86,10 +121,48 @@
         <div class="d-flex mt-6 pt-5">
           <p class="text-h6"><b> Daftar Kursus</b></p>
           <v-spacer></v-spacer>
-          <v-btn class="text-capitalize text-body-2" color="primary" depressed>
+          <v-btn
+            class="text-capitalize text-body-2"
+            color="primary"
+            depressed
+            @click="dialogAddCourse = true"
+          >
             <v-icon class="me-2" small>mdi-plus-thick</v-icon>
             tambahkan kursus
           </v-btn>
+          <v-dialog v-model="dialogAddCourse" width="900">
+            <v-card>
+              <div class="d-flex">
+                <v-card-title class="text-capitalize primary--text">
+                  tambahkan kursus
+                </v-card-title>
+                <v-spacer></v-spacer>
+                <v-btn icon @click="dialogAddCourse = false">
+                  <v-icon>mdi-close</v-icon>
+                </v-btn>
+              </div>
+              <v-card-text>
+                <v-select
+                  outlined
+                  dense
+                  :items="getCourse"
+                  item-value="id"
+                  item-text="title"
+                  v-model="course_id"
+                  label="Pilih Kursus"
+                ></v-select>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn
+                  color="primary"
+                  class="text-capitalize"
+                  @click="btnAddCourse"
+                >
+                  Simpan Perubahan
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </div>
         <v-card class="pa-4" outlined>
           <div class="d-flex">
@@ -209,9 +282,19 @@ export default {
     return {
       value: 55,
       snackbar: false,
+      dialogAddCourse: false,
+      dialogChangeName: false,
+      course_id: "",
     };
   },
   methods: {
+    changeName() {},
+    btnAddCourse() {
+      this.$store.dispatch("specialization/addCourseToSpecialization", {
+        course_id: this.course_id,
+      });
+      this.dialogAddCourse = false;
+    },
     copyLink(link) {
       try {
         navigator.clipboard.writeText("localhost:8080/invitation?link=" + link);
@@ -225,9 +308,13 @@ export default {
     getSpecialization() {
       return this.$store.state.specialization.specialization;
     },
+    getCourse() {
+      return this.$store.state.course.course;
+    },
   },
   mounted() {
     this.$store.dispatch("specialization/getSpecializationById");
+    this.$store.dispatch("course/fetchCourse");
   },
 };
 </script>
