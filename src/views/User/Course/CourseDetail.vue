@@ -4,7 +4,7 @@
         <Back/>
         <v-img src="@/assets/JavaHeaders.png"></v-img>
         <v-row class="mt-1">
-          <v-col cols="7">
+          <v-col class="desc">
             <v-chip
                 class="ma-2"
                 color="accentSec"
@@ -63,9 +63,9 @@
             </p>
 <!-- REVIEW -->
             <h3 class="black--text mt-4"><b>Apa yang mereka katakan?</b></h3>
-            <v-col>
-              <v-card class="ml-0" width="100%" :elevation="0">
-                <v-card-text>
+            <v-col class="px-0">
+              <v-card class="ml-0" width="100%" flat>
+                <v-card-text class="pr-0">
                   <v-row class="ma-auto mb-2">
                     <v-rating
                       v-model="rating"
@@ -78,10 +78,10 @@
                     ></v-rating>
                     <span class="black--text text-caption ml-1 my-auto pt-1" >{{ rating }}</span>
                   </v-row>
-                  <div>
+                  <div class="pr-4">
                     “It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.”
                   </div>
-                  <v-card-actions >
+                  <v-card-actions class="pa-0 pt-4">
                   <v-list-item two-line class="mr-0 pr-0">
                     <v-spacer></v-spacer>
                             <v-img
@@ -99,11 +99,14 @@
                   </v-card-actions>
                 </v-card-text>
               </v-card>
+              <div class="text-center">
+                <v-btn color="primary" class="text-capitalize my-auto mt-6">Tampilkan Lainnya</v-btn>
+              </div>
             </v-col>
           </v-col>
 <!-- BAR -->
-          <v-col cols="5">
-            <h3><b>Modul Kursus</b></h3>
+          <v-col class="bar">
+            <h3><b class="black--text">Modul Kursus</b></h3>
             <ModulBar/>
           </v-col>
         </v-row>
@@ -124,6 +127,12 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.desc{
+  max-width: 640px;
+}
+.bar{
+  max-width: 394px;
+}
 
 </style>

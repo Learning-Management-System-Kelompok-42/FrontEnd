@@ -102,14 +102,36 @@
 
               <v-data-table
                 :headers="headers"
-                :items="special"
+                :items="getAllSpecialization"
+                :sort-by="['amount']"
+                :sort-desc="true"
+                :items-per-page="data"
                 hide-default-footer
                 class="my-auto mx-4"
-              ></v-data-table>
-
-              <!-- <template v-slot:item.actions="{ item }">
-                        <v-btn text color="grey">Lihat detail <v-icon>mdi-chevron-right</v-icon></v-btn>
-                    </template> -->
+              >
+                <template v-slot:[`item.name`]="{ item }">
+                  <span class="gray6--text">
+                    {{ item.SpecializationName }}
+                  </span>
+                </template>
+                <template v-slot:[`item.amount`]="{ item }">
+                  <span class="gray6--text">
+                    {{ item.AmountEmployee }}
+                  </span>
+                </template>
+                <template v-slot:[`item.actions`]="{ item }">
+                  <v-btn
+                    small
+                    plain
+                    class="text-capitalize ps-0"
+                    color="warning"
+                    @click="() => this.$router.push(detail(item))"
+                  >
+                    Lihat detail
+                    <v-icon>mdi-chevron-right</v-icon>
+                  </v-btn>
+                </template>
+              </v-data-table>
             </v-card>
             <br />
             <v-card class="ml-3 mx-auto" width="100%" outlined>
@@ -129,51 +151,85 @@
               </v-row>
 
               <v-data-table
-                :headers="headers"
-                :items="special"
+                :headers="headercourse"
+                :items="getAllCourse"
                 hide-default-footer
                 class="my-auto mx-4"
-              ></v-data-table>
-                    <!-- <template v-slot:item.actions="{item}" >
-                        <v-btn text color="grey" @click="()=>router.push(detail(item))">Lihat detail <v-icon>mdi-chevron-right</v-icon></v-btn>
-                    </template>
-                    <template v-slot:no-data>
-                        <p>There is no data</p>
-                    </template> -->
-                </v-card>
-            </v-col>
-<!-- TERBARU -->
-            <v-col cols="4">
-                <v-card>
-                    <v-row class="ml-4 ma-auto">
-                    <v-list-item-icon class="mr-4">
-                        <v-avatar :elevation="0" color="accentSec" size="30">
-                            <v-icon class="pa-auto" color="secondary" small>mdi-bookmark-minus-outline</v-icon>
-                        </v-avatar>
-                    </v-list-item-icon>
-                    <v-list-item-content>
-                        <v-list-item-title class="font-weight-bold">Permintaan Terbaru</v-list-item-title>
-                    </v-list-item-content>
-                    </v-row>
-                    <div class="mx-4 mt-1">
-                        <p class="text-subtitle-2 my-auto mt-2">Permintaan Kursus baru oleh 
-                            <span class="primary--text font-weight-bold">Fajar Eka Pambudi</span>
-                        </p>
-                        <p class="text-caption gray--text pt-0">2 jam yang lalu</p>
-                        <v-divider/>
-                        <p class="text-subtitle-2 my-auto mt-2">Permintaan Konseling baru oleh 
-                            <span class="primary--text font-weight-bold">Decindy Amanda Diah</span>
-                        </p>
-                        <p class="text-caption gray--text  pt-0">3 jam yang lalu</p>
-                        <v-divider/>
-                        <p class="text-subtitle-2 my-auto mt-2">Permintaan Kursus baru oleh 
-                            <span class="primary--text font-weight-bold">Fajri Nur Syifa</span>
-                        </p>
-                        <p class="text-caption gray--text pt-0">6 jam yang lalu</p>
-                        <v-divider/>
-                    </div>
-                </v-card>
-            </v-col>
+                :items-per-page="data"
+              >
+                <template v-slot:[`item.name`]="{ item }">
+                  <span class="gray6--text">
+                    {{ item.title }}
+                  </span>
+                </template>
+                <template v-slot:[`item.amount`]="{ item }">
+                  <span class="gray6--text">
+                    {{ item.AmountEmployee }}
+                  </span>
+                </template>
+                <template v-slot:[`item.actions`]="{ item }">
+                  <v-btn
+                    small
+                    plain
+                    class="text-capitalize ps-0"
+                    color="warning"
+                    @click="() => this.$router.push(detail(item))"
+                  >
+                    Lihat detail
+                    <v-icon>mdi-chevron-right</v-icon>
+                  </v-btn>
+                </template>
+              </v-data-table>
+              <template v-slot:no-data>
+                <p>There is no data</p>
+              </template>
+            </v-card>
+          </v-col>
+          <!-- TERBARU -->
+          <v-col cols="4">
+            <v-card>
+              <v-row class="ml-4 ma-auto">
+                <v-list-item-icon class="mr-4">
+                  <v-avatar :elevation="0" color="accentSec" size="30">
+                    <v-icon class="pa-auto" color="secondary" small
+                      >mdi-bookmark-minus-outline</v-icon
+                    >
+                  </v-avatar>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title class="font-weight-bold"
+                    >Permintaan Terbaru</v-list-item-title
+                  >
+                </v-list-item-content>
+              </v-row>
+              <div class="mx-4 mt-1">
+                <p class="text-subtitle-2 my-auto mt-2">
+                  Permintaan Kursus baru oleh
+                  <span class="primary--text font-weight-bold"
+                    >Fajar Eka Pambudi</span
+                  >
+                </p>
+                <p class="text-caption gray--text pt-0">2 jam yang lalu</p>
+                <v-divider />
+                <p class="text-subtitle-2 my-auto mt-2">
+                  Permintaan Konseling baru oleh
+                  <span class="primary--text font-weight-bold"
+                    >Decindy Amanda Diah</span
+                  >
+                </p>
+                <p class="text-caption gray--text pt-0">3 jam yang lalu</p>
+                <v-divider />
+                <p class="text-subtitle-2 my-auto mt-2">
+                  Permintaan Kursus baru oleh
+                  <span class="primary--text font-weight-bold"
+                    >Fajri Nur Syifa</span
+                  >
+                </p>
+                <p class="text-caption gray--text pt-0">6 jam yang lalu</p>
+                <v-divider />
+              </div>
+            </v-card>
+          </v-col>
         </v-row>
       </v-container>
     </v-main>
@@ -181,23 +237,43 @@
 </template>
 
 <script>
-export default {data(){
-    return{
-        headers :[
-            {text:'Nama Spesialisasi',align:"start", sortable:false, value:"name"},
-            {text:'Jumlah Anggota', sortable:false, value:'amount'},
-            {text:'Aksi', sortable:false, value:'actions'},
-        ],
-        special :[
-            {name:'Backend Engineer', amount: 16},
-            {name:'Frontend Engineer', amount: 12},
-            {name:'UI/UX Designer', amount: 8},
-            {name:'Quality Asurance', amount: 6},
-        ],
-    }
+export default {
+  setup() {},
+  data() {
+    return {
+      data: 4,
+      sortDesc: "amount",
+      headers: [
+        {
+          text: "Nama Spesialisasi",
+          align: "start",
+          sortable: false,
+          value: "name",
+        },
+        { text: "Jumlah Anggota", value: "amount" },
+        { text: "Aksi", sortable: false, value: "actions" },
+      ],
+      headercourse: [
+        {
+          text: "Nama Kursus",
+          align: "start",
+          sortable: false,
+          value: "name",
+        },
+        { text: "Jumlah Anggota", value: "amount" },
+        { text: "Aksi", sortable: false, value: "actions" },
+      ],
+    };
+  },
   computed: {
     getDataCompany() {
       return this.$store.state.company.dataCompany;
+    },
+    getAllSpecialization() {
+      return this.$store.state.specialization.specialization;
+    },
+    getAllCourse() {
+      return this.$store.state.course.course;
     },
   },
   methods: {
@@ -208,6 +284,8 @@ export default {data(){
   },
   mounted() {
     console.log(this.$store.state.user.userid);
+    this.$store.dispatch("specialization/fetchSpecialization");
+    this.$store.dispatch("course/fetchCourse");
     console.log(this.gettoken());
   },
   created() {
