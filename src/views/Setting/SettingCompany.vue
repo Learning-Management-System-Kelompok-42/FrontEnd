@@ -22,19 +22,19 @@
               outlined
               dense
               depressed
-              v-model="getDataCompany.name"
+              :value="getDataCompany.name"
             ></v-text-field>
             <p>Bidang Perusahaan</p>
             <v-text-field
               outlined
               dense
-              v-model="getDataCompany.sector"
+              :value="getDataCompany.sector"
             ></v-text-field>
             <p>Website Perusahaan</p>
             <v-text-field
               outlined
               dense
-              v-model="getDataCompany.website"
+              :value="getDataCompany.website"
             ></v-text-field>
             <p>Alamat Perusahaan</p>
             <v-textarea
@@ -42,7 +42,7 @@
               outlined
               dense
               rows="4"
-              v-model="getDataCompany.address"
+              :value="getDataCompany.address"
               row-height="30"
             ></v-textarea>
             <p class="mb-1">Logo Perusahaan</p>
@@ -87,16 +87,17 @@
                   />
                   <p class="pt-3 ps-4">{{ buttonText }}</p>
                 </v-toolbar>
-                <p class="text-caption pt-1">Format file jpg, jpeg, png dengan ukuran maksimal 500 kb</p>
+                <p class="text-caption pt-1">
+                  Format file jpg, jpeg, png dengan ukuran maksimal 500 kb
+                </p>
               </v-col>
             </div>
-          <v-card-actions>
-                <v-spacer/>
-                <v-btn
-                color="primary"
-                class="text-capitalize my-auto mb-4"
+            <v-card-actions>
+              <v-spacer />
+              <v-btn color="primary" class="text-capitalize my-auto mb-4">
+                <v-icon class="me-2 my-auto" small rounded
+                  >mdi-checkbox-outline</v-icon
                 >
-                <v-icon class="me-2 my-auto" small rounded>mdi-checkbox-outline</v-icon>
                 Simpan Perubahan
               </v-btn>
             </v-card-actions>
@@ -113,23 +114,18 @@ export default {
     return {
       logo: null,
       url: " ",
-      // namecompany: this.getDataCompany.name,
-      // sectorcompany: this.getDataCompany.sector,
-      // websitecompany: this.getDataCompany.website,
-      // addresscompany: this.getDataCompany.address,
-      // logocompany: this.getDataCompany
     };
   },
   watch: {},
   computed: {
-    getDataCompany() {
-      return this.$store.state.company.dataProfileCompany;
-    },
     buttonText() {
       return this.logo ? this.logo.name : "";
     },
     getDataUser() {
       return this.$store.state.user.user;
+    },
+    getDataCompany() {
+      return this.$store.state.company.dataProfileCompany;
     },
   },
   methods: {
@@ -146,6 +142,8 @@ export default {
   },
   mounted() {
     this.$store.dispatch("company/getDataProfileCompany");
+    this.getDataCompany;
+    console.log(this.getDataCompany);
   },
 };
 </script>
