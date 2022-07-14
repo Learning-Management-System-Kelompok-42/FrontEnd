@@ -1,12 +1,11 @@
 <template>
-    <v-main>
-        <v-container>
-            <v-col cols="4">
-            <v-card
-                class="mx-auto"
-                width="100%"
-            >
-                <v-list>
+    <v-col class="pa-0 pt-2">
+        <v-card
+            flat
+            class="mx-auto"
+            width="100%"
+        >
+            <v-list>
                     <v-list-group
                         :value="false"
                     >
@@ -35,7 +34,7 @@
                         </v-list>
                     </v-list-group>
                 </v-list>
-                <v-list>
+            <v-list>
                     <v-list-group
                         :value="false"
                     >
@@ -64,7 +63,7 @@
                         </v-list>
                     </v-list-group>
                 </v-list>
-                <v-list>
+            <v-list>
                     <v-list-group
                         :value="false"
                     >
@@ -93,7 +92,7 @@
                         </v-list>
                     </v-list-group>
                 </v-list>
-                <v-list>
+            <v-list>
                     <v-list-group
                         :value="false"
                     >
@@ -122,7 +121,7 @@
                         </v-list>
                     </v-list-group>
                 </v-list>
-                <v-list>
+            <v-list>
                     <v-list-group
                         :value="false"
                     >
@@ -151,7 +150,7 @@
                         </v-list>
                     </v-list-group>
                 </v-list>
-                <v-list>
+            <v-list>
                     <v-list-group
                         :value="false"
                     >
@@ -180,7 +179,7 @@
                         </v-list>
                     </v-list-group>
                 </v-list>
-                <v-list>
+            <v-list>
                     <v-list-group
                         :value="false"
                     >
@@ -209,7 +208,7 @@
                         </v-list>
                     </v-list-group>
                 </v-list>
-                <v-list>
+            <v-list>
                     <v-list-group
                         :value="false"
                     >
@@ -238,7 +237,7 @@
                         </v-list>
                     </v-list-group>
                 </v-list>
-                <v-list>
+            <v-list>
                     <v-list-group
                         :value="false"
                     >
@@ -267,7 +266,7 @@
                         </v-list>
                     </v-list-group>
                 </v-list>
-                <v-list>
+            <v-list>
                     <v-list-group
                         :value="false"
                     >
@@ -296,7 +295,7 @@
                         </v-list>
                     </v-list-group>
                 </v-list>
-                <v-list>
+            <v-list>
                     <v-list-group
                         :value="false"
                     >
@@ -325,7 +324,7 @@
                         </v-list>
                     </v-list-group>
                 </v-list>
-                <v-list>
+            <v-list>
                     <v-list-group
                         :value="false"
                     >
@@ -354,9 +353,8 @@
                         </v-list>
                     </v-list-group>
                 </v-list>               
-            </v-card></v-col>
-    </v-container>
-  </v-main>
+        </v-card>
+    </v-col>
 </template>
 <script>
 
