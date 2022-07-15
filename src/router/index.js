@@ -8,8 +8,8 @@ import SpecializationDetail from "../views/SpecializationDetail.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import EmployeeView from "../views/EmployeeView.vue";
-import RequestKursusView from "../views/RequestKursusView.vue";
-import RequestKonselingView from "../views/RequestKonselingView.vue";
+import RequestKursusView from "../views/Request/RequestKursusView.vue";
+import RequestKonselingView from "../views/Request/RequestKonselingView.vue";
 import DashboardView from "../views/DashBoard.vue";
 import SideBarParents from "../views/SideBarParents.vue";
 import EmployeeParent from "../views/EmployeeParent.vue";
@@ -46,14 +46,6 @@ const routes = [
   {
     path: "/redirect",
     component: SuccessLoginView,
-  },
-  {
-    path: "/kursus",
-    component: RequestKursusView,
-  },
-  {
-    path: "/konseling",
-    component: RequestKonselingView,
   },
   // {
   //   path: "/request/detailKursus",
@@ -128,7 +120,6 @@ const routes = [
         path: "/course/detail",
         component: DetailCourse,
       },
-      
       {
         path: "/setting",
         component: SettingView,
@@ -154,8 +145,18 @@ const routes = [
           },
         ],
       },
+      
     ],
   },
+      {
+        path: "/request/course",
+        component: RequestKursusView,
+      },
+      {
+        path: "/request/counseling",
+        component: RequestKonselingView,
+      },
+  
 ];
 
 const router = new VueRouter({
