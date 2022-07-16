@@ -83,18 +83,20 @@
                   color="secondary"
                   >{{ value }}%</b
                 >
-                <v-list-item>
-                  <v-list-item-content>
-                    <v-list-item-avatar
-                      class="mt-3"
-                      rounded
-                      height="80"
-                      color="grey6"
-                      size="100%"
-                    >
-                        Lihat Detail <v-icon class="pt-1">mdi-chevron-right</v-icon>
-                    </v-btn>
-                    </v-card-actions>
+              </div>
+              <div class="d-flex">
+                <v-spacer></v-spacer>
+                <v-card-actions>
+                  <v-btn
+                    plain
+                    small
+                    class="text-capitalize"
+                    @click="toDetailCourse(course.id)"
+                  >
+                    Lihat Detail
+                    <v-icon class="pt-1">mdi-chevron-right</v-icon>
+                  </v-btn>
+                </v-card-actions>
               </div>
             </v-card>
           </v-col>
@@ -117,6 +119,12 @@ export default {
   computed: {
     getCourseEmployee() {
       return this.$store.state.course.course;
+    },
+  },
+  methods: {
+    toDetailCourse(id) {
+      this.$store.dispatch("course/setCourseIdFromVue", id);
+      this.$router.push("/urcourse/detail");
     },
   },
   mounted() {
