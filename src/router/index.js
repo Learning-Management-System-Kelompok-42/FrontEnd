@@ -38,7 +38,6 @@ import UserSettingProfile from "../views/User/Setting/SettingProfile.vue";
 import UserSettingPassword from "../views/User/Setting/SettingPassword.vue";
 import InvitationUser from "../views/User/InvitationUser.vue";
 
-
 Vue.use(VueRouter);
 
 const cookie = require("tiny-cookie");
