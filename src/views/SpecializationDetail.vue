@@ -297,7 +297,9 @@ export default {
     },
     copyLink(link) {
       try {
-        navigator.clipboard.writeText("localhost:8080/invitation?link=" + link);
+        navigator.clipboard.writeText(
+          "https://radiant-kataifi-b63e51.netlify.app/invitation?link=" + link
+        );
         this.snackbar = !this.snackbar;
       } catch (e) {
         console.log(e);
