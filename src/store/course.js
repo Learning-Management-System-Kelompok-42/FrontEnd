@@ -5,12 +5,15 @@ const state = () => ({
   courseById: {},
   courseId: "",
   moduleById: {},
+  detailCourse: {},
 });
 const mutations = {
   setCourse(state, param) {
     state.course = param;
   },
-
+  setDetailCourse(state, param) {
+    state.detailCourse = param;
+  },
   setCourseById(state, param) {
     state.courseById = param;
   },
@@ -36,6 +39,19 @@ const actions = {
       commit("setCourse", response.data.data);
     } else {
       console.log(response);
+    }
+  },
+  async getDetailCourse({ state, commit }) {
+    const response = await axios.get(
+      `https://api.rubick.tech/v1/employee/${this.state.user.userid}/course/${state.courseId}/details`,
+      {
+        headers: {
+          Authorization: `Bearer ${this.state.user.token}`,
+        },
+      }
+    );
+    if (response.status >= 200 || response.status < 400) {
+      commit("setDetailCourse", response.data.data);
     }
   },
   async getAllCourseEmployee({ commit }) {

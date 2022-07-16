@@ -27,15 +27,15 @@
            dense
           ></v-text-field>
           <v-card-actions>
-                <v-spacer/>
-                <v-btn
+            <v-spacer/>
+            <v-btn
                 color="primary"
                 class="text-capitalize my-auto mb-4"
                 >
                 <v-icon class="me-2 my-auto" small rounded>mdi-checkbox-outline</v-icon>
                 Simpan Perubahan
-                </v-btn>
-            </v-card-actions>
+            </v-btn>
+          </v-card-actions>
         </v-card> 
       </v-col>
       </v-container>

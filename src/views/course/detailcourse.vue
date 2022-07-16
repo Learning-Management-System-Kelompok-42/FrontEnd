@@ -39,7 +39,9 @@
               </v-card>
               <div class="mx-2 px-5">
                 <p class="text-capitalize my-0">total modul</p>
-                <p class="font-weight-bold">{{ getModuleById.length }}</p>
+                <p class="font-weight-bold">
+                  {{ getCourseById.count_modules }}
+                </p>
               </div>
             </div>
           </v-card>
@@ -51,7 +53,9 @@
               <v-spacer></v-spacer>
               <div class="mx-2 px-5">
                 <p class="text-capitalize my-0">total karyawan</p>
-                <p class="font-weight-bold">17</p>
+                <p class="font-weight-bold">
+                  {{ getCourseById.count_employee }}
+                </p>
               </div>
             </div>
           </v-card>
@@ -101,7 +105,11 @@
         </div>
         <div class="karyawan">
           <v-row>
-            <v-col cols="3" v-for="userlist in user" :key="userlist.id">
+            <v-col
+              cols="3"
+              v-for="userlist in getCourseById.users"
+              :key="userlist.id"
+            >
               <v-card flat>
                 <v-avatar size="56" class="ms-3 mt-3" tile>
                   <v-img :src="userlist.img"></v-img>
@@ -199,9 +207,6 @@ export default {
   computed: {
     getCourseById() {
       return this.$store.state.course.courseById;
-    },
-    getModuleById() {
-      return this.$store.state.course.moduleById;
     },
   },
   mounted() {

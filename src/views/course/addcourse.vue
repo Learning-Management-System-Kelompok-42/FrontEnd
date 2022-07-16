@@ -341,6 +341,7 @@
 <script>
 import goback from "@/components/BackButton.vue";
 import Loader from "@/components/Loader.vue";
+import axios from "axios";
 // import { mapFields, mapMultiRowFields } from "vuex-map-fields";
 // import { mapMutations } from "vuex";
 export default {
@@ -438,10 +439,10 @@ export default {
       const file = e.target.files[0];
       this.gambarmodul = file;
       this.url = URL.createObjectURL(file);
-      this.getBase64(e.target.files[0]).then((data) => {
-        console.log(data);
-        this.course.thumbnail = data;
-      });
+      // this.getBase64(e.target.files[0]).then((data) => {
+      //   console.log(data);
+      //   this.course.thumbnail = data;
+      // });
       // console.log(this.course.thumbnail);
     },
     getBase64(file) {
@@ -453,13 +454,43 @@ export default {
       });
     },
     addCourse() {
-      console.log(this.course);
-      this.$store.dispatch("modul/addCourse", this.course);
-      if (this.getStatus === 200) {
-        this.success = true;
-      } else {
-        this.error = true;
-      }
+      axios
+        .post(
+          "https://api.rubick.tech/v1/image",
+          {
+            file: this.gambarmodul,
+          },
+          {
+            headers: {
+              Accept: "multipart/form-data",
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        )
+        .then(
+          (response) => {
+            console.log(this.course.thumbnail);
+            this.course.thumbnail = response.data.url;
+            this.$store.dispatch("modul/addCourse", this.course);
+            if (this.getStatus === 200) {
+              this.success = true;
+            } else {
+              this.error = true;
+            }
+          }
+          // function (response) {
+          // this.course.thumbnail = response.data.url;
+          // this.$store.dispatch("modul/addCourse", this.course);
+          // if (this.getStatus === 200) {
+          //   this.success = true;
+          // } else {
+          //   this.error = true;
+          // }
+          // }
+        )
+        .catch(function (e) {
+          console.log(e);
+        });
       // this.$store.dispatch("moduls/addCourse", this.course);
     },
   },

@@ -27,11 +27,17 @@ import CourseView from "../views/User/Course/CourseView.vue";
 import UserDashboard from "../views/User/UserDashboard.vue";
 import UserCourse from "../views/User/Course/UserCourse.vue";
 import CourseDetail from "../views/User/Course/CourseDetail.vue";
+import CourseSlides from "../views/User/Course/CourseSlides.vue";
+import CourseVideo from "../views/User/Course/CourseVideo.vue";
+import CourseQuiz from "../views/User/Course/CourseQuiz.vue";
+import QuizResult from "../views/User/Course/QuizResult.vue";
+import CourseDone from "../views/User/Course/CourseDone.vue";
 import UserSettingView from "../views/User/Setting/SettingView.vue";
 import UserSettingMenu from "../views/User/Setting/SettingMenu.vue";
 import UserSettingProfile from "../views/User/Setting/SettingProfile.vue";
 import UserSettingPassword from "../views/User/Setting/SettingPassword.vue";
-import InvitationUser from "../views/User/invitationuser.vue";
+import InvitationUser from "../views/User/InvitationUser.vue";
+
 
 Vue.use(VueRouter);
 
@@ -157,32 +163,16 @@ const routes = [
   {
     path: "/urdashboard",
     component: UserView,
-    beforeEnter: (to, from, next) => {
-      if (cookie.get("token") === null || !cookie.get("token")) {
-        return next("/login");
-      }
-      next();
-    },
+    // beforeEnter: (to, from, next) => {
+    //   if (cookie.get("token") === null || !cookie.get("token")) {
+    //     return next("/login");
+    //   }
+    //   next();
+    // },
     children: [
       {
         path: "/",
         component: UserDashboard,
-      },
-      {
-        path: "/urcourse",
-        component: CourseView,
-        children: [
-          {
-            path: "/",
-            name: "userCourse",
-            component: UserCourse,
-          },
-          {
-            path: "detail",
-            name: "userCourseDetail",
-            component: CourseDetail,
-          },
-        ],
       },
       {
         path: "/ursetting",
@@ -204,7 +194,47 @@ const routes = [
           },
         ],
       },
+      {
+        path: "/urcourse",
+        component: CourseView,
+        children: [
+          {
+            path: "/",
+            name: "userCourse",
+            component: UserCourse,
+          },
+          {
+            path: "detail",
+            name: "userCourseDetail",
+            component: CourseDetail,
+          },
+        ],
+      },
     ],
+  },
+  {
+    path: "/urcourse/done",
+    name: "courseDone",
+    component: CourseDone,
+  },
+  {
+    path: "/urcourse/slides",
+    name: "courseSlides",
+    component: CourseSlides,
+  },
+  {
+    path: "/urcourse/video",
+    name: "courseVideo",
+    component: CourseVideo,
+  },
+  {
+    path: "/urcourse/quiz",
+    name: "courseQuiz",
+    component: CourseQuiz,
+  },
+  {
+    path: "/urcourse/quiz/result",
+    component: QuizResult,
   },
 ];
 

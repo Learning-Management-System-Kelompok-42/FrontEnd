@@ -22,19 +22,19 @@
               outlined
               dense
               depressed
-              v-model="getDataCompany.name"
+              v-model="dataCompanyModel.name"
             ></v-text-field>
             <p>Bidang Perusahaan</p>
             <v-text-field
               outlined
               dense
-              v-model="getDataCompany.sector"
+              v-model="dataCompanyModel.sector"
             ></v-text-field>
             <p>Website Perusahaan</p>
             <v-text-field
               outlined
               dense
-              v-model="getDataCompany.website"
+              v-model="dataCompanyModel.website"
             ></v-text-field>
             <p>Alamat Perusahaan</p>
             <v-textarea
@@ -42,13 +42,13 @@
               outlined
               dense
               rows="4"
-              v-model="getDataCompany.address"
+              v-model="dataCompanyModel.address"
               row-height="30"
             ></v-textarea>
             <p class="mb-1">Logo Perusahaan</p>
             <div class="d-flex">
               <v-img
-                :src="getDataCompany.logo"
+                :src="dataCompanyModel.logo"
                 height="70"
                 max-width="100"
                 :aspect-ratio="1"
@@ -87,16 +87,21 @@
                   />
                   <p class="pt-3 ps-4">{{ buttonText }}</p>
                 </v-toolbar>
-                <p class="text-caption pt-1">Format file jpg, jpeg, png dengan ukuran maksimal 500 kb</p>
+                <p class="text-caption pt-1">
+                  Format file jpg, jpeg, png dengan ukuran maksimal 500 kb
+                </p>
               </v-col>
             </div>
-          <v-card-actions>
-                <v-spacer/>
-                <v-btn
+            <v-card-actions>
+              <v-spacer />
+              <v-btn
                 color="primary"
                 class="text-capitalize my-auto mb-4"
+                @click="updateDataCompany"
+              >
+                <v-icon class="me-2 my-auto" small rounded
+                  >mdi-checkbox-outline</v-icon
                 >
-                <v-icon class="me-2 my-auto" small rounded>mdi-checkbox-outline</v-icon>
                 Simpan Perubahan
               </v-btn>
             </v-card-actions>
@@ -113,26 +118,33 @@ export default {
     return {
       logo: null,
       url: " ",
-      // namecompany: this.getDataCompany.name,
-      // sectorcompany: this.getDataCompany.sector,
-      // websitecompany: this.getDataCompany.website,
-      // addresscompany: this.getDataCompany.address,
-      // logocompany: this.getDataCompany
+      dataCompany: {},
     };
   },
   watch: {},
   computed: {
-    getDataCompany() {
-      return this.$store.state.company.dataProfileCompany;
-    },
     buttonText() {
       return this.logo ? this.logo.name : "";
     },
     getDataUser() {
       return this.$store.state.user.user;
     },
+    getDataCompany() {
+      return this.$store.state.company.dataProfileCompany;
+    },
+    dataCompanyModel: {
+      get() {
+        return this.$store.state.company.dataProfileCompany;
+      },
+      set(value) {
+        this.setState({ dataCompany: value });
+      },
+    },
   },
   methods: {
+    updateDataCompany() {
+      console.log(this.dataCompanyModel);
+    },
     onButtonClick() {
       window.addEventListener("focus", () => {});
       this.$refs.uploader.click();
@@ -146,6 +158,8 @@ export default {
   },
   mounted() {
     this.$store.dispatch("company/getDataProfileCompany");
+    this.getDataCompany;
+    console.log(this.getDataCompany);
   },
 };
 </script>
