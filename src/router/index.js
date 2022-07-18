@@ -39,7 +39,8 @@ import UserSettingPassword from "../views/User/Setting/SettingPassword.vue";
 import CourseReq from "../views/User/Request/CourseRequest.vue"
 import CounselingReq from "../views/User/Request/CounselingRequest.vue"
 import InvitationUser from "../views/User/InvitationUser.vue";
-import RegistrationUser from "../views/User/RegistrationUser.vue"
+import RegistrationUser from "../views/User/RegistrationUser.vue";
+import InvitationUser from "../views/User/invitationuser.vue";
 
 Vue.use(VueRouter);
 
@@ -54,10 +55,6 @@ const routes = [
   {
     path: "/register",
     component: RegisterView,
-  },
-  {
-    path: "/registeremployee",
-    component: RegistrationUser,
   },
   {
     path: "/login",

@@ -29,7 +29,7 @@ const mutations = {
 const actions = {
   async fetchCompany({ commit }) {
     const response = await axios.get(
-      `https://api.rubick.tech/v1/company/${this.state.user.companyId}/dashboard`,
+      `http://18.140.96.118/v1/company/${this.state.user.companyId}/dashboard`,
       {
         headers: {
           Authorization: `Bearer ${this.state.user.token}`,
