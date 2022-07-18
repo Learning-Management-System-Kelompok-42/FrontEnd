@@ -239,8 +239,8 @@ export default {
       if (response.status >= 200 || response.status < 400) {
         console.log(response.data.data);
         this.user.company_id = response.data.data.company_id;
-        this.user.specialization_id = response.data.data.id;
-      } else console.log(response);
+        this.user.specialization_id = response.data.data.specialization_id;
+      } else console.log(response.status);
     },
   },
 };

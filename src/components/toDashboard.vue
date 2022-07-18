@@ -38,51 +38,55 @@
         <v-virtual-scroll
           :bench="benched"
           :items="items"
-          height="420"
-          item-height="2500"
+          height="500"
+          item-height="500"
         >
           <template>
             <v-list>
-              <v-list-item>
-                <v-avatar
-                  :elevation="0"
-                  class="mr-2"
-                  color="accentSec"
-                  size="36"
-                >
-                  <v-icon color="secondary" size="20"
-                    >mdi-file-document-outline</v-icon
+              <div v-for="module in getModule" :key="module.ID">
+                <v-list-item>
+                  <v-avatar
+                    :elevation="0"
+                    class="mr-2"
+                    color="accentSec"
+                    size="36"
                   >
-                </v-avatar>
-                <v-list-item-title
-                  ><b class="gray9--text">Pengenalan</b></v-list-item-title
-                >
-              </v-list-item>
-              <v-list nav dense>
-                <v-list-item
-                  v-for="([icon, title, mark], i) in done"
-                  :key="i"
-                  link
-                  class="ma-2 mt-0 list"
-                >
-                  <v-list-item-icon>
-                    <v-icon
-                      v-text="icon"
-                      color="primary"
-                      class="px-auto"
-                    ></v-icon>
-                  </v-list-item-icon>
-                  <v-list-item-title
-                    v-text="title"
-                    class="primary--text"
-                  ></v-list-item-title>
-                  <v-spacer />
-                  <v-list-item-icon>
-                    <v-icon v-text="mark" size="20" color="primary"></v-icon>
-                  </v-list-item-icon>
+                    <v-icon color="secondary" size="20"
+                      >mdi-file-document-outline</v-icon
+                    >
+                  </v-avatar>
+                  <v-list-item-title>
+                    <b class="gray9--text">
+                      {{ module.Title }}
+                    </b>
+                  </v-list-item-title>
                 </v-list-item>
-              </v-list>
-              <v-list-item>
+                <v-list nav dense>
+                  <v-list-item
+                    @click="toMateri(module.ID)"
+                    v-for="([icon, title], i) in done"
+                    :key="i"
+                    link
+                    class="ma-2 mt-0 list"
+                  >
+                    <div class="d-flex" @click="toMateri(title, module.ID)">
+                      <v-list-item-icon>
+                        <v-icon
+                          v-text="icon"
+                          color="primary"
+                          class="px-auto"
+                        ></v-icon>
+                      </v-list-item-icon>
+                      <v-list-item-title
+                        v-text="title"
+                        class="primary--text"
+                      ></v-list-item-title>
+                      <v-spacer />
+                    </div>
+                  </v-list-item>
+                </v-list>
+              </div>
+              <!-- <v-list-item>
                 <v-avatar
                   :elevation="0"
                   class="mr-2"
@@ -530,7 +534,7 @@
                     <v-icon v-text="mark" size="20" color="primary"></v-icon>
                   </v-list-item-icon>
                 </v-list-item>
-              </v-list>
+              </v-list> -->
             </v-list>
           </template>
         </v-virtual-scroll>
@@ -568,6 +572,29 @@ export default {
     },
     length() {
       return 1;
+    },
+    getModule() {
+      return this.$store.state.modul.allModule;
+    },
+  },
+  mounted() {
+    this.$store.dispatch("modul/getModul");
+  },
+  methods: {
+    toMateri(title, id) {
+      if (title === "Video Materi") {
+        this.$router.push(
+          `/urcourse/detail/${this.$store.state.user.companyId}`
+        );
+      } else if (title === "Slide Presentasi") {
+        this.$router.push(
+          `/urcourse/detail/${this.$store.state.user.companyId}/slides/${id}`
+        );
+      } else if (title === "Quiz") {
+        this.$router.push(
+          `/urcourse/detail/${this.$store.state.user.companyId}/quiz/${id}`
+        );
+      }
     },
   },
 };

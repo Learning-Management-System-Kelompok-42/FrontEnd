@@ -4,6 +4,7 @@ import { mapGetters } from "vuex";
 const state = () => ({
   code: "",
   isLoading: false,
+  allModule: [],
 });
 mapGetters;
 const mutations = {
@@ -13,8 +14,26 @@ const mutations = {
   setIsLoading(state, param) {
     state.isLoading = param;
   },
+  setAllModule(state, param) {
+    state.allModule = param;
+  },
 };
 const actions = {
+  async getModul({ commit }) {
+    const response = await axios.get(
+      `https://api.rubick.tech/v1/employee/${this.state.user.userid}/course/${this.state.course.courseId}/modules`,
+      {
+        headers: {
+          Authorization: `Bearer ${this.state.user.token}`,
+        },
+      }
+    );
+    if (response.status >= 200 || response.status < 400) {
+      commit("setAllModule", response.data.data);
+    } else {
+      console.log(response.data);
+    }
+  },
   async addCourse({ commit }, param) {
     console.log(param);
     commit("setIsLoading", true);
