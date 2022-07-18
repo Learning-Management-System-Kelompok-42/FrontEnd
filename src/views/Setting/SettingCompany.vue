@@ -105,6 +105,14 @@
                 Simpan Perubahan
               </v-btn>
             </v-card-actions>
+            <v-dialog v-model="succesdialog">
+              <v-card>
+                <v-card-title>Berhasil Mengupdate Company</v-card-title>
+                <v-card-actions>
+                  <v-btn @click="successdialog = false"> Tutup </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
           </v-card>
         </v-col>
       </v-container>
@@ -113,12 +121,14 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
       logo: null,
       url: " ",
       dataCompany: {},
+      succesdialog: false,
     };
   },
   watch: {},
@@ -143,7 +153,25 @@ export default {
   },
   methods: {
     updateDataCompany() {
-      console.log(this.dataCompanyModel);
+      axios
+        .put(
+          `https://api.rubick.tech/v1/company/${this.$store.state.user.companyId}`,
+          this.dataCompanyModel,
+          {
+            headers: {
+              Authorization: `Bearer ${this.$store.state.user.token}`,
+              Accept: "multipart/form-data",
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        )
+        .then(() => {
+          console.log(this.dataCompanyModel);
+          this.succesdialog = true;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     },
     onButtonClick() {
       window.addEventListener("focus", () => {});

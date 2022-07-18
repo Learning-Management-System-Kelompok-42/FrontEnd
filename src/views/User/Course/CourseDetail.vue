@@ -31,15 +31,21 @@
               size="15"
               class="my-auto pt-0"
             ></v-rating>
-            <span class="black--text text-caption ml-1 my-auto pt-1">{{
-              rating
-            }}</span>
+            <span class="black--text text-caption ml-1 my-auto pt-1">
+              {{ rating }}
+            </span>
             <span class="grey--text text-caption ml-2 my-auto pt-1"
               >(15 Penilaian)</span
             >
           </v-row>
           <br />
-          <v-btn class="text-capitalize" depressed color="primary" dense>
+          <v-btn
+            class="text-capitalize"
+            depressed
+            color="primary"
+            dense
+            @click="() => this.$router.push(`detail/${getDetailCourse.id}`)"
+          >
             <v-icon class="me-2" color="white" small
               >mdi-play-circle-outline</v-icon
             >
@@ -57,12 +63,16 @@
           </p>
           <!-- REVIEW -->
           <h3 class="black--text mt-4"><b>Apa yang mereka katakan?</b></h3>
-          <v-col class="px-0">
+          <v-col
+            class="px-0"
+            v-for="rating in getDetailCourse.rating_reviews"
+            :key="rating.id"
+          >
             <v-card class="ml-0" width="100%" flat>
               <v-card-text class="pr-0">
                 <v-row class="ma-auto mb-2">
                   <v-rating
-                    v-model="rating"
+                    v-model="rating.rating"
                     background-color="orange lighten-3"
                     color="orange"
                     half-increments
@@ -71,13 +81,11 @@
                     class="my-auto pt-0"
                   ></v-rating>
                   <span class="black--text text-caption ml-1 my-auto pt-1">{{
-                    rating
+                    rating.rating
                   }}</span>
                 </v-row>
                 <div class="pr-4">
-                  “It is a long established fact that a reader will be
-                  distracted by the readable content of a page when looking at
-                  its layout.”
+                  {{ `“${rating.reviews}”` }}
                 </div>
                 <v-card-actions class="pa-0 pt-4">
                   <v-list-item two-line class="mr-0 pr-0">
@@ -91,22 +99,22 @@
                     </v-img>
                     <v-list-item-content class="ml-3">
                       <v-list-item-title class="text-subtitle-1"
-                        ><b>Bagas Kresna Putra</b></v-list-item-title
+                        ><b>{{ rating.name }}</b></v-list-item-title
                       >
-                      <v-list-item-subtitle class="text-caption"
-                        >bagaskresna@intanabadi.com</v-list-item-subtitle
-                      >
+                      <v-list-item-subtitle class="text-caption">{{
+                        rating.email
+                      }}</v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
                 </v-card-actions>
               </v-card-text>
             </v-card>
-            <div class="text-center">
-              <v-btn color="primary" class="text-capitalize my-auto mt-6"
-                >Tampilkan Lainnya</v-btn
-              >
-            </div>
           </v-col>
+          <div class="text-center">
+            <v-btn color="primary" class="text-capitalize my-auto mt-6"
+              >Tampilkan Lainnya</v-btn
+            >
+          </div>
         </v-col>
         <!-- BAR -->
         <v-col class="bar">

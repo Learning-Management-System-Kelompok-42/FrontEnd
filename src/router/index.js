@@ -37,6 +37,7 @@ import UserSettingMenu from "../views/User/Setting/SettingMenu.vue";
 import UserSettingProfile from "../views/User/Setting/SettingProfile.vue";
 import UserSettingPassword from "../views/User/Setting/SettingPassword.vue";
 import InvitationUser from "../views/User/InvitationUser.vue";
+import CourseParent from "../views/User/Course/CourseParent.vue";
 
 Vue.use(VueRouter);
 
@@ -208,6 +209,24 @@ const routes = [
             component: CourseDetail,
           },
         ],
+      },
+    ],
+  },
+  {
+    path: "/urcourse/detail/:id",
+    component: CourseParent,
+    children: [
+      {
+        path: "/",
+        component: CourseVideo,
+      },
+      {
+        path: "slides/:id",
+        component: CourseSlides,
+      },
+      {
+        path: "quiz/:id",
+        component: CourseQuiz,
       },
     ],
   },

@@ -35,6 +35,7 @@ const actions = {
       commit("setLoading", false);
       console.log(response.data.data);
     }
+    commit("setLoading", false);
   },
 };
 
