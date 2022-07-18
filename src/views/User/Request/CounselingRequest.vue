@@ -1,0 +1,498 @@
+<template>
+  <v-app>
+    <v-main class="ma-5 ml-10">
+        <v-container>
+<!-- HEAD-->
+        <v-container class="d-flex">
+            <div>
+                <h3 class="primary--text"><b>Permintaan</b></h3>
+                <p>Kamu dapat membuat permintaan untuk Kursus baru dan Konseling</p>
+            </div>
+            <v-row>
+                <v-spacer/>
+                <v-btn 
+                    class="text-capitalize white--text" 
+                    color="primary"
+                    @click.stop="request = true"
+                >
+                    <v-icon color="white" class="me-2">mdi-plus-box-outline</v-icon>
+                    Buat Permintaan
+                </v-btn>
+                <v-dialog 
+                    v-model="request"
+                    max-width="1116"
+                >
+                    <v-card>
+                        <div class="d-flex">
+                            <v-card-title class="text-h5 primary--text pa-6 pb-2"><b>Buat Permintaan Baru</b></v-card-title>
+                            <v-spacer/>
+                            <v-btn
+                            icon
+                            @click="request = false"
+                            class="pa-3"
+                            >
+                            <v-icon>mdi-close</v-icon>
+                            </v-btn>
+                        </div>
+                        <v-card-title class="text-subtitle-1">
+                            <b>Judul Permintaan</b>
+                        </v-card-title>
+                        <v-col cols="12" class="pl-6 py-0">
+                            <v-text-field
+                                outlined
+                                dense
+                                placeholder="Masukkan Judul Permintaan"
+                            ></v-text-field>
+                        </v-col>    
+                        <v-card-title class="text-subtitle-1 pt-0">
+                            <b>Alasan</b>
+                        </v-card-title>
+                        <v-col cols="12" class="pl-6 py-0">
+                            <v-textarea
+                                placeholder="Masukkan alasan kamu mengajukan permintaan konseling disini"
+                                auto-grow
+                                outlined
+                                dense
+                                rows="4"
+                                row-height="30"
+                            ></v-textarea>
+                        </v-col>
+  
+                        <v-row class="pl-6 mr-0">
+                            <div>                      
+                                <v-card-title class="text-subtitle-1 py-0">
+                                    <b>Ajukan Waktu</b>
+                                </v-card-title>
+                                <v-col
+                                cols="12"
+                                >
+                                <v-dialog
+                                    ref="dialog"
+                                    v-model="clock"
+                                    :return-value.sync="time"
+                                    persistent
+                                    width="290px"
+                                >
+                                    <template v-slot:activator="{ on, attrs }">
+                                    <v-text-field
+                                        v-model="time"
+                                        prepend-icon="mdi-clock-outline"
+                                        readonly
+                                        outlined
+                                        dense
+                                        v-bind="attrs"
+                                        v-on="on"
+                                    >
+                                    </v-text-field>
+                                    </template>
+                                    <v-time-picker
+                                    v-if="clock"
+                                    v-model="time"
+                                    full-width
+                                    color="primary"
+                                    format="24hr"
+                                    >
+                                    <v-spacer></v-spacer>
+                                    <v-btn
+                                        text
+                                        color="primary"
+                                        @click="clock = false"
+                                    >
+                                        Cancel
+                                    </v-btn>
+                                    <v-btn
+                                        text
+                                        color="primary"
+                                        @click="$refs.dialog.save(time)"
+                                    >
+                                        OK
+                                    </v-btn>
+                                    </v-time-picker>
+                                </v-dialog>
+                                </v-col>
+                            </div>
+                            <div>
+                                <v-card-title class="text-subtitle-1 py-0">
+                                    <b>Ajukan Tanggal</b>
+                                </v-card-title>
+                                    <v-col
+                                    cols="12"
+                                    >
+                                        <v-dialog
+                                            ref="dateVal"
+                                            v-model="calendar"
+                                            :return-value.sync="date"
+                                            persistent
+                                            width="290px"
+                                        >
+                                            <template v-slot:activator="{ on, attrs }">
+                                            <v-text-field
+                                                v-model="date"
+                                                prepend-icon="mdi-calendar"
+                                                outlined
+                                                dense
+                                                readonly
+                                                v-bind="attrs"
+                                                v-on="on"
+                                            ></v-text-field>
+                                            </template>
+                                            <v-date-picker
+                                            v-model="date"
+                                            scrollable
+                                            >
+                                            <v-spacer></v-spacer>
+                                            <v-btn
+                                                text
+                                                color="primary"
+                                                @click="calendar = false"
+                                            >
+                                                Cancel
+                                            </v-btn>
+                                            <v-btn
+                                                text
+                                                color="primary"
+                                                @click="$refs.dateVal.save(date)"
+                                            >
+                                                OK
+                                            </v-btn>
+                                            </v-date-picker>
+                                        </v-dialog>
+                                    </v-col>
+                            </div>
+                        </v-row>
+                        <v-card-actions>
+                            <v-spacer/>
+                            <v-btn
+                                color="primary"
+                                @click="request= false"
+                                class="text-capitalize my-auto mb-4"
+                            >
+                                <v-icon class="me-2 my-auto" small rounded>mdi-checkbox-outline</v-icon>
+                                Buat Permintaan
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+            </v-row>
+        </v-container>
+        <div class="d-flex align-center mb-2">
+          <v-chip
+            class="ma-1 "
+            color="accentSec"
+            text-color="secondary"
+          >
+            Permintaan Kursus
+          </v-chip>
+          <v-chip
+            class="ma-2"
+            color="secondary"
+            text-color="white"
+          >
+            Permintaan Konseling
+          </v-chip>    
+        </div>
+<!-- CONTENT -->
+        <v-row class="mt-1">
+          <v-col class="pl-0 pr-6" cols="6">
+            <v-card
+              class="ml-3 mx-auto"
+              width="100%"
+              flat
+            >
+              <v-chip
+                class="ma-4 my-4 mb-1"
+                color="warning2"
+                text-color="warning"
+              >
+                <v-icon small outlined class="me-1">mdi-close-box-outline</v-icon>
+                Belum Selesai
+              </v-chip>
+              <v-list-item two-line>  
+                <v-list-item-content class="pl-2">
+                  <v-list-item-title><b>Ingin konsultasi mengenai penerapan Redux di ReactJS</b></v-list-item-title>
+                    <v-list-item-subtitle>
+                      Fajar Eka Pambudi
+                      <v-icon>mdi-circle-small</v-icon>
+                      2 jam yang lalu 
+                    </v-list-item-subtitle>              
+                </v-list-item-content>
+              </v-list-item>
+              <v-card-action>
+                <v-row class="ml-2 pt-2 pb-3 ">
+                  <v-btn
+                    class="text-capitalize"
+                    text
+                    color="primary"
+                    @click.stop="dialog = true"
+                  >
+                    lihat detail
+                    <v-icon class="ms-2">mdi-chevron-right</v-icon>
+                  </v-btn>
+
+                  <v-dialog
+                    v-model="dialog"
+                    max-width="1116"
+                  >
+                    <v-card>
+                      <div class="d-flex">
+                        <v-card-title class="text-h5 primary--text pa-6 pb-2"><b>Detail Permintaan Konseling</b></v-card-title>
+                        <v-spacer/>
+                        <v-btn
+                          icon
+                          @click="dialog = false"
+                          class="pa-3"
+                        >
+                          <v-icon>mdi-close</v-icon>
+                        </v-btn>
+                      </div> 
+                      <v-card-title class="text-subtitle-1 py-0">
+                      <b>Status</b>
+                      </v-card-title>
+                      <v-chip
+                        class="ml-4"
+                        color="gray2"
+                        text-color="gray9"
+                      >
+                        <v-icon small class="me-2">mdi-clock-outline</v-icon>
+                        Menunggu Respon
+                      </v-chip>
+                      <v-card-title class="text-subtitle-1">
+                        <b>Judul Permintaan</b>
+                      </v-card-title>
+                      <v-card-subtitle>Ingin konsultasi mengenai penerapan Redux di ReactJS</v-card-subtitle>
+                      <v-card-title class="text-subtitle-1 pt-0">
+                        <b>Alasan</b>
+                      </v-card-title>
+                      <v-card-subtitle>
+                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. 
+                        The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here,
+                        content here', making it look like readable English. Many desktop publishing packages and web page editors now use 
+                        Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
+                      </v-card-subtitle>
+                      <div class="d-flex pt-0 pl-2">
+                        <v-list>
+                          <v-card-title class="text-subtitle-1 pt-0">
+                            <b>Tanggal yang diajukan</b>
+                          </v-card-title>
+                          <v-card-subtitle>Senin, 30 Agustus 2022</v-card-subtitle>
+                        </v-list>
+                        <v-list>
+                          <v-card-title class="text-subtitle-1 pt-0">
+                            <b>Waktu yang diajukan</b>
+                          </v-card-title>
+                          <v-card-subtitle>20:00 WIB</v-card-subtitle>
+                        </v-list>
+                      </div>
+                    </v-card>
+                  </v-dialog>
+                </v-row> 
+              </v-card-action>
+            </v-card>
+          </v-col>
+          <v-col class="pl-0 pr-6" cols="6">
+            <v-card
+              class="ml-3 mx-auto"
+              width="100%"
+              flat
+            >
+              <v-chip
+                class="ma-4 my-4 mb-1"
+                color="accent"
+                text-color="primary"
+              >
+                <v-icon small class="me-2">mdi-checkbox-outline</v-icon>
+                Sudah Selesai
+              </v-chip>
+              <v-list-item two-line>                
+                <v-list-item-content class="pl-2">                       
+                  <v-list-item-title><b>Ingin konsultasi mengenai penggunaan Figma</b></v-list-item-title>
+                  <v-list-item-subtitle>
+                    Fajar Eka Pambudi
+                    <v-icon>mdi-circle-small</v-icon>
+                    6 jam yang lalu
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+              <v-card-action>
+                <v-row class="ml-2 pt-2 pb-3 ">
+                  <v-btn
+                    class="text-capitalize"
+                    text
+                    color="primary"
+                    @click.stop="done = true"
+                  >
+                    lihat detail
+                    <v-icon class="ms-2">mdi-chevron-right</v-icon>
+                  </v-btn>
+
+                  <v-dialog
+                    v-model="done"
+                    max-width="1116"
+                  >
+                    <v-card>
+                      <div class="d-flex">
+                        <v-card-title class="text-h5 primary--text pa-6 pb-0"><b>Detail Permintaan Konseling</b></v-card-title>
+                        <v-spacer/>
+                        <v-btn
+                          icon
+                          @click="done = false"
+                          class="pa-3"
+                        >
+                          <v-icon>mdi-close</v-icon>
+                        </v-btn>
+                      </div> 
+                      <v-card-title class="text-subtitle-1 pb-0">
+                        <b>Status</b>
+                      </v-card-title>
+                      <v-chip
+                        class="ml-4"
+                        color="accent"
+                        text-color="primary"
+                      >
+                        <v-icon small class="me-2">mdi-checkbox-outline</v-icon>
+                        Permintaan Diterima
+                      </v-chip>
+                      <v-card-title class="text-subtitle-1">
+                        <b>Judul Permintaan</b>
+                      </v-card-title>
+                      <v-card-subtitle>Ingin konsultasi mengenai penerapan Redux di ReactJS</v-card-subtitle>
+                      <v-card-title class="text-subtitle-1 pt-0">
+                        <b>Alasan</b>
+                      </v-card-title>
+                      <v-card-subtitle>
+                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. 
+                        The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here,
+                        content here', making it look like readable English. Many desktop publishing packages and web page editors now use 
+                        Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
+                      </v-card-subtitle>
+                      <div class="d-flex pl-2">
+                        <v-list>
+                          <v-card-title class="text-subtitle-1 pt-0">
+                            <b>Tanggal yang diajukan</b>
+                          </v-card-title>
+                          <v-card-subtitle class="pb-0">Senin, 30 Agustus 2022</v-card-subtitle>
+                        </v-list>
+                        <v-list>
+                          <v-card-title class="text-subtitle-1 pt-0">
+                            <b>Waktu yang diajukan</b>
+                          </v-card-title>
+                          <v-card-subtitle class="pb-0">20:00 WIB</v-card-subtitle>
+                        </v-list>
+                      </div>
+                      <v-card-title class="text-subtitle-1">
+                        <b>Link Pertemuan</b>
+                      </v-card-title>
+                      <v-card-subtitle class="pb-4">zoom.us/meeting/register/tJEuceihpj4pE9YG18D1OTbZHQjnniOr_ii-</v-card-subtitle>       
+                    </v-card>
+                  </v-dialog>
+                </v-row> 
+              </v-card-action>
+
+              <v-list-item two-line>                
+                <v-list-item-content class="pl-2">                       
+                  <v-list-item-title><b>Ingin konsultasi mengenai penggunaan Figma</b></v-list-item-title>
+                  <v-list-item-subtitle>
+                    Fajar Eka Pambudi
+                    <v-icon>mdi-circle-small</v-icon>
+                    6 jam yang lalu
+                  </v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+              <v-card-action>
+                <v-row class="ml-2 pt-2 pb-3 ">
+                  <v-btn
+                    class="text-capitalize"
+                    text
+                    color="primary"
+                    @click.stop="reject = true"
+                  >
+                    lihat detail
+                    <v-icon class="ms-2">mdi-chevron-right</v-icon>
+                  </v-btn>
+
+                  <v-dialog
+                    v-model="reject"
+                    max-width="1116"
+                  >
+                    <v-card>
+                      <div class="d-flex">
+                        <v-card-title class="text-h5 primary--text pa-6 pb-0"><b>Detail Permintaan Konseling</b></v-card-title>
+                        <v-spacer/>
+                        <v-btn
+                          icon
+                          @click="reject = false"
+                          class="pa-3"
+                        >
+                          <v-icon>mdi-close</v-icon>
+                        </v-btn>
+                      </div> 
+                      <v-card-title class="text-subtitle-1 pb-0">
+                        <b>Status</b>
+                      </v-card-title>
+                      <v-chip
+                        class="ml-4"
+                        color="warning2"
+                        text-color="warning"
+                      >
+                        <v-icon small class="me-2">mdi-close-box-outline</v-icon>
+                        Permintaan Ditolak
+                      </v-chip>
+                      <v-card-title class="text-subtitle-1">
+                        <b>Judul Permintaan</b>
+                      </v-card-title>
+                      <v-card-subtitle class="pb-1">Ingin konsultasi mengenai penerapan Redux di ReactJS</v-card-subtitle>
+                      <v-card-title class="text-subtitle-1">
+                        <b>Alasan</b>
+                      </v-card-title>
+                      <v-card-subtitle>
+                        It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. 
+                        The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here,
+                        content here', making it look like readable English. Many desktop publishing packages and web page editors now use 
+                        Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
+                      </v-card-subtitle>
+                      <div class="d-flex pl-2 pb-3">
+                        <v-list>
+                          <v-card-title class="text-subtitle-1 pt-0">
+                            <b>Tanggal yang diajukan</b>
+                          </v-card-title>
+                          <v-card-subtitle class="pb-0">Senin, 30 Agustus 2022</v-card-subtitle>
+                        </v-list>
+                        <v-list>
+                          <v-card-title class="text-subtitle-1 pt-0">
+                            <b>Waktu yang diajukan</b>
+                          </v-card-title>
+                          <v-card-subtitle class="pb-0">20:00 WIB</v-card-subtitle>
+                        </v-list>
+                      </div>       
+                    </v-card>
+                  </v-dialog>
+                </v-row> 
+              </v-card-action>
+            </v-card>
+          </v-col>            
+        </v-row>
+      </v-container>
+    </v-main>
+  </v-app>
+</template>
+
+<script>
+export default {
+data(){
+    return{
+        dialog : false,
+        done : false,
+        reject : false,
+        request : false,
+        clock : false,
+        time : null,
+        calendar : false,
+        date : null,
+
+    }
+  },
+  methods: {
+    
+    },
+  };
+</script>

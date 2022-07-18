@@ -36,6 +36,8 @@ import UserSettingView from "../views/User/Setting/SettingView.vue";
 import UserSettingMenu from "../views/User/Setting/SettingMenu.vue";
 import UserSettingProfile from "../views/User/Setting/SettingProfile.vue";
 import UserSettingPassword from "../views/User/Setting/SettingPassword.vue";
+import CourseReq from "../views/User/Request/CourseRequest.vue"
+import CounselingReq from "../views/User/Request/CounselingRequest.vue"
 import InvitationUser from "../views/User/InvitationUser.vue";
 import RegistrationUser from "../views/User/RegistrationUser.vue"
 
@@ -239,7 +241,15 @@ const routes = [
   {
     path : "/urcourse/quiz/result",
     component : QuizResult,
-  } 
+  },
+  {
+    path : "/urrequest/course",
+    component : CourseReq,
+  },
+  {
+    path: "/urrequest/counseling",
+    component : CounselingReq,
+  },
 ];
 
 const router = new VueRouter({

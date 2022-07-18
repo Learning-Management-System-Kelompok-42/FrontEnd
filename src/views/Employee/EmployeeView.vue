@@ -3,7 +3,7 @@
     <v-main class="ml-10 ma-5">
       <v-container>
         <!-- HEADER -->
-        <v-container style="display: flex">
+        <v-container class="d-flex">
           <div class="header">
             <h3><b>Karyawan</b></h3>
             <p>Lihat daftar karyawan yang terdaftar di perusahaanmu</p>
