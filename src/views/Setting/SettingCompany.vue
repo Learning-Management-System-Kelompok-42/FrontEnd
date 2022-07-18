@@ -22,19 +22,19 @@
               outlined
               dense
               depressed
-              :value="getDataCompany.name"
+              v-model="dataCompanyModel.name"
             ></v-text-field>
             <p>Bidang Perusahaan</p>
             <v-text-field
               outlined
               dense
-              :value="getDataCompany.sector"
+              v-model="dataCompanyModel.sector"
             ></v-text-field>
             <p>Website Perusahaan</p>
             <v-text-field
               outlined
               dense
-              :value="getDataCompany.website"
+              v-model="dataCompanyModel.website"
             ></v-text-field>
             <p>Alamat Perusahaan</p>
             <v-textarea
@@ -42,13 +42,13 @@
               outlined
               dense
               rows="4"
-              :value="getDataCompany.address"
+              v-model="dataCompanyModel.address"
               row-height="30"
             ></v-textarea>
             <p class="mb-1">Logo Perusahaan</p>
             <div class="d-flex">
               <v-img
-                :src="getDataCompany.logo"
+                :src="dataCompanyModel.logo"
                 height="70"
                 max-width="100"
                 :aspect-ratio="1"
@@ -94,7 +94,11 @@
             </div>
             <v-card-actions>
               <v-spacer />
-              <v-btn color="primary" class="text-capitalize my-auto mb-4">
+              <v-btn
+                color="primary"
+                class="text-capitalize my-auto mb-4"
+                @click="updateDataCompany"
+              >
                 <v-icon class="me-2 my-auto" small rounded
                   >mdi-checkbox-outline</v-icon
                 >
@@ -114,6 +118,7 @@ export default {
     return {
       logo: null,
       url: " ",
+      dataCompany: {},
     };
   },
   watch: {},
@@ -127,8 +132,19 @@ export default {
     getDataCompany() {
       return this.$store.state.company.dataProfileCompany;
     },
+    dataCompanyModel: {
+      get() {
+        return this.$store.state.company.dataProfileCompany;
+      },
+      set(value) {
+        this.setState({ dataCompany: value });
+      },
+    },
   },
   methods: {
+    updateDataCompany() {
+      console.log(this.dataCompanyModel);
+    },
     onButtonClick() {
       window.addEventListener("focus", () => {});
       this.$refs.uploader.click();

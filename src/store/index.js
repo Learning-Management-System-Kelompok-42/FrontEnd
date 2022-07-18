@@ -12,7 +12,7 @@ import setting from "./setting";
 Vue.use(Vuex);
 
 const presistedDataState = createPresistedState({
-  paths: ["user"],
+  paths: ["user", "company", "course", "specialization"],
 });
 
 export default new Vuex.Store({

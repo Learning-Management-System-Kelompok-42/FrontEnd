@@ -102,16 +102,14 @@
 
               <v-data-table
                 :headers="headers"
-                :items="getAllSpecialization"
-                :sort-by="['amount']"
-                :sort-desc="true"
+                :items="getDataCompany.Specialization"
                 :items-per-page="data"
                 hide-default-footer
                 class="my-auto mx-4"
               >
                 <template v-slot:[`item.name`]="{ item }">
                   <span class="gray6--text">
-                    {{ item.SpecializationName }}
+                    {{ item.Name }}
                   </span>
                 </template>
                 <template v-slot:[`item.amount`]="{ item }">
@@ -152,14 +150,14 @@
 
               <v-data-table
                 :headers="headercourse"
-                :items="getAllCourse"
+                :items="getDataCompany.Course"
                 hide-default-footer
                 class="my-auto mx-4"
                 :items-per-page="data"
               >
                 <template v-slot:[`item.name`]="{ item }">
                   <span class="gray6--text">
-                    {{ item.title }}
+                    {{ item.Title }}
                   </span>
                 </template>
                 <template v-slot:[`item.amount`]="{ item }">
@@ -250,7 +248,7 @@ export default {
           sortable: false,
           value: "name",
         },
-        { text: "Jumlah Anggota", value: "amount" },
+        { text: "Jumlah Anggota", sortable: false, value: "amount" },
         { text: "Aksi", sortable: false, value: "actions" },
       ],
       headercourse: [
@@ -283,10 +281,8 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$store.state.user.userid);
     this.$store.dispatch("specialization/fetchSpecialization");
     this.$store.dispatch("course/fetchCourse");
-    console.log(this.gettoken());
   },
   created() {
     document.title = "Dashboard";

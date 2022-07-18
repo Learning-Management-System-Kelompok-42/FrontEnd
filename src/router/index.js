@@ -27,10 +27,10 @@ import CourseView from "../views/User/Course/CourseView.vue";
 import UserDashboard from "../views/User/UserDashboard.vue";
 import UserCourse from "../views/User/Course/UserCourse.vue";
 import CourseDetail from "../views/User/Course/CourseDetail.vue";
-import CourseSlides from "../views/User/Course/CourseSlides.vue"
-import CourseVideo from "../views/User/Course/CourseVideo.vue"
-import CourseQuiz from "../views/User/Course/CourseQuiz.vue"
-import QuizResult from "../views/User/Course/QuizResult.vue"
+import CourseSlides from "../views/User/Course/CourseSlides.vue";
+import CourseVideo from "../views/User/Course/CourseVideo.vue";
+import CourseQuiz from "../views/User/Course/CourseQuiz.vue";
+import QuizResult from "../views/User/Course/QuizResult.vue";
 import CourseDone from "../views/User/Course/CourseDone.vue";
 import UserSettingView from "../views/User/Setting/SettingView.vue";
 import UserSettingMenu from "../views/User/Setting/SettingMenu.vue";
@@ -39,8 +39,6 @@ import UserSettingPassword from "../views/User/Setting/SettingPassword.vue";
 import CourseReq from "../views/User/Request/CourseRequest.vue"
 import CounselingReq from "../views/User/Request/CounselingRequest.vue"
 import InvitationUser from "../views/User/InvitationUser.vue";
-import RegistrationUser from "../views/User/RegistrationUser.vue";
-import InvitationUser from "../views/User/invitationuser.vue";
 
 Vue.use(VueRouter);
 
@@ -216,24 +214,24 @@ const routes = [
     ],
   },
   {
-    path : "/urcourse/done",
-    name : "courseDone",
-    component : CourseDone,
+    path: "/urcourse/done",
+    name: "courseDone",
+    component: CourseDone,
   },
   {
-    path : "/urcourse/slides",
-    name : "courseSlides",
-    component : CourseSlides,
+    path: "/urcourse/slides",
+    name: "courseSlides",
+    component: CourseSlides,
   },
   {
-    path : "/urcourse/video",
-    name : "courseVideo",
-    component : CourseVideo,
+    path: "/urcourse/video",
+    name: "courseVideo",
+    component: CourseVideo,
   },
   {
-    path : "/urcourse/quiz",
-    name : "courseQuiz",
-    component : CourseQuiz,
+    path: "/urcourse/quiz",
+    name: "courseQuiz",
+    component: CourseQuiz,
   },
   {
     path : "/urcourse/quiz/result",
@@ -246,6 +244,7 @@ const routes = [
   {
     path: "/urrequest/counseling",
     component : CounselingReq,
+
   },
 ];
 
