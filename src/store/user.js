@@ -10,7 +10,7 @@ const state = () => ({
   userlogin: {},
   allUser: [],
   token: null,
-  isLoading: true,
+  isLoading: false,
   status: 0,
   companyId: "",
   akses: "",
