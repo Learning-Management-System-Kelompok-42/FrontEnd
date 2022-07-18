@@ -8,7 +8,9 @@ import AddAdmin from "../views/AddAdmin.vue"
 import WebsiteSetting from "../views/WebsiteSetting.vue"
 import ProfileSetting from "../views/ProfileSetting.vue"
 import PasswordSetting from "../views/PasswordSetting.vue"
-
+import AdminPerusahaan from "../views/AdminPerusahaan.vue"
+import MenungguPersetujuan from "../views/MenungguPersetujuan.vue"
+import DetailPerusahaan from "../views/DetailPerusahaan.vue"
 Vue.use(VueRouter);
  
 const routes = [
@@ -52,6 +54,21 @@ const routes = [
     name: "pass_setting",
     component: PasswordSetting,
   }, 
+  {
+    path: "/perusahaan",
+    name: "perusahaan",
+    component: AdminPerusahaan,
+  }, 
+    {
+    path: "/menunggu_persetujuan",
+    name: "menungggu_persetujuan",
+    component: MenungguPersetujuan,
+  }, 
+  {
+    path: "/detail_perusahaan",
+    name: "detail_perusahaan",
+    component: DetailPerusahaan,
+  },
 ];
 
 const router = new VueRouter({
